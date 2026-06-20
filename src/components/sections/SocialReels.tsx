@@ -12,8 +12,10 @@ export function SocialReels() {
     >
       <SectionHeading
         eyebrow="@sneakcure"
-        title="From the atelier."
+        title="From the atelier"
+        titleAccent="Behind the bench"
         subtitle="Restorations, transformations, and behind-the-scenes — straight from our reels."
+        gsap
         align="center"
       />
 

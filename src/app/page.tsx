@@ -1,41 +1,19 @@
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import dynamic from "next/dynamic";
+import { HomePageMotion } from "@/components/providers/HomePageMotion";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { Statistics } from "@/components/sections/Statistics";
-import { ScrollRevealServices } from "@/components/sections/ScrollRevealServices";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
-import { BrandsWall } from "@/components/sections/BrandsWall";
-import { Process } from "@/components/sections/Process";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { WhyChoose } from "@/components/sections/WhyChoose";
-import { Collection } from "@/components/sections/Collection";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { SocialReels } from "@/components/sections/SocialReels";
-import { FAQ } from "@/components/sections/FAQ";
-import { BookingCTA } from "@/components/sections/BookingCTA";
+
+const HomeBelowFold = dynamic(
+  () => import("@/components/sections/HomeBelowFold").then((mod) => mod.HomeBelowFold)
+);
 
 export default function HomePage() {
   return (
-    <>
-      <Navbar />
+    <HomePageMotion>
       <main>
         <Hero />
-        <About />
-        <Statistics />
-        <ScrollRevealServices />
-        <BrandsWall />
-        <Process />
-        <HowItWorks />
-        <WhyChoose />
-        <Collection />
-        <BeforeAfter />
-        <Testimonials />
-        <SocialReels />
-        <FAQ />
-        <BookingCTA />
+        <HomeBelowFold />
       </main>
-      <Footer />
-    </>
+    </HomePageMotion>
   );
 }

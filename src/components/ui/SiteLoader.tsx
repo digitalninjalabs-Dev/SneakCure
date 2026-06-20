@@ -1,11 +1,11 @@
 "use client";
 
-import { prefersReducedMotion } from "@/lib/animations";
+import { prefersReducedMotion } from "@/lib/motion";
 import { useEffect, useState } from "react";
 
-const MIN_DISPLAY_MS = 1600;
-const MAX_DISPLAY_MS = 4500;
-const EXIT_MS = 850;
+const MIN_DISPLAY_MS = 650;
+const MAX_DISPLAY_MS = 2200;
+const EXIT_MS = 550;
 
 function finishLoading() {
   const root = document.documentElement;
@@ -15,14 +15,21 @@ function finishLoading() {
 
   window.setTimeout(() => {
     root.classList.remove("is-loading");
-    fallback?.remove();
-  }, prefersReducedMotion() ? 200 : EXIT_MS);
+    root.classList.add("site-loaded");
+    fallback?.classList.add("is-hidden");
+    // Never call .remove() — the loader is React-managed in layout.tsx
+  }, prefersReducedMotion() ? 150 : EXIT_MS);
 }
 
 export function SiteLoader() {
   const [active, setActive] = useState(true);
 
   useEffect(() => {
+    if (document.documentElement.classList.contains("site-loaded")) {
+      setActive(false);
+      return;
+    }
+
     document.documentElement.classList.add("is-loading");
 
     const reduceMotion = prefersReducedMotion();

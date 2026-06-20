@@ -7,8 +7,10 @@ export function Statistics() {
     <section className="section-pad py-24 md:py-32" aria-label="Premium statistics">
       <SectionHeading
         eyebrow="By The Numbers"
-        title="Trusted by collectors worldwide."
+        title="Trusted by collectors worldwide"
+        titleAccent="Proof in every pair"
         align="center"
+        gsap
       />
       <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {STATS.map((stat) => (

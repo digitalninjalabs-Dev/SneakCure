@@ -57,14 +57,14 @@ export function MagneticButton({
 
   if (href) {
     return (
-      <a ref={ref} href={href} className={wrapperClass}>
+      <a ref={ref} href={href} className={`magnetic-btn ${wrapperClass}`}>
         {inner}
       </a>
     );
   }
 
   return (
-    <button ref={ref} type={type} className={wrapperClass}>
+    <button ref={ref} type={type} className={`magnetic-btn ${wrapperClass}`}>
       {inner}
     </button>
   );

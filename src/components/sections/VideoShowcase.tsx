@@ -2,26 +2,25 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
+import { gsap, registerGsap } from "@/lib/gsap-client";
 import { productImage } from "@/lib/constants";
-
-gsap.registerPlugin(useGSAP);
+import { SplitTitle } from "@/components/ui/SplitTitle";
 
 export function VideoShowcase() {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
+      registerGsap();
       gsap.from(ref.current, {
         scrollTrigger: {
           trigger: ref.current,
           start: "top 85%",
         },
         autoAlpha: 0,
-        scale: 1.05,
-        filter: "blur(8px)",
-        duration: 1.4,
-        ease: "power3.out",
+        y: 24,
+        duration: 0.75,
+        ease: "power2.out",
       });
     },
     { scope: ref }
@@ -48,9 +47,7 @@ export function VideoShowcase() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30" />
         <div className="absolute bottom-10 left-10 md:bottom-16 md:left-16">
           <p className="text-xs uppercase tracking-[0.25em] text-soft-white/70">Cinematic Process</p>
-          <h2 className="editorial-title mt-3 text-4xl text-soft-white md:text-6xl">
-            Craft in motion.
-          </h2>
+          <SplitTitle title="Craft in motion" accent="See the process" as="h2" size="section" dark className="mt-3" />
         </div>
       </div>
     </section>

@@ -9,8 +9,10 @@ export function Testimonials() {
     <section id="reviews" className="section-pad py-24 md:py-36" aria-label="Testimonials">
       <SectionHeading
         eyebrow="Voices"
-        title="What our clients say."
+        title="What our clients say"
+        titleAccent="Real collector stories"
         align="center"
+        gsap
       />
       <div className="mx-auto grid max-w-6xl gap-4 sm:gap-6 md:grid-cols-3">
         {TESTIMONIALS.map((t) => (

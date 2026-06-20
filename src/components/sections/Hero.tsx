@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { prefersReducedMotion } from "@/lib/animations";
+import { prefersReducedMotion } from "@/lib/motion";
 
 const HERO_VIDEO = "/video/herovideo.mp4";
 
@@ -231,13 +231,13 @@ export function Hero() {
               data-fade-up
             >
               <MagneticButton
-                href="#contact"
+                href="/contact"
                 className="!px-4 !py-2.5 !text-[11px] sm:!px-5 sm:!py-3 sm:!text-xs"
               >
                 Book Restoration
               </MagneticButton>
               <MagneticButton
-                href="#services"
+                href="/services"
                 variant="ghost"
                 className="!px-4 !py-2.5 !text-[11px] border-white/40 bg-transparent text-white hover:bg-white/10 sm:!px-5 sm:!py-3 sm:!text-xs"
               >

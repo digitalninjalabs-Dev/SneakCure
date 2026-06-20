@@ -10,8 +10,10 @@ export function Collection() {
     <section className="section-pad py-24 md:py-36 bg-soft-white grain" aria-label="Premium collection showcase">
       <SectionHeading
         eyebrow="Archive"
-        title="Restored masterpieces."
+        title="Restored masterpieces"
+        titleAccent="From our private archive"
         subtitle="A curated selection from our private restoration archive."
+        gsap
       />
       <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
         {COLLECTION_ITEMS.map((item, i) => (

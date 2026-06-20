@@ -10,7 +10,9 @@ export function About() {
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="The Atelier"
-              title="Where sneaker culture meets haute craftsmanship."
+              title="Where sneaker culture meets haute craftsmanship"
+              titleAccent="Built for collectors"
+              gsap
             />
           </div>
           <div className="lg:col-span-7">

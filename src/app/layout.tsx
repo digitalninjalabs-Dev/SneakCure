@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { PageAnimations } from "@/components/providers/PageAnimations";
-import { SiteLoader } from "@/components/ui/SiteLoader";
-import { productImage } from "@/lib/constants";
-
-const siteUrl = "https://sneakcure.com";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { ClientBootstraps } from "@/components/providers/ClientBootstraps";
+import { productImage } from "@/lib/constants";const siteUrl = "https://sneakcure.com";
 const ogImage = `${siteUrl}${productImage(0)}`;
 
 export const metadata: Metadata = {
@@ -91,6 +89,10 @@ export default function RootLayout({
           href="https://api.fontshare.com/v2/css?f=clash-display@400,500,600,700&f=satoshi@400,500,700&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -122,13 +124,12 @@ export default function RootLayout({
         </div>
 
         <div data-site-main suppressHydrationWarning>
-          <SiteLoader />
-          <SmoothScroll>
-            <PageAnimations />
+          <ClientBootstraps>
+            <Navbar />
             {children}
-          </SmoothScroll>
-        </div>
-      </body>
+            <Footer />
+          </ClientBootstraps>
+        </div>      </body>
     </html>
   );
 }

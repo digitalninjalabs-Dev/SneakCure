@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
-import { bladeClip, BLADE_EASE } from "@/lib/animations";
-
-gsap.registerPlugin(useGSAP);
+import { motion } from "framer-motion";
 
 type BladeTextProps = {
   lines: string[];
@@ -14,53 +9,37 @@ type BladeTextProps = {
   accentIndex?: number;
 };
 
+const MOTION_TAGS = {
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+  p: motion.p,
+} as const;
+
+const LINE_EASE = [0.76, 0, 0.24, 1] as const;
+
 export function BladeText({
   lines,
   className = "",
   as: Tag = "h1",
   accentIndex,
 }: BladeTextProps) {
-  const ref = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const spans = ref.current?.querySelectorAll("[data-line]");
-      if (!spans?.length) return;
-
-      gsap.fromTo(
-        spans,
-        {
-          clipPath: bladeClip.hidden,
-          y: 80,
-          autoAlpha: 0,
-          filter: "blur(14px)",
-        },
-        {
-          clipPath: bladeClip.visible,
-          y: 0,
-          autoAlpha: 1,
-          filter: "blur(0px)",
-          duration: 1.3,
-          stagger: 0.14,
-          ease: BLADE_EASE,
-          delay: 0.2,
-        }
-      );
-    },
-    { scope: ref }
-  );
+  const MotionTag = MOTION_TAGS[Tag];
 
   return (
-    <Tag ref={ref as never} className={className}>
+    <MotionTag className={className}>
       {lines.map((line, i) => (
-        <span
+        <motion.span
           key={line}
-          data-line
           className={`block overflow-hidden ${i === accentIndex ? "text-gloss-black italic" : ""}`}
+          initial={{ opacity: 0, y: 80, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.3, delay: 0.2 + i * 0.14, ease: LINE_EASE }}
         >
           <span className="block">{line}</span>
-        </span>
+        </motion.span>
       ))}
-    </Tag>
+    </MotionTag>
   );
 }

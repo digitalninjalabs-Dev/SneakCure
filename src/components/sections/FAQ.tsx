@@ -11,7 +11,7 @@ export function FAQ() {
   return (
     <section className="section-pad py-24 md:py-36 bg-soft-white grain" aria-label="FAQ">
       <div className="mx-auto max-w-3xl">
-        <SectionHeading eyebrow="Questions" title="Everything you need to know." align="center" />
+        <SectionHeading eyebrow="Questions" title="Everything you need to know" titleAccent="Answers at a glance" align="center" gsap />
         <div className="space-y-3">
           {FAQ_ITEMS.map((item, i) => (
             <div

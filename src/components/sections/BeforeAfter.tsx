@@ -7,8 +7,10 @@ export function BeforeAfter() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="Transformation"
-          title="Witness the revival."
+          title="Witness the revival"
+          titleAccent="From worn to runway-ready"
           subtitle="Drag to reveal the SneakCure difference — from worn to runway-ready."
+          gsap
         />
         <BeforeAfterSlider />
       </div>

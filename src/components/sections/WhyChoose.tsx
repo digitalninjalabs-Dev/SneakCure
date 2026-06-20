@@ -7,8 +7,10 @@ export function WhyChoose() {
     <section className="section-pad py-24 md:py-36" aria-label="Why choose SneakCure">
       <SectionHeading
         eyebrow="The SneakCure Standard"
-        title="Why collectors choose us."
+        title="Why collectors choose us"
+        titleAccent="No shortcuts, ever"
         align="center"
+        gsap
       />
       <div className="mx-auto max-w-6xl space-y-12 sm:space-y-16 md:space-y-24">
         {WHY_CHOOSE.map((item, i) => (

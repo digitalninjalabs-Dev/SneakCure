@@ -1,10 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
-
-gsap.registerPlugin(useGSAP);
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 type AnimatedCounterProps = {
   value: number;
@@ -13,36 +10,34 @@ type AnimatedCounterProps = {
 };
 
 export function AnimatedCounter({ value, suffix = "", label }: AnimatedCounterProps) {
-  const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [display, setDisplay] = useState(0);
 
-  useGSAP(
-    () => {
-      const obj = { val: 0 };
-      ScrollTrigger.create({
-        trigger: ref.current,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(obj, {
-            val: value,
-            duration: 2.2,
-            ease: "power2.out",
-            onUpdate: () => setDisplay(Math.floor(obj.val)),
-          });
-        },
-      });
-    },
-    { scope: ref, dependencies: [value] }
-  );
+  useEffect(() => {
+    if (!isInView) return;
+    const controls = animate(0, value, {
+      duration: 2.2,
+      ease: [0.25, 0.1, 0.25, 1],
+      onUpdate: (v) => setDisplay(Math.floor(v)),
+    });
+    return () => controls.stop();
+  }, [isInView, value]);
 
   return (
-    <div ref={ref} className="glass-card shine-sweep rounded-2xl p-6 sm:p-8 md:p-10" data-scroll-reveal>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      className="glass-card shine-sweep rounded-2xl p-6 sm:p-8 md:p-10"
+    >
       <p className="editorial-title text-4xl text-primary-black sm:text-5xl md:text-6xl">
         {display.toLocaleString()}
         {suffix}
       </p>
       <p className="mt-3 text-sm uppercase tracking-[0.15em] text-muted">{label}</p>
-    </div>
+    </motion.div>
   );
 }

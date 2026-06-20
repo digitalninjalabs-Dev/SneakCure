@@ -1,6 +1,7 @@
 "use client";
 
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { SplitTitle } from "@/components/ui/SplitTitle";
 import { serviceImage } from "@/lib/constants";
 
 const FIXING_VIDEO = "/video/fixing.mov";
@@ -34,9 +35,7 @@ export function HowItWorks() {
                 <p className="mb-3 text-xs font-medium uppercase tracking-[0.22em] text-muted">
                   How It Works
                 </p>
-                <h2 className="editorial-title text-3xl text-primary-black sm:text-4xl md:text-5xl lg:text-[3.25rem]">
-                  The Craft
-                </h2>
+                <SplitTitle title="The Craft" accent="Preservation, not repair" as="h2" size="md" />
               </div>
             </div>
 
@@ -56,7 +55,7 @@ export function HowItWorks() {
             </div>
 
             <div className="mt-10 md:mt-12" data-fade-up>
-              <MagneticButton href="#contact">
+              <MagneticButton href="/contact">
                 Get In Touch →
               </MagneticButton>
             </div>

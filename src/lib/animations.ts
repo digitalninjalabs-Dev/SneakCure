@@ -1,4 +1,4 @@
-import { gsap } from "./gsap";
+import { gsap } from "./gsap-client";
 
 export const BLADE_EASE = "power4.inOut";
 export const LUXURY_EASE = "power3.out";
@@ -53,7 +53,4 @@ export function fadeUpReveal(
   });
 }
 
-export function prefersReducedMotion(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+export { prefersReducedMotion } from "./motion";

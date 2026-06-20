@@ -10,7 +10,8 @@ export function SocialGallery() {
     <section className="section-pad py-24 md:py-32 bg-gloss-black text-soft-white grain" aria-label="Social gallery">
       <SectionHeading
         eyebrow="@sneakcure"
-        title="Follow the culture."
+        title="Follow the culture"
+        titleAccent="Editorial moments daily"
         subtitle="Editorial moments from our atelier and community."
         dark
         align="center"
