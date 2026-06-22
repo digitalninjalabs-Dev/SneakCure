@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MAIN_NAV, SERVICE_NAV } from "@/lib/site-data";
 
-const SITE_LOGO = "/logo/Sneakcureblack.png";
+const SITE_LOGO = "/logo/sneakcureblack.png";
 const NAV_EASE = [0.22, 1, 0.36, 1] as const;
 
 const headerVariants = {

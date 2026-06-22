@@ -85,7 +85,7 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/logo/Sneakcuresqblack.png"
+          href="/logo/sneakcuresqblack.png"
           as="image"
         />
         <link
@@ -112,7 +112,7 @@ export default function RootLayout({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo/Sneakcuresqblack.png"
+            src="/logo/sneakcuresqblack.png"
             alt="Sneakcure"
             width={512}
             height={512}
