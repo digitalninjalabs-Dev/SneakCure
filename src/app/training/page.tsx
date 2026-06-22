@@ -10,7 +10,7 @@ const TrainingShowcase = dynamic(
 
 export const metadata: Metadata = {
   title: "Training & Consultation",
-  description: "Professional sneaker and leather restoration training programs and consultation services by SneakCure.",
+  description: "Professional sneaker and leather restoration training programs and consultation services by Sneakcure.",
 };
 
 export default function TrainingPage() {

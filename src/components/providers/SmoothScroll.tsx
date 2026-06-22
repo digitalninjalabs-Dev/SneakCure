@@ -1,21 +1,51 @@
 "use client";
 
 import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { useEffect } from "react";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/gsap-client";
+import { setLenisInstance } from "@/lib/lenis-scroll";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    if (prefersReducedMotion()) return;
+
     registerGsap();
 
     let destroyed = false;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.16,
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      syncTouch: false,
+      touchMultiplier: 1,
+      wheelMultiplier: 1,
     });
+
+    setLenisInstance(lenis);
+    document.documentElement.classList.add("lenis", "lenis-smooth");
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && typeof value === "number") {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: document.documentElement.style.transform ? "transform" : "fixed",
+    });
+
+    const onRefresh = () => lenis.resize();
+    ScrollTrigger.addEventListener("refresh", onRefresh);
 
     const ticker = (time: number) => {
       lenis.raf(time * 1000);
@@ -24,10 +54,15 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const teardown = () => {
       if (destroyed) return;
       destroyed = true;
-      window.removeEventListener("sneakcure:navigate", onNavigate);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      window.removeEventListener("Sneakcure:navigate", onNavigate);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
       gsap.ticker.remove(ticker);
-      lenis.destroy();
+      ScrollTrigger.scrollerProxy(document.documentElement, {});
       ScrollTrigger.getAll().forEach((t) => t.kill());
+      lenis.destroy();
+      setLenisInstance(null);
+      document.documentElement.classList.remove("lenis", "lenis-smooth");
     };
 
     const onNavigate = () => {
@@ -35,15 +70,20 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       teardown();
     };
 
-    window.addEventListener("sneakcure:navigate", onNavigate);
-    lenis.on("scroll", (event: { scroll: number }) => {
-      ScrollTrigger.update();
-      window.dispatchEvent(
-        new CustomEvent("sneakcure:scroll", { detail: event.scroll })
-      );
+    window.addEventListener("Sneakcure:navigate", onNavigate);
+
+    let scrollRaf = 0;
+    lenis.on("scroll", () => {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        ScrollTrigger.update();
+        window.dispatchEvent(new CustomEvent("Sneakcure:scroll", { detail: lenis.scroll }));
+      });
     });
+
     gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
+    ScrollTrigger.refresh();
 
     return teardown;
   }, []);

@@ -32,10 +32,10 @@ export function BladeText({
         <motion.span
           key={line}
           className={`block overflow-hidden ${i === accentIndex ? "text-gloss-black italic" : ""}`}
-          initial={{ opacity: 0, y: 80, filter: "blur(14px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.3, delay: 0.2 + i * 0.14, ease: LINE_EASE }}
+          transition={{ duration: 0.75, delay: 0.12 + i * 0.1, ease: LINE_EASE }}
         >
           <span className="block">{line}</span>
         </motion.span>

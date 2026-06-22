@@ -4,5 +4,5 @@ export function prepareForNavigation() {
     video.pause();
   });
 
-  window.dispatchEvent(new CustomEvent("sneakcure:navigate"));
+  window.dispatchEvent(new CustomEvent("Sneakcure:navigate"));
 }

@@ -69,10 +69,10 @@ export function ImageCycle({
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.06 }}
+          initial={{ opacity: 0, scale: 1.03 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.85, ease: EASE }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 0.55, ease: EASE }}
           className="absolute inset-0"
         >
           <motion.div

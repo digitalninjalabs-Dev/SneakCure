@@ -9,7 +9,7 @@ const ServicesShowcase = dynamic(
 );
 export const metadata: Metadata = {
   title: "Services",
-  description: "Explore SneakCure restoration services — sneakers, leather, sofas, automotive, and patina work.",
+  description: "Explore Sneakcure restoration services — sneakers, leather, sofas, automotive, and patina work.",
 };
 
 export default function ServicesPage() {

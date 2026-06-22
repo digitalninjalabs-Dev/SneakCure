@@ -11,7 +11,7 @@ const ProductsShowcase = dynamic(
 );
 export const metadata: Metadata = {
   title: "Products",
-  description: "Premium SneakCure care products — sneaker cleaners, leather conditioners, restoration kits, and accessories.",
+  description: "Premium Sneakcure care products — sneaker cleaners, leather conditioners, restoration kits, and accessories.",
 };
 
 export default function ProductsPage() {

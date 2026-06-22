@@ -98,8 +98,8 @@ export function SplitHero({
 }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 24]);
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-pearl pt-28 grain md:pt-36">
@@ -148,17 +148,17 @@ export function SplitHero({
 
         <motion.div
           style={{ y: imageY }}
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.12, ease: PAGE_EASE }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.1, ease: PAGE_EASE }}
           className="relative aspect-[4/5] overflow-visible md:aspect-[3/4]"
         >
           <div className="relative h-full w-full overflow-hidden rounded-[2rem] ring-1 ring-black/8 shadow-[0_40px_100px_rgba(0,0,0,0.08)]">
             <ImageFrameGraphic />
             <motion.div
-              className="absolute inset-0"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 will-change-transform"
+              animate={{ scale: [1, 1.04, 1] }}
+              transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
             >
               <SafeImage src={image} alt={imageAlt} fill priority className="object-cover" sizes="50vw" />
             </motion.div>

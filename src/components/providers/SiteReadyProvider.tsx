@@ -6,10 +6,7 @@ const SiteReadyContext = createContext(false);
 
 function readReady() {
   if (typeof document === "undefined") return false;
-  return (
-    document.documentElement.classList.contains("site-loaded") ||
-    !document.documentElement.classList.contains("is-loading")
-  );
+  return document.documentElement.classList.contains("site-loaded");
 }
 
 export function SiteReadyProvider({ children }: { children: React.ReactNode }) {

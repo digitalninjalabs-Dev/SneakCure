@@ -80,7 +80,7 @@ export const TESTIMONIALS = [
   },
   {
     quote:
-      "Our atelier ships six-figure runway samples here. SneakCure is the only team we trust.",
+      "Our atelier ships six-figure runway samples here. Sneakcure is the only team we trust.",
     name: "Elena V.",
     role: "Creative Director · Milan",
   },
@@ -128,6 +128,30 @@ export const BEFORE_AFTER = {
   before: "/beforeafter/before.jpg",
   after: "/beforeafter/after.jpg",
 } as const;
+
+export const BEFORE_AFTER_SHOWCASE = [
+  {
+    title: "Luxury Sneaker Restoration",
+    before: BEFORE_AFTER.before,
+    after: BEFORE_AFTER.after,
+    beforeAlt: "Sneaker before restoration",
+    afterAlt: "Sneaker after restoration",
+  },
+  {
+    title: "Suede Revival",
+    before: "/services/service-02.jpg",
+    after: "/services/service-03.jpg",
+    beforeAlt: "Suede sneaker before restoration",
+    afterAlt: "Suede sneaker after restoration",
+  },
+  {
+    title: "Leather Bag Care",
+    before: "/product/product-04.jpg",
+    after: "/product/product-05.jpg",
+    beforeAlt: "Leather bag before restoration",
+    afterAlt: "Leather bag after restoration",
+  },
+] as const;
 
 export const REEL_VIDEOS = [
   "/reel/reel-01.mp4",

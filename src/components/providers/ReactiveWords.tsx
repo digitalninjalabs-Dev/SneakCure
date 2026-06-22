@@ -38,6 +38,7 @@ export function ReactiveWords({
   return (
     <span
       className={className}
+      data-reactive-words
       style={{
         overflow: "visible",
         display: "inline-block",

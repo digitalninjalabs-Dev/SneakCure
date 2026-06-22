@@ -11,7 +11,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Contact SneakCure — book restoration, training, franchise, or product inquiries.",
+  description: "Contact Sneakcure — book restoration, training, franchise, or product inquiries.",
 };
 
 export default function ContactPage() {
@@ -49,7 +49,7 @@ export default function ContactPage() {
             className="h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="SneakCure location"
+            title="Sneakcure location"
           />
         </div>
       </section>

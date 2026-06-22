@@ -12,6 +12,8 @@ type SectionHeadingProps = {
   /** Enable homepage GSAP hooks on subtitle only. */
   gsap?: boolean;
   delay?: number;
+  /** Tighter spacing below the heading block */
+  dense?: boolean;
 };
 
 export function SectionHeading({
@@ -23,10 +25,13 @@ export function SectionHeading({
   align = "left",
   gsap = false,
   delay = 0,
+  dense = false,
 }: SectionHeadingProps) {
+  const marginClass = dense ? "mb-6 sm:mb-8 md:mb-10" : "mb-10 sm:mb-14 md:mb-20";
+
   return (
     <div
-      className={`mb-10 sm:mb-14 md:mb-20 ${align === "center" ? "mx-auto max-w-3xl px-1 text-center" : "max-w-4xl"}`}
+      className={`${marginClass} ${align === "center" ? "mx-auto max-w-3xl px-1 text-center" : "max-w-4xl"}`}
       {...(gsap ? { "data-scroll-reveal": true } : {})}
     >
       {eyebrow && (

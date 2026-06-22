@@ -1,14 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { MotionConfig } from "framer-motion";
 import { SiteReadyProvider } from "@/components/providers/SiteReadyProvider";
+import { SiteLoader } from "@/components/ui/SiteLoader";
 import { MOTION_EASE } from "@/lib/motion-viewport";
-
-const SiteLoader = dynamic(
-  () => import("@/components/ui/SiteLoader").then((mod) => mod.SiteLoader),
-  { ssr: false }
-);
+import dynamic from "next/dynamic";
 
 const RouteChangeHandler = dynamic(
   () =>

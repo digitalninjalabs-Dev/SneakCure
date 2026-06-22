@@ -5,4 +5,11 @@ export const MOTION_VIEWPORT = {
   margin: "0px 0px -40px 0px",
 } as const;
 
+/** Slightly earlier trigger for image blocks */
+export const IMAGE_VIEWPORT = {
+  once: true,
+  amount: 0.18,
+  margin: "0px 0px -56px 0px",
+} as const;
+
 export const MOTION_EASE = [0.22, 1, 0.36, 1] as const;

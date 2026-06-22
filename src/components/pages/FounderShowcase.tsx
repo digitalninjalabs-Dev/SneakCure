@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { useSiteReady } from "@/components/providers/SiteReadyProvider";
 import { MaterialIcon } from "@/components/pages/campaign-ui";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SafeImage } from "@/components/ui/SafeImage";
 import { SplitTitle } from "@/components/ui/SplitTitle";
+import { REEL_VIDEOS } from "@/lib/constants";
 import { FOUNDER, FOUNDER_MEDIA, FOUNDER_STORY } from "@/lib/site-data";
 import { MOTION_EASE, MOTION_VIEWPORT } from "@/lib/motion-viewport";
 
@@ -19,7 +21,7 @@ const PROCESS_STEPS = [
 
 const FAQ_ITEMS = [
   {
-    q: "Why SneakCure?",
+    q: "Why Sneakcure?",
     a: "Because modern luxury is about preservation. We live in a disposable world; I wanted to build something that lasts.",
   },
   {
@@ -38,22 +40,22 @@ const JOURNAL = [
     text: "Tuesday. The humidity today is perfect for leather hydration. Working on a pair of 1994 high-tops.",
     date: "14.03.2024",
   },
-  { type: "image" as const, src: FOUNDER_MEDIA.workspace, alt: "Atelier detail" },
+  { type: "image" as const, src: FOUNDER_MEDIA.workspace, alt: "Ajit Yadav in the Sneakcure workshop" },
   {
     type: "article" as const,
     title: "On Materiality",
     body: "Synthetic polymers never age like natural hides. The challenge is making the new blend with the vintage soul.",
   },
-  { type: "image" as const, src: FOUNDER_MEDIA.process, alt: "Restoration process" },
+  { type: "image" as const, src: FOUNDER_MEDIA.process, alt: "Ajit Yadav restoring leather at the bench" },
   { type: "quote" as const, text: "Detail is not a luxury, it's a necessity." },
-  { type: "image" as const, src: FOUNDER_MEDIA.portrait, alt: FOUNDER.name, grayscale: true },
+  { type: "image" as const, src: FOUNDER_MEDIA.portrait, alt: "Ajit Yadav, founder of Sneakcure", grayscale: true },
 ] as const;
 
 const VALUES = [
   { word: "CARE", opacity: "opacity-10", offset: "" },
-  { word: "DETAIL", opacity: "opacity-20", offset: "translate-x-6 md:translate-x-12" },
-  { word: "PATIENCE", opacity: "opacity-40", offset: "translate-x-12 md:translate-x-24" },
-  { word: "TRUST", opacity: "", offset: "translate-x-[4.5rem] md:translate-x-36" },
+  { word: "DETAIL", opacity: "opacity-20", offset: "translate-x-0 md:translate-x-12" },
+  { word: "PATIENCE", opacity: "opacity-40", offset: "translate-x-0 md:translate-x-24" },
+  { word: "TRUST", opacity: "", offset: "translate-x-0 md:translate-x-36" },
 ] as const;
 
 function FounderReveal({
@@ -84,11 +86,148 @@ function FounderLabel({ children }: { children: React.ReactNode }) {
   return <p className="founder-label text-primary-black/60 tracking-[0.2em]">{children}</p>;
 }
 
-export function FounderShowcase() {
-  const nameParts = FOUNDER.name.split(" ");
-  const firstName = nameParts[0] ?? FOUNDER.name;
-  const lastName = nameParts.slice(1).join(" ");
+function FounderReelCard({
+  src,
+  label,
+  className = "",
+  poster,
+  showLabel = true,
+}: {
+  src: string;
+  label: string;
+  className?: string;
+  poster?: string;
+  showLabel?: boolean;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
+  return (
+    <article
+      className={`group relative h-full w-full shrink-0 overflow-hidden rounded-lg bg-primary-black ring-1 ring-primary-black/10 ${className}`}
+    >
+      <video
+        ref={videoRef}
+        className="h-full w-full object-cover"
+        src={src}
+        poster={poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        suppressHydrationWarning
+        aria-label={label}
+      />
+      {showLabel ? (
+        <>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+          <span className="founder-label absolute bottom-2.5 left-2.5 right-2.5 text-[9px] tracking-[0.16em] text-white">
+            {label}
+          </span>
+        </>
+      ) : null}
+    </article>
+  );
+}
+
+const FOUNDER_BEGINNING_REELS = [
+  { src: FOUNDER_MEDIA.reel, label: `${FOUNDER.name} · Founder`, poster: FOUNDER_MEDIA.portrait },
+  ...REEL_VIDEOS.map((src, i) => ({
+    src,
+    label: `Atelier ${String(i + 1).padStart(2, "0")}`,
+  })),
+] as const;
+
+function FounderBeginningReels({
+  reelClassName = "founder-beginning-reel",
+}: {
+  reelClassName?: string;
+}) {
+  return (
+    <>
+      {FOUNDER_BEGINNING_REELS.map((reel, i) => (
+        <FounderReelCard
+          key={reel.src}
+          src={reel.src}
+          label={reel.label}
+          poster={"poster" in reel ? reel.poster : undefined}
+          showLabel={i === 0}
+          className={reelClassName}
+        />
+      ))}
+    </>
+  );
+}
+
+function FounderBeginningMobile() {
+  return (
+    <section className="founder-beginning lg:hidden" aria-label="The beginning">
+      <div className="founder-pad founder-container overflow-x-hidden">
+        <FounderReveal className="founder-beginning-copy-mobile">
+          <p className="founder-label text-primary-black/50">The beginning</p>
+          <blockquote className="mt-4">
+            <p className="founder-beginning-quote-text-mobile">
+              &ldquo;Restoration is not about making something look new; it&apos;s about honoring the
+              life it has lived while giving it a second chance.&rdquo;
+            </p>
+            <footer className="founder-beginning-quote-by">— {FOUNDER.name}</footer>
+          </blockquote>
+        </FounderReveal>
+
+        <FounderReveal className="mt-8 min-w-0" delay={0.08}>
+          <div className="founder-beginning-reels-mobile scrollbar-hide">
+            <FounderBeginningReels reelClassName="founder-beginning-reel-mobile" />
+          </div>
+        </FounderReveal>
+      </div>
+    </section>
+  );
+}
+
+function FounderBeginningDesktop() {
+  return (
+    <section className="founder-beginning hidden lg:block" aria-label="The beginning">
+      <div className="founder-pad founder-container">
+        <div className="founder-beginning-grid">
+          <FounderReveal className="founder-beginning-copy">
+            <p className="founder-label text-primary-black/50">The beginning</p>
+            <blockquote className="founder-beginning-quote">
+              <p className="founder-beginning-quote-text">
+                &ldquo;Restoration is not about making something look new; it&apos;s about honoring the
+                life it has lived while giving it a second chance.&rdquo;
+              </p>
+              <footer className="founder-beginning-quote-by">— {FOUNDER.name}</footer>
+            </blockquote>
+          </FounderReveal>
+
+          <FounderReveal className="founder-beginning-reels-wrap min-w-0" delay={0.08}>
+            <div className="founder-beginning-reels founder-reels-mosaic scrollbar-hide">
+              <FounderBeginningReels />
+            </div>
+          </FounderReveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FounderReel() {
+  return (
+    <FounderReelCard
+      src={FOUNDER_MEDIA.reel}
+      poster={FOUNDER_MEDIA.process}
+      label={`${FOUNDER.name} · Founder`}
+      showLabel
+      className="founder-reel-feature aspect-[9/16] w-[min(78vw,300px)] sm:w-[min(70vw,320px)] md:w-[min(22vw,300px)] lg:w-[300px]"
+    />
+  );
+}
+
+export function FounderShowcase() {
   return (
     <div className="founder-page overflow-x-hidden">
       {/* 1. Introduction */}
@@ -109,7 +248,7 @@ export function FounderShowcase() {
                 sizes="(max-width:768px) 85vw, 40vw"
               />
             </div>
-            <div className="absolute -bottom-6 -right-2 flex h-32 w-32 items-center justify-center rounded-lg border border-black/10 bg-[#f1edec] p-4 shadow-lg md:-right-6">
+            <div className="absolute -bottom-4 right-0 flex h-24 w-24 items-center justify-center rounded-lg border border-black/10 bg-[#f1edec] p-3 shadow-lg sm:h-32 sm:w-32 sm:p-4 md:-bottom-6 md:-right-6">
               <span className="founder-label text-center text-[10px] leading-tight">
                 EST. 2018
                 <br />
@@ -123,21 +262,20 @@ export function FounderShowcase() {
           <div className="space-y-4">
             <FounderLabel>Founder profile</FounderLabel>
             <SplitTitle
-              title={`Hi, I'm ${firstName}`}
-              accent={lastName || FOUNDER.title}
+              title={FOUNDER.name}
+              accent={FOUNDER.title}
               as="h1"
               size="campaign"
             />
             <p className="founder-body-lg max-w-md text-primary-black/65">
-              The intersection of technical precision and artistic intuition. My mission is to redefine
-              restoration as a form of archaeology.
+              {FOUNDER.intro}
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
             <div>
               <p className="founder-label mb-1 text-[10px] text-muted">Founded</p>
-              <p className="founder-headline">SneakCure</p>
+              <p className="founder-headline">Sneakcure</p>
             </div>
             <div>
               <p className="founder-label mb-1 text-[10px] text-muted">Location</p>
@@ -145,49 +283,17 @@ export function FounderShowcase() {
             </div>
           </div>
 
-          <button type="button" className="group flex items-center gap-3">
+          <a href="#founder-reel" className="group flex items-center gap-3">
             <span className="flex h-12 w-12 items-center justify-center rounded-full border border-primary-black transition-all group-hover:bg-primary-black group-hover:text-soft-white">
               <MaterialIcon name="play_arrow" filled />
             </span>
             <span className="founder-label">Watch story</span>
-          </button>
+          </a>
         </FounderReveal>
       </section>
 
-      {/* 2. The Beginning */}
-      <section className="border-y border-black/[0.06] bg-[#f1edec] py-20 md:py-24">
-        <div className="founder-pad founder-container flex flex-col gap-10 md:flex-row md:gap-12">
-          <div className="w-full md:w-[35%]">
-            <div className="md:sticky md:top-[calc(var(--site-header-offset)+2rem)]">
-              <span className="founder-label inline-block origin-left rotate-90 whitespace-nowrap text-primary-black/40">
-                The beginning
-              </span>
-            </div>
-          </div>
-          <FounderReveal className="w-full space-y-12 md:w-[65%]" delay={0.1}>
-            <p className="founder-display-md text-primary-black">
-              It wasn&apos;t about shoes; it was about history. Every crease tells a story of where we&apos;ve
-              been. I wanted to protect those chapters.
-            </p>
-            <div className="founder-paper founder-asymmetric-shadow flex flex-col items-center gap-8 rounded-lg border border-black/10 p-8 md:flex-row md:p-12">
-              <blockquote className="founder-headline flex-1 italic text-primary-black/80">
-                &ldquo;Restoration is not about making something look new; it&apos;s about honoring the life it
-                has lived while giving it a second chance.&rdquo;
-              </blockquote>
-              <div className="h-64 w-48 shrink-0 rotate-3 overflow-hidden rounded-lg shadow-xl">
-                <SafeImage
-                  src={FOUNDER_MEDIA.workspace}
-                  alt="Workspace detail"
-                  width={192}
-                  height={256}
-                  className="h-full w-full object-cover grayscale transition-all duration-1000 hover:grayscale-0"
-                  sizes="192px"
-                />
-              </div>
-            </div>
-          </FounderReveal>
-        </div>
-      </section>
+      <FounderBeginningMobile />
+      <FounderBeginningDesktop />
 
       {/* 3. The Turning Point */}
       <section className="founder-pad founder-container flex flex-col items-center gap-10 py-20 md:flex-row md:gap-12 md:py-24">
@@ -219,32 +325,13 @@ export function FounderShowcase() {
       </section>
 
       {/* 4. Video + FAQ */}
-      <section className="bg-gloss-black py-20 text-soft-white md:py-24">
-        <div className="founder-pad founder-container flex flex-col items-center gap-10 md:flex-row md:gap-12">
-          <FounderReveal className="w-full md:w-1/2">
-            <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-lg bg-[#f7f3f2]">
-              <SafeImage
-                src={FOUNDER_MEDIA.studio}
-                alt="Founder story video"
-                fill
-                className="object-cover opacity-50 blur-sm"
-                sizes="50vw"
-              />
-              <div className="absolute inset-0 bg-neutral-900/40" />
-              <div className="relative z-10 flex flex-col items-center">
-                <button
-                  type="button"
-                  className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-primary-black shadow-2xl transition-transform hover:scale-110"
-                  aria-label="Play founder story"
-                >
-                  <MaterialIcon name="play_arrow" filled className="text-3xl" />
-                </button>
-                <span className="founder-label mt-4 text-white/60">Autoplay muted</span>
-              </div>
-            </div>
+      <section id="founder-reel" className="bg-gloss-black py-16 text-soft-white md:py-20">
+        <div className="founder-pad founder-container flex flex-col items-center gap-10 md:flex-row md:items-center md:justify-center md:gap-12 lg:gap-16">
+          <FounderReveal className="flex shrink-0 justify-center">
+            <FounderReel />
           </FounderReveal>
 
-          <FounderReveal className="w-full space-y-2 md:w-1/2" delay={0.12}>
+          <FounderReveal className="w-full max-w-md md:max-w-lg" delay={0.12}>
             <div className="founder-accordion space-y-0">
               {FAQ_ITEMS.map((item, i) => (
                 <details
@@ -312,11 +399,11 @@ export function FounderShowcase() {
             <div className="w-full space-y-8 md:w-3/4">
               <div className="founder-asymmetric-shadow overflow-hidden rounded-lg">
                 <SafeImage
-                  src={FOUNDER_MEDIA.studio}
-                  alt={FOUNDER.name}
+                  src={FOUNDER_MEDIA.portrait}
+                  alt="Ajit Yadav, founder of Sneakcure"
                   width={500}
                   height={650}
-                  className="h-auto w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                  className="h-auto w-full object-cover"
                   sizes="40vw"
                 />
               </div>
@@ -334,8 +421,8 @@ export function FounderShowcase() {
           <FounderReveal className="flex justify-end">
             <div className="founder-asymmetric-shadow relative h-[480px] w-full overflow-hidden rounded-xl md:h-[700px] md:w-[60%]">
               <SafeImage
-                src={FOUNDER_MEDIA.studio}
-                alt={`${FOUNDER.name} in the atelier`}
+                src={FOUNDER_MEDIA.process}
+                alt="Ajit Yadav working in the Sneakcure atelier"
                 fill
                 className="object-cover"
                 sizes="60vw"
@@ -426,7 +513,7 @@ export function FounderShowcase() {
             alt={`${FOUNDER.name} portrait`}
             width={700}
             height={900}
-            className="h-auto w-full rounded-lg grayscale opacity-80"
+            className="h-auto w-full rounded-lg object-cover"
             sizes="50vw"
           />
         </FounderReveal>
@@ -434,13 +521,13 @@ export function FounderShowcase() {
           <div className="max-w-md space-y-8">
             <h3 className="founder-headline italic">A personal note,</h3>
             <p className="founder-body-lg leading-relaxed text-primary-black/65">
-              Thank you for taking the time to see into my world. SneakCure is a labor of love, a testament
+              Thank you for taking the time to see into my world. Sneakcure is a labor of love, a testament
               to the belief that some things are worth saving. I invite you to join us in this journey of
               preservation.
             </p>
             <div className="pt-4">
               <p className="founder-headline">{FOUNDER.name}</p>
-              <p className="founder-label mt-2 text-primary-black/50">Founder, SneakCure</p>
+              <p className="founder-label mt-2 text-primary-black/50">Founder, Sneakcure</p>
             </div>
           </div>
         </FounderReveal>
@@ -451,7 +538,7 @@ export function FounderShowcase() {
         <FounderReveal>
           <SplitTitle
             title="See you inside"
-            accent="SneakCure"
+            accent="Sneakcure"
             as="h2"
             size="campaign"
             align="center"

@@ -10,7 +10,7 @@ import { productImage } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Discover SneakCure — our story, mission, values, and the team behind premium restoration.",
+  description: "Discover Sneakcure — our story, mission, values, and the team behind premium restoration.",
 };
 
 export default function AboutPage() {
@@ -20,7 +20,7 @@ export default function AboutPage() {
         eyebrow="About Us"
         title="Crafted for iconic pieces"
         titleAccent="Restored with precision"
-        subtitle="SneakCure was founded for collectors who refuse to retire their grails. We blend archival restoration science with luxury fashion-house precision."
+        subtitle="Sneakcure was founded for collectors who refuse to retire their grails. We blend archival restoration science with luxury fashion-house precision."
         image={productImage(8)}
       />
 
@@ -29,7 +29,7 @@ export default function AboutPage() {
           <div>
             <SectionHeading eyebrow="Our Story" title="Company story" titleAccent="Where it began" />
             <p className="text-lg leading-relaxed text-muted">
-              From a single atelier bench in Lucknow to a multi-city restoration house, SneakCure has grown by saying no to shortcuts. Every sneaker, bag, and leather piece receives a bespoke protocol — documented, insured, and returned in museum-grade presentation.
+              From a single atelier bench in Lucknow to a multi-city restoration house, Sneakcure has grown by saying no to shortcuts. Every sneaker, bag, and leather piece receives a bespoke protocol — documented, insured, and returned in museum-grade presentation.
             </p>
           </div>
           <div>

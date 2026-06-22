@@ -7,7 +7,7 @@ export const SPLIT_TITLE_SIZES = {
   page: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]",
   section: "text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-[1.1]",
   display: "text-[clamp(2rem,4vw,3rem)] leading-[1.12]",
-  campaign: "text-[clamp(3rem,7vw,5rem)] leading-[1.1]",
+  campaign: "text-[clamp(1.75rem,6.5vw,5rem)] leading-[1.1]",
   md: "text-3xl md:text-4xl lg:text-5xl leading-[1.12]",
   sm: "text-3xl leading-[1.12]",
   cta: "text-3xl sm:text-4xl md:text-5xl leading-[1.1]",
@@ -32,7 +32,7 @@ export function parseSplitTitle(title: string, accent?: string) {
 
   return {
     line1: title.endsWith(".") ? title : `${title}.`,
-    line2: "One SneakCure standard.",
+    line2: "One Sneakcure standard.",
   };
 }
 
@@ -65,10 +65,10 @@ export function SplitTitle({
   return (
     <div className={`${alignClass} ${className}`}>
       <TitleReveal delay={delay}>
-        <Tag className={`editorial-title ${sizeClass} ${primaryColor}`}>{line1}</Tag>
+        <Tag className={`editorial-title text-balance break-words ${sizeClass} ${primaryColor}`}>{line1}</Tag>
       </TitleReveal>
       <TitleReveal delay={delay + 0.08}>
-        <Tag className={`editorial-title ${sizeClass} italic ${accentColor}`}>{line2}</Tag>
+        <Tag className={`editorial-title text-balance break-words ${sizeClass} italic ${accentColor}`}>{line2}</Tag>
       </TitleReveal>
     </div>
   );

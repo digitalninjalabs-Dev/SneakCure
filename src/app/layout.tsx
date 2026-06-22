@@ -3,14 +3,16 @@ import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ClientBootstraps } from "@/components/providers/ClientBootstraps";
-import { productImage } from "@/lib/constants";const siteUrl = "https://sneakcure.com";
+import { productImage } from "@/lib/constants";
+
+const siteUrl = "https://sneakcure.com";
 const ogImage = `${siteUrl}${productImage(0)}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "SneakCure — Premium Sneaker Restoration & Care",
-    template: "%s | SneakCure",
+    default: "Sneakcure — Premium Sneaker Restoration & Care",
+    template: "%s | Sneakcure",
   },
   description:
     "Luxury sneaker restoration, cleaning, and archival care. Museum-grade craftsmanship for iconic footwear — trusted by collectors and luxury houses worldwide.",
@@ -21,13 +23,13 @@ export const metadata: Metadata = {
     "sole whitening",
     "leather restoration",
   ],
-  authors: [{ name: "SneakCure" }],
+  authors: [{ name: "Sneakcure" }],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "SneakCure",
-    title: "SneakCure — Restore The Culture",
+    siteName: "Sneakcure",
+    title: "Sneakcure — Restore The Culture",
     description:
       "Premium sneaker restoration crafted for iconic footwear. Billion-dollar care for your grails.",
     images: [
@@ -35,13 +37,13 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: "SneakCure premium sneaker restoration",
+        alt: "Sneakcure premium sneaker restoration",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SneakCure — Premium Sneaker Restoration",
+    title: "Sneakcure — Premium Sneaker Restoration",
     description: "Restore the culture. Crafted for iconic footwear.",
     images: [ogImage],
   },
@@ -53,12 +55,13 @@ export const viewport: Viewport = {
   themeColor: "#F6F4F1",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "SneakCure",
+  name: "Sneakcure",
   description: "Premium sneaker restoration and luxury sneaker care services.",
   url: siteUrl,
   image: ogImage,
@@ -78,11 +81,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="is-loading" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
-          href="/logo/sneakcuresqblack.png"
+          href="/logo/Sneakcuresqblack.png"
           as="image"
         />
         <link
@@ -98,19 +101,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="overflow-x-hidden" suppressHydrationWarning>
+      <body className="overflow-x-clip" suppressHydrationWarning>
         <div
           id="initial-site-loader"
           className="site-loader-fallback grain"
           role="status"
           aria-live="polite"
-          aria-label="Loading SneakCure"
+          aria-label="Loading Sneakcure"
           suppressHydrationWarning
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo/sneakcuresqblack.png"
-            alt="SneakCure"
+            src="/logo/Sneakcuresqblack.png"
+            alt="Sneakcure"
             width={512}
             height={512}
             className="site-loader-fallback__logo"
@@ -129,7 +132,8 @@ export default function RootLayout({
             {children}
             <Footer />
           </ClientBootstraps>
-        </div>      </body>
+        </div>
+      </body>
     </html>
   );
 }

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return {};
-  return { title: product.name, description: `${product.name} — ${product.category} by SneakCure` };
+  return { title: product.name, description: `${product.name} — ${product.category} by Sneakcure` };
 }
 
 export default async function ProductDetailPage({ params }: Props) {
@@ -41,7 +41,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <p className="mt-4 text-2xl font-medium">{product.price}</p>
             <p className="mt-2 text-sm text-muted">★ {product.rating} · {product.reviews} reviews</p>
             <p className="mt-6 text-muted leading-relaxed">
-              Professional-grade formula developed in the SneakCure atelier. Safe for premium materials when used as directed. Batch-tested for consistency and performance.
+              Professional-grade formula developed in the Sneakcure atelier. Safe for premium materials when used as directed. Batch-tested for consistency and performance.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <MagneticButton href={`/contact?product=${product.slug}`}>Add to Inquiry</MagneticButton>

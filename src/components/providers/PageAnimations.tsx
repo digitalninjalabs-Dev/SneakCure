@@ -19,15 +19,17 @@ export function PageAnimations() {
     bladeReveal("[data-blade]", { stagger: 0.06 });
     fadeUpReveal("[data-fade-up]", { stagger: 0.06 });
 
-    ScrollTrigger.batch("[data-scroll-reveal]", {
-      start: "top 90%",
+    ScrollTrigger.batch("[data-scroll-reveal]:not([data-reveal-motion])", {
+      start: "top 92%",
       onEnter: (elements) => {
         gsap.from(elements, {
-          y: 28,
+          y: 12,
           autoAlpha: 0,
-          duration: 0.65,
-          stagger: 0.06,
+          duration: 0.4,
+          stagger: 0.03,
           ease: "power2.out",
+          force3D: true,
+          clearProps: "transform",
         });
       },
       once: true,

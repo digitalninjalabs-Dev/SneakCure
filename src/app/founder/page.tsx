@@ -10,7 +10,8 @@ const FounderShowcase = dynamic(
 
 export const metadata: Metadata = {
   title: "Founder Story",
-  description: "The journey behind SneakCure — vision, milestones, and the craft that started it all.",
+  description:
+    "Meet Ajit Yadav — founder of Sneakcure. The journey, craft, and vision behind India's premium restoration atelier.",
 };
 
 export default function FounderPage() {

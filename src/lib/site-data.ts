@@ -1,15 +1,51 @@
 import { productImage, serviceImage, PRODUCT_IMAGES, SERVICE_IMAGES, BEFORE_AFTER } from "@/lib/constants";
 
 export const SITE = {
-  name: "SneakCure",
+  name: "Sneakcure",
   phone: "+91 98765 43210",
   email: "hello@sneakcure.com",
   whatsapp: "919876543210",
   address: "Gomti Nagar, Lucknow, Uttar Pradesh 226010, India",
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.9462!3d26.8467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDUwJzQ4LjEiTiA4MMKwNTYnNDYuMyJF!5e0!3m2!1sen!2sin!4v1",
-  instagram: "https://instagram.com/sneakcure",
+  instagram: "https://instagram.com/Sneakcure",
 } as const;
+
+export const SERVICE_CITIES = ["Delhi", "Lucknow", "Kanpur"] as const;
+
+export const FRANCHISE_HOME_IMAGE =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuC63WQcWdPWICp7H-PBnleVHosYEqVDRiVwe5O2Q0Nm4S3Yww-39oJQmVhjD3KWfdiB96Ei8EEnu-hFxc7QFvkUP1aIR9OECJaXLftPfRQ23QYoWZcA-iepTysFZkJSZkHxx12Ad9r-iiYdVebgbhAPbH9fq2XgGpgztSBUCuhhRw3D9ldgSA8yKHZqpivYWfkEsjp7ZeAlDqou9zEdK5tfbl1KrKYWsCwhFZjm7O4XzClkU9al8Bh1sPJ0KPLx-eky48T0JcqMbfo";
+
+export const FRANCHISE_TERRITORIES = [
+  { city: "Lucknow", detail: "Gomti Nagar · Flagship" },
+  { city: "Delhi", detail: "NCR · Open" },
+  { city: "Kanpur", detail: "UP · Open" },
+] as const;
+
+/** Franchise page — exclusive territory cards */
+export const FRANCHISE_EXCLUSIVE_TERRITORIES = [
+  {
+    name: "Delhi",
+    status: "Available",
+    statusClass: "bg-green-100 text-green-800",
+    desc: "NCR territory open for a flagship Sneakcure studio. Prime locations in South Delhi, Gurgaon, or Noida preferred.",
+    image: "/franchise/delhi.jpg",
+  },
+  {
+    name: "Lucknow",
+    status: "Flagship",
+    statusClass: "bg-primary-black text-white",
+    desc: "Home of Sneakcure HQ in Gomti Nagar. Our reference atelier — training hub and operational blueprint for partners.",
+    image: "/franchise/lucknow.jpg",
+  },
+  {
+    name: "Kanpur",
+    status: "Reviewing",
+    statusClass: "bg-yellow-100 text-yellow-800",
+    desc: "Applications under review for Kanpur and surrounding UP markets. One studio per city — selection in progress.",
+    image: "/franchise/kanpur.jpg",
+  },
+] as const;
 
 export const MAIN_NAV = [
   { label: "Home", href: "/" },
@@ -37,41 +73,41 @@ export const TEAM = [
 ] as const;
 
 export const FOUNDER = {
-  name: "Aryan Singh",
+  name: "Ajit Yadav",
   title: "Founder & Atelier Director",
   location: "Lucknow, India",
-  image: serviceImage(4),
+  image: "/founder/ajit-yadav-portrait.jpg",
   tagline: "From late-night restorations to a national restoration house.",
   intro:
-    "Aryan Singh founded SneakCure in 2018 with one bench, a desk lamp, and a refusal to treat iconic footwear like disposable fashion. What began as restorations for friends in Lucknow grew into a full atelier — and eventually a training academy and franchise network — because clients kept asking for the same standard on leather goods, bags, and pieces no one else would touch.",
+    "Ajit Yadav founded Sneakcure in 2018 with one bench, a desk lamp, and a refusal to treat iconic footwear like disposable fashion. What began as restorations for friends in Lucknow grew into a full atelier — and eventually a training academy and franchise network — because clients kept asking for the same standard on leather goods, bags, and pieces no one else would touch.",
 } as const;
 
 export const FOUNDER_STORY = [
   {
     title: "The spark",
-    body: "Aryan grew up surrounded by sneaker culture — collecting, trading, and eventually watching pairs he loved age beyond repair. Local cleaners would shrink suede, strip paint, or rush jobs that deserved patience. He started experimenting on his own pairs at home, studying material guides and watching atelier videos from Europe and Japan until he could revive what others wrote off.",
+    body: "Ajit Yadav grew up surrounded by sneaker culture — collecting, trading, and eventually watching pairs he loved age beyond repair. Local cleaners would shrink suede, strip paint, or rush jobs that deserved patience. He started experimenting on his own pairs at home, studying material guides and watching atelier videos from Europe and Japan until he could revive what others wrote off.",
   },
   {
     title: "The first bench",
-    body: "In 2018, he rented a small studio space in Gomti Nagar, Lucknow — one bench, a rack of brushes, and a desk lamp for inspection. Word spread through friends and local collectors. The first paid job was a pair of oxidized Air Jordans; the client returned with three more pairs and a leather wallet. That was the moment SneakCure stopped being a side project and became a standard.",
+    body: "In 2018, he rented a small studio space in Gomti Nagar, Lucknow — one bench, a rack of brushes, and a desk lamp for inspection. Word spread through friends and local collectors. The first paid job was a pair of oxidized Air Jordans; the client returned with three more pairs and a leather wallet. That was the moment Sneakcure stopped being a side project and became a standard.",
   },
   {
     title: "Building the house",
-    body: "As demand grew, Aryan refused to scale by cutting corners. Every piece received a written protocol: material mapping, before photos, stage updates, and final QC under studio lighting. He hired slowly — prioritizing hand skill and respect for the culture over speed. Leather goods, bags, and patina work followed naturally as clients trusted the atelier with more than sneakers.",
+    body: "As demand grew, Ajit Yadav refused to scale by cutting corners. Every piece received a written protocol: material mapping, before photos, stage updates, and final QC under studio lighting. He hired slowly — prioritizing hand skill and respect for the culture over speed. Leather goods, bags, and patina work followed naturally as clients trusted the atelier with more than sneakers.",
   },
   {
     title: "Academy & franchise",
-    body: "By 2022, collectors and stylists across India were shipping pieces to Lucknow. Aryan launched the SneakCure Training Academy so the craft could outlive one studio, and began developing franchise systems to bring the same standard to new cities — with SOPs, supply chains, and on-site mentorship built in from day one.",
+    body: "By 2022, collectors and stylists across India were shipping pieces to Lucknow. Ajit Yadav launched the Sneakcure Training Academy so the craft could outlive one studio, and began developing franchise systems to bring the same standard to new cities — with SOPs, supply chains, and on-site mentorship built in from day one.",
   },
 ] as const;
 
 export const FOUNDER_MEMBERS = [
   {
-    name: "Aryan Singh",
+    name: "Ajit Yadav",
     role: "Founder & Atelier Director",
     joined: "2018",
-    bio: "Sets the restoration standard, leads material R&D, and mentors every new artisan through the SneakCure protocol.",
-    image: serviceImage(4),
+    bio: "Sets the restoration standard, leads material R&D, and mentors every new artisan through the Sneakcure protocol.",
+    image: "/founder/ajit-yadav-portrait.jpg",
     founder: true,
   },
   {
@@ -102,7 +138,7 @@ export const FOUNDER_MEMBERS = [
     name: "Vikram Joshi",
     role: "Academy & Franchise Lead",
     joined: "2022",
-    bio: "Former hospitality operator. Designed the training curriculum and partner onboarding playbook as SneakCure expanded beyond Lucknow.",
+    bio: "Former hospitality operator. Designed the training curriculum and partner onboarding playbook as Sneakcure expanded beyond Lucknow.",
     image: serviceImage(3),
     founder: false,
   },
@@ -116,8 +152,8 @@ export const FOUNDER_TIMELINE = [
   },
   {
     year: "2018",
-    title: "SneakCure is born",
-    body: "Opened the first atelier bench in Gomti Nagar, Lucknow. Named the house SneakCure — sneaker care elevated to a cure, not a quick clean.",
+    title: "Sneakcure is born",
+    body: "Opened the first atelier bench in Gomti Nagar, Lucknow. Named the house Sneakcure — sneaker care elevated to a cure, not a quick clean.",
   },
   {
     year: "2019",
@@ -142,7 +178,7 @@ export const FOUNDER_TIMELINE = [
   {
     year: "2024",
     title: "National vision",
-    body: "Franchise partnerships in new cities, 500+ students trained, and 12,000+ pieces restored under the SneakCure standard.",
+    body: "Franchise partnerships in new cities, 500+ students trained, and 12,000+ pieces restored under the Sneakcure standard.",
   },
 ] as const;
 
@@ -271,6 +307,11 @@ export const SERVICE_PAGES = [
 
 export type ServicePage = (typeof SERVICE_PAGES)[number];
 
+export const SERVICE_NAV = SERVICE_PAGES.map((service) => ({
+  label: service.title,
+  href: `/services/${service.slug}`,
+}));
+
 export function getServiceBySlug(slug: string): ServicePage | undefined {
   return SERVICE_PAGES.find((s) => s.slug === slug);
 }
@@ -329,7 +370,7 @@ export const TRAINING_GALLERY = SERVICE_IMAGES.slice(0, 4);
 export const FRANCHISE_GALLERY = PRODUCT_IMAGES.slice(2, 6);
 
 export const FRANCHISE_BENEFITS = [
-  "Proven SneakCure brand & SOPs",
+  "Proven Sneakcure brand & SOPs",
   "Hands-on training & certification",
   "Marketing & social media playbooks",
   "Ongoing product supply support",
@@ -338,23 +379,24 @@ export const FRANCHISE_BENEFITS = [
 
 export const SHARED_TESTIMONIALS = [
   { quote: "They resurrected my Travis fragments. Factory-new soles and suede nap.", name: "Marcus L.", role: "Collector · Lucknow" },
-  { quote: "Our atelier ships runway samples here. SneakCure is the only team we trust.", name: "Elena V.", role: "Creative Director" },
+  { quote: "Our atelier ships runway samples here. Sneakcure is the only team we trust.", name: "Elena V.", role: "Creative Director" },
   { quote: "Cinematic turnaround, white-glove service. Apple-level care for sneakers.", name: "Jordan K.", role: "Stylist · Delhi" },
 ] as const;
 
 export const ABOUT_GALLERY = PRODUCT_IMAGES.slice(0, 6);
-export const FOUNDER_GALLERY = PRODUCT_IMAGES.slice(4, 8);
+export const FOUNDER_GALLERY = [
+  "/founder/ajit-yadav-portrait.jpg",
+  "/founder/ajit-yadav-workshop.jpg",
+  "/founder/ajit-yadav-atelier.jpg",
+] as const;
 
-/** Founder page imagery — matches founder/code.html sample */
+/** Founder page imagery — Ajit Yadav atelier photography */
 export const FOUNDER_MEDIA = {
-  portrait:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDHUM-ggHjAq16xJWmdkicEp3z-dDduaGskZOSCX8l4beVDXVuCreBLqLf_occ5dS-nFI-b8FV_y_KR0NCC9xnyAsYebC3hH2t1iha5m1N6YX7AmD4k5M77Yes6oopCD8PB9nPL7asnl0qvcU4gdeyUpixipTFmvMr_kXW30_FXjWqAyTSMUpZXjlGWTy8mv7YlswdtxDiGSnRD_NKbJQ9C1V89lLvXO4puR0tIfEX4YPrGtaMtfRiD",
-  workspace:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuD3Iy_sQQkcWqHuP7KSYE-qOx4Lm80RIZbdHvqgW059WON7CIK8Wo2a-uGUahM3y7OcoVQ-0RTRotProm2d2LRvOfsOwf7ztW4KAMjG5O3l2eUpyk9sVvvjn7T9SJt1sxt1xEBgrYKJentqANFh5aZlE7jsh7CHdR3pnm-KxKDoGbIlJjYs2UaayesLIv4VErjUftuymFOGh6Kkz2oNaL9Tmjl6jeIQdLQ0xwLNlSUYgXZcqMBIuOwq",
-  studio:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAfEs885IfpUU_90THpB4ZFnWAx4Sbc9iLKA5o-kA2oLDYVXKD836KlVMqD11CMNl1ZfK1htnDbEPNfuW7Xs4n4vyCeFQ7NF9genJGY460U06YPXnRRJbDopjeGHwTW37ThCqQ9IwLUtTOx3grkbyG3wEtliZTpZEm2GeJIp716SayGz3nzM8gB24uOZeOJueV24JGMHX3YIAmDyIIznnuGdPdtY81rxR_tlZ1pQIHQ8mJb3QiTbacl",
-  process:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAvMt-WmYcWWsvDkHfsRk61aDqzxP9lNq6kcoyTX_snUcWAgOldAxfROJPNchXwntnDtwarvBfc4UtdNIvAPb3iBxtTLxA1zuDafWUtKUNOEOsBpAOj9w8yfbjjgEdUlw8B_YVWAQF1PauXelloFJ-h3WfxvabrdmqlBW-kdIPZUAqEJGrJ8_f2KH3vkA42vkLNhY8yy2ZqkYSLTbw-fYHVQNODXuJI7USGPQn6Uv7Vu2sZNAvYygld",
+  portrait: "/founder/ajit-yadav-portrait.jpg",
+  workspace: "/founder/ajit-yadav-workshop.jpg",
+  studio: "/founder/ajit-yadav-workshop.jpg",
+  process: "/founder/ajit-yadav-atelier.jpg",
+  reel: "/founder/founderreel.mp4",
 } as const;
 
 export const SERVICE_BEFORE_AFTER = BEFORE_AFTER;

@@ -150,12 +150,11 @@ export function StaggerReveal({
 }
 
 export const staggerItem = {
-  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.75, ease: ANIM_EASE },
+    transition: { duration: 0.55, ease: ANIM_EASE },
   },
 };
 
@@ -198,13 +197,12 @@ export function HoverLiftCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32, rotateX: 8 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.85, delay, ease: ANIM_EASE }}
-      whileHover={{ y: -10, scale: 1.02, rotate: -0.5 }}
+      transition={{ duration: 0.55, delay, ease: ANIM_EASE }}
+      whileHover={{ y: -8, scale: 1.015 }}
       className={className}
-      style={{ transformPerspective: 800 }}
     >
       {children}
     </motion.div>

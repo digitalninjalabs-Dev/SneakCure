@@ -141,7 +141,7 @@ export function CampaignBtn({
   onClick?: () => void;
 }) {
   const base =
-    "inline-flex items-center justify-center rounded-full px-10 py-5 text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 sm:text-sm";
+    "inline-flex min-h-11 w-full items-center justify-center rounded-full px-6 py-4 text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 sm:w-auto sm:px-10 sm:py-5 sm:text-sm";
   const styles =
     variant === "primary"
       ? "bg-gloss-black text-soft-white hover:opacity-90"
@@ -197,7 +197,13 @@ export function ParallaxImage({
 }) {
   return (
     <div className={`overflow-hidden ${className}`}>
-      <img src={src} alt={alt} className="h-full w-full object-cover" loading="lazy" />
+      <img
+        src={src}
+        alt={alt}
+        className="h-full w-full object-cover"
+        loading="lazy"
+        suppressHydrationWarning
+      />
     </div>
   );
 }
@@ -223,7 +229,13 @@ export function CampaignScrollImage({
       transition={{ duration: 0.55, ease: CAMPAIGN_EASE }}
       className={`overflow-hidden ${className}`}
     >
-      <img src={src} alt={alt} loading="lazy" className={`h-full w-full object-cover ${imgClassName}`} />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={`h-full w-full object-cover ${imgClassName}`}
+        suppressHydrationWarning
+      />
     </motion.div>
   );
 }
@@ -243,7 +255,13 @@ export function CampaignGrayscaleImage({
 }) {
   return (
     <div className={`overflow-hidden ${className}`}>
-      <img src={src} alt={alt} loading="lazy" className="h-full w-full object-cover grayscale-[0.35] transition-[filter] duration-700 hover:grayscale-0" />
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-cover grayscale-[0.35] transition-[filter] duration-700 hover:grayscale-0"
+        suppressHydrationWarning
+      />
     </div>
   );
 }

@@ -132,20 +132,20 @@ export function TrainingShowcase() {
           </div>
         </CampaignReveal>
 
-        <CampaignReveal className="relative h-[500px] w-full md:h-[700px] md:w-1/2" delay={0.2}>
+        <CampaignReveal className="relative h-[min(72vw,380px)] w-full sm:h-[420px] md:h-[700px] md:w-1/2" delay={0.2}>
           <div className="absolute right-0 top-0 z-10 h-[80%] w-3/4 overflow-hidden shadow-2xl">
             <ParallaxImage src={IMG.heroMain} alt="Artisan at work" className="h-full w-full" />
           </div>
           <div className="absolute bottom-0 left-0 z-20 h-1/2 w-1/2 overflow-hidden border-8 border-pearl shadow-xl">
             <ParallaxImage src={IMG.heroSecondary} alt="Mentor and student" className="h-full w-full" />
           </div>
-          <div className="absolute -left-8 top-1/4 z-30 rotate-[-90deg] bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+          <div className="absolute -left-8 top-1/4 z-30 hidden rotate-[-90deg] bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white md:block">
             TRAIN
           </div>
-          <div className="absolute right-1/4 top-1/2 z-30 bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+          <div className="absolute right-1/4 top-1/2 z-30 hidden bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white md:block">
             MENTOR
           </div>
-          <div className="absolute -right-4 bottom-1/4 z-30 rotate-90 bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white">
+          <div className="absolute -right-4 bottom-1/4 z-30 hidden rotate-90 bg-gloss-black px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white md:block">
             BUILD
           </div>
         </CampaignReveal>
@@ -290,7 +290,13 @@ export function TrainingShowcase() {
               <p className="editorial-title mb-12 flex-1 text-[clamp(1.5rem,2.5vw,2rem)] italic leading-snug">&ldquo;{t.quote}&rdquo;</p>
               <div className="mt-auto flex items-center gap-4">
                 <div className="h-12 w-12 overflow-hidden rounded-full bg-soft-white">
-                  <img src={t.avatar} alt={t.name} className="h-full w-full object-cover" loading="lazy" />
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    suppressHydrationWarning
+                  />
                 </div>
                 <div>
                   <span className="block text-[12px] font-medium uppercase tracking-wider">{t.name}</span>
@@ -339,7 +345,7 @@ export function TrainingShowcase() {
       </section>
 
       {/* Sticky CTA */}
-      <div className="pointer-events-none fixed bottom-12 right-12 z-40">
+      <div className="pointer-events-none fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 sm:bottom-12 sm:right-12">
         <CampaignBtn href="#apply" className="pointer-events-auto !h-20 !w-20 !rounded-full !p-0 shadow-2xl md:!h-auto md:!w-auto md:!rounded-none md:!px-10 md:!py-5">
           <span className="md:hidden">
             <MaterialIcon name="school" className="text-3xl" />

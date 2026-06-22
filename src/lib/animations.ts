@@ -22,19 +22,19 @@ export function bladeReveal(
     targets,
     {
       clipPath: clip.hidden,
-      y: 48,
+      y: 24,
       autoAlpha: 0,
-      filter: "blur(12px)",
     },
     {
       clipPath: clip.visible,
       y: 0,
       autoAlpha: 1,
-      filter: "blur(0px)",
-      duration: 1.2,
-      ease: BLADE_EASE,
-      stagger: options?.stagger ?? 0.12,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: options?.stagger ?? 0.08,
       delay: options?.delay ?? 0,
+      force3D: true,
+      clearProps: "transform",
     }
   );
 }
@@ -44,12 +44,14 @@ export function fadeUpReveal(
   options?: { delay?: number; stagger?: number }
 ) {
   return gsap.from(targets, {
-    y: 60,
+    y: 28,
     autoAlpha: 0,
-    duration: 1,
+    duration: 0.65,
     ease: LUXURY_EASE,
-    stagger: options?.stagger ?? 0.1,
+    stagger: options?.stagger ?? 0.08,
     delay: options?.delay ?? 0,
+    force3D: true,
+    clearProps: "transform",
   });
 }
 

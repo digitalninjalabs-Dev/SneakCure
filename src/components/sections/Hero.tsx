@@ -18,33 +18,26 @@ const SMOOTH_EASE = [0.33, 1, 0.68, 1] as const;
 function createCycleMotion(scale: "hero" | "location") {
   const yIn = scale === "hero" ? 14 : 8;
   const yOut = scale === "hero" ? -10 : -6;
-  const blurIn = scale === "hero" ? "8px" : "4px";
-  const blurOut = scale === "hero" ? "6px" : "3px";
 
   return {
     initial: {
       opacity: 0,
       y: yIn,
-      filter: `blur(${blurIn})`,
     },
     animate: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
-        opacity: { duration: 1.35, ease: SMOOTH_EASE },
-        y: { duration: 1.5, ease: SMOOTH_EASE },
-        filter: { duration: 1.25, ease: SMOOTH_EASE },
+        opacity: { duration: 1.1, ease: SMOOTH_EASE },
+        y: { duration: 1.2, ease: SMOOTH_EASE },
       },
     },
     exit: {
       opacity: 0,
       y: yOut,
-      filter: `blur(${blurOut})`,
       transition: {
-        opacity: { duration: 1.15, ease: SMOOTH_EASE },
-        y: { duration: 1.2, ease: SMOOTH_EASE },
-        filter: { duration: 1, ease: SMOOTH_EASE },
+        opacity: { duration: 0.9, ease: SMOOTH_EASE },
+        y: { duration: 1, ease: SMOOTH_EASE },
       },
     },
   };
@@ -53,7 +46,7 @@ function createCycleMotion(scale: "hero" | "location") {
 const wordMotion = createCycleMotion("hero");
 const locationMotion = createCycleMotion("location");
 
-function HeroVideoBackground() {
+function HeroVideoBackground({ paused }: { paused: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -64,8 +57,12 @@ function HeroVideoBackground() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    if (paused) {
+      video.pause();
+      return;
+    }
     video.play().catch(() => {});
-  }, [mounted]);
+  }, [mounted, paused]);
 
   if (!mounted) {
     return <div className="absolute inset-0 bg-black" aria-hidden />;
@@ -78,7 +75,7 @@ function HeroVideoBackground() {
       muted
       loop
       playsInline
-      preload="auto"
+      preload="none"
       className="absolute inset-0 h-full w-full object-cover"
       suppressHydrationWarning
       aria-hidden
@@ -142,7 +139,7 @@ function CyclingText({
       <AnimatePresence initial={false}>
         <motion.span
           key={label}
-          className="absolute left-0 top-0 block w-full bg-transparent will-change-[opacity,transform,filter]"
+          className="absolute left-0 top-0 block w-full bg-transparent will-change-[opacity,transform]"
           variants={motionVariants}
           initial="initial"
           animate="animate"
@@ -163,7 +160,7 @@ function HeroWordCycle() {
         motionVariants={wordMotion}
         widthPlaceholder="RESTORE"
         intervalMs={WORD_MS}
-        className="font-display text-[clamp(2.75rem,11vw,7.5rem)] font-semibold uppercase leading-[0.92] text-white"
+        className="font-display text-[clamp(2rem,11vw,7.5rem)] font-semibold uppercase leading-[0.92] text-white"
       />
     </h1>
   );
@@ -188,14 +185,31 @@ function HeroLocationCycle() {
 }
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [heroInView, setHeroInView] = useState(true);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry?.isIntersecting ?? false),
+      { rootMargin: "0px", threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="home"
-      className="relative min-h-svh w-full overflow-hidden bg-black"
+      ref={sectionRef}
+      className="relative min-h-svh w-full overflow-hidden bg-black pb-[max(5rem,env(safe-area-inset-bottom))]"
       aria-label="Hero"
     >
       <div className="absolute inset-0">
-        <HeroVideoBackground />
+        <HeroVideoBackground paused={!heroInView} />
         <div className="absolute inset-0 bg-black/18" aria-hidden />
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/45"
@@ -227,19 +241,19 @@ export function Hero() {
             </p>
 
             <div
-              className="mt-8 flex flex-row flex-wrap items-center gap-2 sm:gap-2.5 md:mt-11"
+              className="mt-8 flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2.5 md:mt-11"
               data-fade-up
             >
               <MagneticButton
                 href="/contact"
-                className="!px-4 !py-2.5 !text-[11px] sm:!px-5 sm:!py-3 sm:!text-xs"
+                className="!min-h-11 !w-full !px-5 !py-3 !text-xs sm:!w-auto sm:!px-5 sm:!py-3 sm:!text-xs"
               >
                 Book Restoration
               </MagneticButton>
               <MagneticButton
                 href="/services"
                 variant="ghost"
-                className="!px-4 !py-2.5 !text-[11px] border-white/40 bg-transparent text-white hover:bg-white/10 sm:!px-5 sm:!py-3 sm:!text-xs"
+                className="!min-h-11 !w-full !px-5 !py-3 !text-xs border-white/40 bg-transparent text-white hover:bg-white/10 sm:!w-auto sm:!px-5 sm:!py-3 sm:!text-xs"
               >
                 Explore Services
               </MagneticButton>

@@ -9,7 +9,7 @@ let registered = false;
 
 export function registerGsap() {
   if (registered || typeof window === "undefined") return;
-  gsap.registerPlugin(ScrollTrigger, Flip, useGSAP);
+  gsap.registerPlugin(ScrollTrigger, Flip);
   registered = true;
 }
 

@@ -37,7 +37,7 @@ export function VideoShowcase() {
           playsInline
           poster={productImage(0)}
           suppressHydrationWarning
-          aria-label="SneakCure restoration cinematic showcase"
+          aria-label="Sneakcure restoration cinematic showcase"
         >
           <source
             src="https://assets.mixkit.co/videos/preview/mixkit-white-sneaker-on-a-black-background-3280-large.mp4"

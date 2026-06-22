@@ -1,13 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const HomeMotionProviders = dynamic(
-  () =>
-    import("@/components/providers/HomeMotionProviders").then((mod) => mod.HomeMotionProviders),
-  { ssr: false }
-);
+import { PageAnimations } from "@/components/providers/PageAnimations";
 
 export function HomePageMotion({ children }: { children: React.ReactNode }) {
-  return <HomeMotionProviders>{children}</HomeMotionProviders>;
+  return (
+    <>
+      <PageAnimations />
+      {children}
+    </>
+  );
 }

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import {
@@ -17,6 +17,7 @@ import {
   MaterialIcon,
   ParallaxImage,
 } from "@/components/pages/campaign-ui";
+import { FRANCHISE_EXCLUSIVE_TERRITORIES } from "@/lib/site-data";
 
 const IMG = {
   hero: "https://lh3.googleusercontent.com/aida-public/AB6AXuC9bjaskSLC0EPreQVMT7hNpwyQvW3ndEjKZEZyUaK6FFhfVaYFD5-d8YMWKu_GBWxob2NeubM1bXfwIDxPgR4rYZN2a4Y5gk91vlcaieDCrLj4Fy_nYHXDQPcSWFs_gLMV6KfFBMOwQ39MFx7c26pcTox2ViC9mXe50ird35808AHzUOsB4c5Ms4tZ2QCjyk5vercZLO-Nj_gzLMa-XiIyrRc2B5g-0H7pjkBgXtXbeSDBrE1WzbU6RXroKc2FD4_Tcjt7H6yvSFk",
@@ -32,9 +33,6 @@ const IMG = {
   journey4: "https://lh3.googleusercontent.com/aida-public/AB6AXuDMA17kx5H3XzX7iC3xClB305EG-R-MsoQR539LTYB0VJRTT7BNY1Z3TFDStlQo37oOc0FbgwtIGpN0llTgUiZqIYliyfp5vzFPCjyfQjldYi3fqCA6aOKeQnTawzuGdEvtVURcD8rnfXHYH5J11IHiM3fviCzo-hzsUn_Ykt-7zs-NXUSvnw-m4vvZOtAswn0XkTbyvq36aRAZdFIkDa8yHMXldoBCNUvP_pG8YVxMoXKUwcJDlTehtz7hsRv3ErfQ1xb2mD2fo54",
   match1: "https://lh3.googleusercontent.com/aida-public/AB6AXuAV_agK1Dog2SD1f_LcZzUDRRvmuOjwL5rwOstiENrC82klSiLMboBWLO1s04LjFdNr_FMLM27l893X_8AfACsuMGyB_1YX8jxFEQKzkrNMhLJk99xqDiFF6AWakjWULvAS0RuUZNOA7AEdPrBg5F57slFmxuCehvqE-PQ_Q9yqTg5rwbIoHzMuZfAB4tbp4cGLeYXPsakJYVWVWngYDdI_PgaoYGFK5PZUoCtJU5Ec4EPkqx4aHHwsoxH5vzqN-jvXDOZATD0EPxQ",
   match2: "https://lh3.googleusercontent.com/aida-public/AB6AXuAo2KKmD0j9qr2iSpfYcve6bxmIjjhkCzZDVPMYDiEH5u9CYpVmH0eref0ggHi2v8gPHxMM6tAwllBx9Q4d29qpZHwMiju7yEZR_9q6dnmkezO3e5b2W1e3c7RvXmgLTfuufuphYpYnTK3UME2gcgU9RWa8tDSlE6dc2czdgF6wyfGFsZ8D6vLjx0LeHn-avb9TDPCVOUOekFdM1Aj3ExUdXI5rHWB8b6ZV9_AGhKiNxm2ka-7zrNUd5iAQIMh5kJ0vFVvNcWCRRR8",
-  london: "https://lh3.googleusercontent.com/aida-public/AB6AXuC20SQuUk7F85Jy7JmYN17euGo7CPRcNTTOXMdlrhP0Y0IX5P9q7bxUeAwxTwMCqkYTBAKbUKCI9BLPzbSdjyIisL6qs2eOB8v_ps-N7I2IWg962o4FU7-zzhU_DrOjlkKTRyn5tChnhpDHq8bcE1mfVps3NmbuyREbhvk33_CWljZtO7hi3dCd0MUj0MHjpjlh2jdG30ZtQwIXpRp8smOGyRPbLDYY8Y_8BJl-QZOpbjEG5CcuT93ZEwiM5VSj5jjY8OzczK-_tEY",
-  dubai: "https://lh3.googleusercontent.com/aida-public/AB6AXuD9JDLoCDEGprYCeMqCYQQAPbfsMn5RZzJoM-aWzYqNeBi11Te_0O6FehgJkoHx_WECBBGhdXH-7ftC08SgJVq58Kut8dX6YDCorue6cl6ySAy7zpQeJvu_hG18ebZmRfVNl-2x0cYKEOZcu7PSqIz1KqRlXm2S0ZGihiIV6Y72LIe4ywH-A9U5bQPrKz69JjNna54iVfC1It8uYVczKActi74B2X8250qZNyjI1PojGDVlEuJoB3CkvHydbM0KVEWwXJys5CT8SBg",
-  nyc: "https://lh3.googleusercontent.com/aida-public/AB6AXuBOCsFf3GGeAqXcFPQItYaguyjzocRpCwLyKYZ-ZSDChJu0nuLEZMAyR7Na1DCWLFbNdl6ub3U7Fw2V8_97_eVEsawvQhQldP-RE1K7VhU73Oxv736ZXEnuu1Fd60PFsz29S_SbEWbCSJazn8PoYChf6vW-N7GrXkh4YKwfmYRV0nZe60JiSmLm-B80S48roTwyiIbQ8x9xIz-H65wI2vmYLL7tWa1rPTcxvPWHvrGxXHKSlTY-7QghSLsRKlQubOyPQkT-rLhmbz4",
   applySide: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFQrZM7A5mhGh--30P7Hr-d1u-_Af2giBwKRfb0K8WvUiQNn4X0OMc7jK0seUUn_D0ju2nZKsUuFCoGKlRdXjfJaBYvQepyjuqVxZkNyA6yv2Gmuy3jmSr5OfO2pmK27iJZEGjFD7HWq65bZsN-QGDDOig2jtKq-IyNlCZ-N6m7RvWT1bfAcaidUXhkjVptReUvXKRa2Ew3lnw1iXM_VnDBGvWfK_1ne7fSBBBGI0fpWXKM3xBkekrMCLImBSjFZ9lXn5wuynhMqI",
 } as const;
 
@@ -42,16 +40,100 @@ const ROADMAP = ["Apply", "Discovery", "Approval", "Training", "Launch", "Grow"]
 
 const SYSTEM = [
   { icon: "school", title: "Training", items: ["Master Artisan Certification", "Sales & Service Training", "Management Coaching"] },
-  { icon: "terminal", title: "Systems", items: ["SneakCure OS Dashboard", "Inventory Management", "Automated Client Updates"] },
+  { icon: "terminal", title: "Systems", items: ["Sneakcure OS Dashboard", "Inventory Management", "Automated Client Updates"] },
   { icon: "campaign", title: "Marketing", items: ["Local Digital Strategies", "Premium Brand Assets", "PR & Launch Media Kit"] },
   { icon: "support", title: "Support", items: ["24/7 Technical Hotline", "Supply Chain Access", "Annual Brand Summit"] },
 ] as const;
 
-const CITIES = [
-  { name: "London", status: "Available", statusClass: "bg-green-100 text-green-800", desc: "High priority zone for our European flagship. Prime locations in Mayfair or Soho preferred.", image: IMG.london },
-  { name: "Dubai", status: "Reviewing", statusClass: "bg-yellow-100 text-yellow-800", desc: "Currently reviewing two applications for the DIFC district. Final selection pending.", image: IMG.dubai },
-  { name: "New York", status: "Closed", statusClass: "bg-red-100 text-red-800", desc: "Territory secured. Grand opening scheduled for Madison Ave, Q4 2024.", image: IMG.nyc },
+const JOURNEY_STAGES = [
+  {
+    img: IMG.journey1,
+    num: "01",
+    title: "Secure Digital Booking",
+    body: "Clients book through our encrypted platform, uploading high-res photos for initial appraisal.",
+  },
+  {
+    img: IMG.journey2,
+    num: "02",
+    title: "White-Glove Collection",
+    body: "Premium logistics partner or in-studio drop-off with detailed condition mapping.",
+  },
+  {
+    img: IMG.journey3,
+    num: "03",
+    title: "Precision Restoration",
+    body: "The craft happens. Clients receive real-time status updates and behind-the-scenes footage.",
+  },
+  {
+    img: IMG.journey4,
+    num: "04",
+    title: "The Reveal",
+    body: "Delivered in archival-grade packaging with a digital certificate of restoration.",
+  },
 ] as const;
+
+function FranchiseJourneyStage({
+  stage,
+  imageClassName = "aspect-[4/3] w-full bg-white",
+}: {
+  stage: (typeof JOURNEY_STAGES)[number];
+  imageClassName?: string;
+}) {
+  return (
+    <>
+      <CampaignScrollImage src={stage.img} alt={stage.title} className={imageClassName} />
+      <div className="flex gap-4">
+        <span className="editorial-title shrink-0 text-3xl text-primary-black/10 sm:text-4xl">{stage.num}</span>
+        <div className="min-w-0">
+          <h3 className="text-lg font-bold uppercase leading-tight tracking-tighter sm:text-xl">{stage.title}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">{stage.body}</p>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function FranchiseJourneyMobile() {
+  return (
+    <section className="campaign-section overflow-x-hidden bg-soft-white md:hidden">
+      <div className="campaign-pad">
+        <CampaignReveal className="mb-8">
+          <CampaignSplitTitle size="display" title="The Journey" accent="From apply to launch" />
+        </CampaignReveal>
+        <div className="space-y-10">
+          {JOURNEY_STAGES.map((stage, i) => (
+            <CampaignReveal key={stage.num} delay={i * 0.08} className="space-y-4">
+              <FranchiseJourneyStage stage={stage} />
+            </CampaignReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FranchiseJourneyDesktop() {
+  return (
+    <section className="campaign-section hidden overflow-hidden bg-soft-white md:block">
+      <div className="mx-auto mb-16 max-w-[1440px] campaign-pad">
+        <CampaignReveal>
+          <CampaignSplitTitle size="display" title="The Journey" accent="From apply to launch" />
+        </CampaignReveal>
+      </div>
+      <div className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 campaign-pad [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {JOURNEY_STAGES.map((stage, i) => (
+          <CampaignReveal
+            key={stage.num}
+            delay={i * 0.1}
+            className="w-[min(85vw,400px)] shrink-0 snap-start space-y-6"
+          >
+            <FranchiseJourneyStage stage={stage} imageClassName="aspect-square w-full bg-white" />
+          </CampaignReveal>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function FranchiseApplicationForm() {
   const [sent, setSent] = useState(false);
@@ -77,14 +159,14 @@ function FranchiseApplicationForm() {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="space-y-2">
           <CampaignLabel>Target City</CampaignLabel>
-          <input required placeholder="e.g. Paris, France" className="w-full border-0 border-b border-black/10 bg-transparent px-0 py-3 outline-none transition-colors placeholder:text-black/20 focus:border-primary-black focus:ring-0" />
+          <input required placeholder="Delhi, Lucknow, or Kanpur" className="w-full border-0 border-b border-black/10 bg-transparent px-0 py-3 outline-none transition-colors placeholder:text-black/20 focus:border-primary-black focus:ring-0" />
         </div>
         <div className="space-y-2">
           <CampaignLabel>Liquidity / Investment Range</CampaignLabel>
           <select className="w-full border-0 border-b border-black/10 bg-transparent px-0 py-3 outline-none focus:border-primary-black focus:ring-0">
-            <option>₹8L - ₹15L</option>
-            <option>₹15L - ₹25L</option>
-            <option>₹25L+</option>
+            <option>?8L - ?15L</option>
+            <option>?15L - ?25L</option>
+            <option>?25L+</option>
           </select>
         </div>
       </div>
@@ -104,9 +186,9 @@ export function FranchiseShowcase() {
     <div className="campaign-page overflow-x-hidden bg-pearl text-primary-black">
       {/* Hero */}
       <section className="campaign-hero flex flex-col items-stretch md:flex-row">
-        <div className="flex w-full flex-col justify-start campaign-pad pb-12 pt-4 md:w-1/2 md:pb-16 md:pt-6">
+        <div className="flex w-full flex-col justify-start campaign-pad pb-12 md:w-1/2 md:pb-16">
           <CampaignReveal>
-            <CampaignEyebrow>SNEAKCURE FRANCHISE</CampaignEyebrow>
+            <CampaignEyebrow>Sneakcure FRANCHISE</CampaignEyebrow>
             <CampaignSplitTitle as="h1" title="Launch a premium restoration business" accent="Own your city" className="mb-8" />
             <p className="mb-12 max-w-lg text-lg leading-relaxed text-muted">
               Become part of the world&apos;s most exclusive footwear and leather care ecosystem. We provide the craft, the
@@ -135,19 +217,19 @@ export function FranchiseShowcase() {
         </div>
         <CampaignHeroParallax className="relative w-full overflow-hidden bg-deep-black md:w-1/2">
           <ParallaxImage src={IMG.hero} alt="Franchise studio" className="h-full min-h-[420px] w-full opacity-80 md:min-h-full" speed={0.1} />
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-12">
-            <div className="relative h-full w-full max-w-lg">
-              <CampaignScale delay={0.3} className="absolute left-0 top-10 border border-white/20 bg-white/90 p-6 shadow-2xl backdrop-blur-md">
+          <div className="pointer-events-none absolute inset-0 flex items-end justify-center p-4 md:items-center md:p-12">
+            <div className="relative flex w-full max-w-lg flex-col gap-3 md:block md:h-full">
+              <CampaignScale delay={0.3} className="border border-white/20 bg-white/90 p-4 shadow-2xl backdrop-blur-md md:absolute md:left-0 md:top-10 md:p-6">
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-primary-black">Status</p>
-                <h3 className="editorial-title text-2xl">Ready To Launch</h3>
+                <h3 className="editorial-title text-xl md:text-2xl">Ready To Launch</h3>
               </CampaignScale>
-              <CampaignScale delay={0.45} className="absolute bottom-40 right-0 border border-white/10 bg-gloss-black/95 p-8 text-white shadow-2xl">
+              <CampaignScale delay={0.45} className="border border-white/10 bg-gloss-black/95 p-4 text-white shadow-2xl md:absolute md:bottom-40 md:right-0 md:p-8">
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest opacity-60">Availability</p>
-                <h3 className="editorial-title text-3xl">Limited Cities</h3>
+                <h3 className="editorial-title text-2xl md:text-3xl">Limited Cities</h3>
               </CampaignScale>
-              <CampaignScale delay={0.6} className="absolute bottom-10 left-20 border border-white/10 bg-white/10 p-6 text-white shadow-2xl backdrop-blur-xl">
+              <CampaignScale delay={0.6} className="border border-white/10 bg-white/10 p-4 text-white shadow-2xl backdrop-blur-xl md:absolute md:bottom-10 md:left-20 md:p-6">
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest opacity-70">Expertise</p>
-                <h3 className="editorial-title text-2xl">Premium Service</h3>
+                <h3 className="editorial-title text-xl md:text-2xl">Premium Service</h3>
               </CampaignScale>
             </div>
           </div>
@@ -179,7 +261,7 @@ export function FranchiseShowcase() {
           <div className="grid w-full grid-cols-2 items-end gap-6 md:w-7/12">
             <div className="space-y-6">
               <CampaignReveal delay={0.2}>
-                <CampaignScrollImage src={IMG.why1} alt="Artisan" className="h-[400px] w-full" />
+                <CampaignScrollImage src={IMG.why1} alt="Artisan" className="h-[min(400px,70vw)] w-full md:h-[400px]" />
               </CampaignReveal>
               <CampaignScale delay={0.4} className="bg-gloss-black p-12 text-white">
                 <p className="editorial-title mb-4 text-6xl">92%</p>
@@ -187,17 +269,17 @@ export function FranchiseShowcase() {
               </CampaignScale>
             </div>
             <CampaignReveal delay={0.3}>
-              <CampaignScrollImage src={IMG.why2} alt="Toolkit" className="h-[600px] w-full" />
+              <CampaignScrollImage src={IMG.why2} alt="Toolkit" className="h-[min(480px,85vw)] w-full md:h-[600px]" />
             </CampaignReveal>
           </div>
         </div>
       </section>
 
-      {/* Why SneakCure */}
+      {/* Why Sneakcure */}
       <section className="campaign-section bg-gloss-black px-[max(1.25rem,4vw)] text-white">
         <div className="mx-auto max-w-[1440px]">
           <CampaignReveal className="mx-auto mb-20 max-w-2xl text-center">
-            <CampaignSplitTitle size="display" title="The SneakCure Advantage" accent="Why partner with us" dark className="mb-6" />
+            <CampaignSplitTitle size="display" title="The Sneakcure Advantage" accent="Why partner with us" dark className="mb-6" />
             <p className="text-lg opacity-70">We don&apos;t just sell franchises; we build restoration institutions.</p>
           </CampaignReveal>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -224,11 +306,11 @@ export function FranchiseShowcase() {
             <p className="mt-4 max-w-xl text-lg text-muted">A meticulously designed space that balances clinical precision with artisanal warmth.</p>
           </CampaignReveal>
           <div className="group relative cursor-crosshair">
-            <CampaignGrayscaleImage src={IMG.studio} alt="Studio" className="h-[716px] w-full" />
+            <CampaignGrayscaleImage src={IMG.studio} alt="Studio" className="h-[min(520px,85vh)] w-full md:h-[716px]" />
             {[
               { top: "30%", left: "20%", title: "Concierge Reception", body: "A personalized intake experience where we assess every item under museum-grade lighting.", align: "left" },
               { top: "50%", left: "55%", title: "The Restoration Lab", body: "Custom-built ergonomic workstations equipped with our proprietary toolsets.", align: "left" },
-              { top: "auto", bottom: "20%", right: "15%", left: "auto", title: "Final Inspection", body: "Temperature-controlled curing and QC area ensuring every pair meets the SneakCure seal.", align: "right" },
+              { top: "auto", bottom: "20%", right: "15%", left: "auto", title: "Final Inspection", body: "Temperature-controlled curing and QC area ensuring every pair meets the Sneakcure seal.", align: "right" },
             ].map((spot) => (
               <div
                 key={spot.title}
@@ -249,33 +331,8 @@ export function FranchiseShowcase() {
         </div>
       </section>
 
-      {/* Customer Journey */}
-      <section className="campaign-section overflow-hidden bg-soft-white">
-        <div className="mx-auto mb-16 max-w-[1440px] campaign-pad">
-          <CampaignReveal>
-            <CampaignSplitTitle size="display" title="The Journey" accent="From apply to launch" />
-          </CampaignReveal>
-        </div>
-        <div className="flex gap-8 overflow-x-auto pb-12 campaign-pad">
-          {[
-            { img: IMG.journey1, num: "01", title: "Secure Digital Booking", body: "Clients book through our encrypted platform, uploading high-res photos for initial appraisal." },
-            { img: IMG.journey2, num: "02", title: "White-Glove Collection", body: "Premium logistics partner or in-studio drop-off with detailed condition mapping." },
-            { img: IMG.journey3, num: "03", title: "Precision Restoration", body: "The craft happens. Clients receive real-time status updates and behind-the-scenes footage." },
-            { img: IMG.journey4, num: "04", title: "The Reveal", body: "Delivered in archival-grade packaging with a digital certificate of restoration." },
-          ].map((stage, i) => (
-            <CampaignReveal key={stage.num} delay={i * 0.1} className="min-w-[400px] space-y-6">
-              <CampaignScrollImage src={stage.img} alt={stage.title} className="aspect-square bg-white" />
-              <div className="flex gap-4">
-                <span className="editorial-title text-4xl text-primary-black/10">{stage.num}</span>
-                <div>
-                  <h3 className="text-xl font-bold uppercase tracking-tighter">{stage.title}</h3>
-                  <p className="mt-2 text-muted">{stage.body}</p>
-                </div>
-              </div>
-            </CampaignReveal>
-          ))}
-        </div>
-      </section>
+      <FranchiseJourneyMobile />
+      <FranchiseJourneyDesktop />
 
       {/* Launch Roadmap */}
       <section className="campaign-section campaign-pad mx-auto max-w-[1440px]">
@@ -303,11 +360,11 @@ export function FranchiseShowcase() {
         </div>
       </section>
 
-      {/* SneakCure System */}
+      {/* Sneakcure System */}
       <section className="campaign-section bg-deep-black px-[max(1.25rem,4vw)] text-white">
         <div className="mx-auto max-w-[1440px]">
           <CampaignReveal className="mb-16">
-            <CampaignSplitTitle size="display" title="The SneakCure System" accent="Everything included" dark />
+            <CampaignSplitTitle size="display" title="The Sneakcure System" accent="Everything included" dark />
           </CampaignReveal>
           <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4">
             {SYSTEM.map((block, i) => (
@@ -352,14 +409,19 @@ export function FranchiseShowcase() {
           <CampaignReveal className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <CampaignSplitTitle size="display" title="Exclusive Territories" accent="Limited cities open" />
-              <p className="mt-2 text-lg text-muted">Only one studio per major metropolitan hub.</p>
+              <p className="mt-2 text-lg text-muted">Delhi · Lucknow · Kanpur — one studio per city.</p>
             </div>
-            <button type="button" className="border-b border-primary-black pb-2 text-[12px] font-medium uppercase tracking-widest">
-              View Global Map
-            </button>
+            <a
+              href="https://www.google.com/maps/search/Sneakcure+Gomti+Nagar+Lucknow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-primary-black pb-2 text-[12px] font-medium uppercase tracking-widest"
+            >
+              View on map
+            </a>
           </CampaignReveal>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {CITIES.map((city, i) => (
+            {FRANCHISE_EXCLUSIVE_TERRITORIES.map((city, i) => (
               <CampaignReveal key={city.name} delay={i * 0.1} className="border border-black/5 bg-white p-10">
                 <div className="mb-8 flex items-start justify-between">
                   <h4 className="text-2xl font-bold uppercase tracking-tighter">{city.name}</h4>

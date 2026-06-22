@@ -10,7 +10,7 @@ const FranchiseShowcase = dynamic(
 
 export const metadata: Metadata = {
   title: "Get Franchise",
-  description: "Partner with SneakCure — franchise opportunities in premium restoration across India.",
+  description: "Partner with Sneakcure — franchise opportunities in premium restoration across India.",
 };
 
 export default function FranchisePage() {

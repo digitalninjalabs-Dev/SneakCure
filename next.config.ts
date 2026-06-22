@@ -12,11 +12,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizePackageImports: ["framer-motion", "lenis"],
-    staleTimes: {
-      dynamic: 30,
-      static: 300,
-    },
+    optimizePackageImports: ["lenis"],
   },
 };
 

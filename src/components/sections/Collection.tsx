@@ -1,7 +1,7 @@
 "use client";
 
 import { SafeImage } from "@/components/ui/SafeImage";
-import { motion } from "framer-motion";
+import { ImageReveal } from "@/components/ui/scroll-reveal";
 import { COLLECTION_ITEMS } from "@/lib/constants";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -17,13 +17,14 @@ export function Collection() {
       />
       <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
         {COLLECTION_ITEMS.map((item, i) => (
-          <motion.article
+          <ImageReveal
             key={item.name}
+            as="article"
             className={`group relative overflow-hidden rounded-2xl gloss-black-panel ${
               i === 0 ? "md:row-span-2 md:aspect-auto aspect-[3/4]" : "aspect-[4/3]"
             }`}
-            data-scroll-reveal
-            whileHover={{ scale: 1.02 }}
+            delay={i * 0.06}
+            whileHover={{ scale: 1.015 }}
           >
             <SafeImage
               src={item.image}
@@ -38,7 +39,7 @@ export function Collection() {
               <p className="text-[10px] uppercase tracking-[0.2em] text-muted sm:text-xs">{item.tag}</p>
               <h3 className="mt-1 font-display text-lg text-soft-white sm:mt-2 sm:text-2xl">{item.name}</h3>
             </div>
-          </motion.article>
+          </ImageReveal>
         ))}
       </div>
     </section>
