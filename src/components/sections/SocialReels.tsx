@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { FadeIn } from "@/components/ui/scroll-reveal";
 import { REEL_VIDEOS } from "@/lib/constants";
+import { SITE } from "@/lib/site-data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 function ReelVideo({ src, index }: { src: string; index: number }) {
@@ -51,9 +52,9 @@ export function SocialReels() {
     >
       <SectionHeading
         eyebrow="@Sneakcure"
-        title="From the atelier"
-        titleAccent="Behind the bench"
-        subtitle="Restorations, transformations, and behind-the-scenes — straight from our reels."
+        title="The art of restoration"
+        titleAccent="Every detail matters"
+        subtitle="Follow our journey through premium restorations, artisan craftsmanship, and exclusive studio moments that bring timeless leather and luxury footwear back to life."
         gsap
         align="center"
       />
@@ -71,7 +72,7 @@ export function SocialReels() {
 
       <p className="mt-10 text-center text-sm tracking-wide text-muted md:mt-12">
         <a
-          href="https://instagram.com"
+          href={SITE.instagram}
           target="_blank"
           rel="noopener noreferrer"
           className="transition-colors hover:text-primary-black"

@@ -14,11 +14,11 @@ const SERVICES_START = 0.24;
 const SERVICES_END = 0.96;
 
 const SERVICE_DISPLAY = [
-  { lines: ["SNEAKER", "RESTORE"], accent: "#E8C9A8" },
+  { lines: ["SNEAKER", "RESTORATION"], accent: "#E8C9A8" },
   { lines: ["BAGS", "CARE"], accent: "#D4C4B0" },
-  { lines: ["LEATHER", "JACKET"], accent: "#C9A27A" },
-  { lines: ["SOFA", "RESTORE"], accent: "#B8A898" },
-  { lines: ["CAR", "INTERIOR"], accent: "#A89078" },
+  { lines: ["LEATHER", "RESTORATION"], accent: "#C9A27A" },
+  { lines: ["SOFA", "RESTORATION"], accent: "#B8A898" },
+  { lines: ["CAR", "INTERIORS"], accent: "#A89078" },
   { lines: ["PATINA", "ART"], accent: "#D8BC94" },
 ] as const;
 
@@ -145,8 +145,13 @@ function ServiceDetailPanel({
 
         <div key={active.slug} className="relative animate-[service-fade-in_0.35s_ease-out]">
           <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-primary-black/40">
-            {indexLabel} — Signature treatment
+            {indexLabel} — Signature service
           </p>
+          {"homeAccent" in active && active.homeAccent ? (
+            <p className="mt-2 text-xs uppercase tracking-[0.16em] text-primary-black/45">
+              {active.homeAccent}
+            </p>
+          ) : null}
           <h3 className="editorial-title mt-3 max-w-md text-xl font-semibold leading-tight text-primary-black sm:text-2xl md:text-[1.85rem]">
             {active.title}
           </h3>
@@ -158,7 +163,7 @@ function ServiceDetailPanel({
       {!isMobile && (
         <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
           <MagneticButton href={`/services/${active.slug}`} className="!min-h-11 !w-full !text-xs sm:!w-auto">
-            View Service
+            Explore service
           </MagneticButton>
           <Link
             href="/services"
@@ -223,7 +228,7 @@ function MobileWordShowcase({
         ))}
       </ul>
 
-      <p className="relative mt-5 text-sm leading-relaxed text-white/40">{service.overview.slice(0, 140)}…</p>
+      <p className="relative mt-5 text-sm leading-relaxed text-white/40">{service.overview}</p>
     </div>
   );
 }
@@ -277,7 +282,7 @@ function WordShowcase({
         </ul>
       </div>
 
-      <p className="relative max-w-sm text-sm leading-relaxed text-white/40">{service.overview.slice(0, 140)}…</p>
+      <p className="relative max-w-sm text-sm leading-relaxed text-white/40">{service.overview}</p>
     </div>
   );
 }
@@ -293,11 +298,11 @@ function ServicesMobileShowcase() {
       <div className="bg-[#F6F4F1] px-4 py-10">
         <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
         <h2 className="editorial-title mt-4 text-[clamp(1.65rem,7vw,2.25rem)] font-semibold leading-[1.05] text-primary-black">
-          Every surface.
+          Every detail.
           <br />
-          Every material.
+          Every finish.
           <br />
-          <span className="text-primary-black/45">Perfected.</span>
+          <span className="text-primary-black/45">Perfectly restored.</span>
         </h2>
 
         <div className="mt-8 -mx-1 px-1">
@@ -321,7 +326,7 @@ function ServicesMobileShowcase() {
 
       <div className="bg-[#F6F4F1] px-4 pb-10 pt-2">
         <MagneticButton href={`/services/${active.slug}`} className="!min-h-11 !w-full !text-xs">
-          View Service
+          Explore service
         </MagneticButton>
         <Link
           href="/services"
@@ -417,11 +422,11 @@ function ServicesDesktopScroll() {
             <div>
               <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
               <h2 className="editorial-title mt-4 max-w-md text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.05] text-primary-black">
-                Every surface.
+                Every detail.
                 <br />
-                Every material.
+                Every finish.
                 <br />
-                <span className="text-primary-black/45">Perfected.</span>
+                <span className="text-primary-black/45">Perfectly restored.</span>
               </h2>
             </div>
 

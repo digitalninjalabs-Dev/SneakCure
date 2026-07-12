@@ -6,9 +6,9 @@ export function Statistics() {
   return (
     <section className="section-pad bg-soft-white py-20 sm:py-24 md:py-28 grain" aria-label="Premium statistics">
       <SectionHeading
-        eyebrow="By The Numbers"
-        title="Trusted by collectors worldwide"
-        titleAccent="Proof in every pair"
+        eyebrow="By the numbers"
+        title="Excellence in every restoration"
+        titleAccent="Trusted across India"
         align="center"
         gsap
       />

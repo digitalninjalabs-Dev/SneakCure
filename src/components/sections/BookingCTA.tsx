@@ -16,11 +16,11 @@ export function BookingCTA() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.8),transparent_60%)]" />
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <BladeText
-          lines={["YOUR SNEAKERS", "DESERVE BETTER."]}
+          lines={["YOUR FAVORITES", "DESERVE EXPERT CARE."]}
           className="editorial-title text-3xl font-semibold uppercase sm:text-5xl md:text-7xl lg:text-8xl"
         />
         <p className="mt-6 text-lg text-muted md:text-xl" data-fade-up>
-          Book a premium restoration. White-glove pickup available.
+          Restore them with craftsmanship. Doorstep pickup available across India.
         </p>
 
         <form
@@ -46,7 +46,7 @@ export function BookingCTA() {
           </div>
           <div className="glass-card rounded-2xl p-2">
             <label className="sr-only" htmlFor="email">
-              Email
+              Email address
             </label>
             <input
               id="email"
@@ -58,20 +58,34 @@ export function BookingCTA() {
             />
           </div>
           <div className="glass-card rounded-2xl p-2">
-            <label className="sr-only" htmlFor="sneaker">
-              Sneaker details
+            <label className="sr-only" htmlFor="phone">
+              Phone / WhatsApp
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              placeholder="Phone / WhatsApp"
+              className="w-full bg-transparent px-5 py-4 text-primary-black outline-none placeholder:text-muted"
+            />
+          </div>
+          <div className="glass-card rounded-2xl p-2">
+            <label className="sr-only" htmlFor="message">
+              Restoration details
             </label>
             <textarea
-              id="sneaker"
-              name="sneaker"
+              id="message"
+              name="message"
               rows={3}
-              placeholder="Tell us about your pair..."
+              required
+              placeholder="Tell us about your restoration..."
               className="w-full resize-none bg-transparent px-5 py-4 text-primary-black outline-none placeholder:text-muted"
             />
           </div>
           <div className="flex justify-center pt-4">
             <MagneticButton type="submit">
-              {submitted ? "Request Received" : "Book Premium Restoration"}
+              {submitted ? "Request Received" : "Request a Free Consultation"}
             </MagneticButton>
           </div>
         </form>

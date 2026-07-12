@@ -9,8 +9,11 @@ const FranchiseShowcase = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Get Franchise",
-  description: "Partner with Sneakcure — franchise opportunities in premium restoration across India.",
+  title: {
+    absolute: "Sneakcure Franchise | Build India's Next Premium Restoration Studio",
+  },
+  description:
+    "Start your own Sneakcure franchise and build a premium restoration studio for shoes, sneakers, and luxury leather goods. Get expert training, marketing support, and proven business systems.",
 };
 
 export default function FranchisePage() {

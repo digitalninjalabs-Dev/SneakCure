@@ -2,14 +2,94 @@ import { productImage, serviceImage, PRODUCT_IMAGES, SERVICE_IMAGES, BEFORE_AFTE
 
 export const SITE = {
   name: "Sneakcure",
-  phone: "+91 98765 43210",
-  email: "hello@sneakcure.com",
-  whatsapp: "919876543210",
-  address: "Gomti Nagar, Lucknow, Uttar Pradesh 226010, India",
+  phone: "+91 9555213651",
+  email: "care@sneakcure.com",
+  whatsapp: "919555213651",
+  address:
+    "Kh No: 31/25, Plot No 86, Near MG Royal Banquet Hall, Pocket 1, Matiala Extension, Matiala, Delhi, 110059",
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.9462!3d26.8467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDUwJzQ4LjEiTiA4MMKwNTYnNDYuMyJF!5e0!3m2!1sen!2sin!4v1",
   instagram: "https://instagram.com/Sneakcure",
 } as const;
+
+export const CONTACT_STORES = [
+  {
+    name: "Delhi Headoffice",
+    landmark: "Near MG Royal Banquet Hall",
+    address:
+      "Kh No: 31/25, Plot No 86, Near MG Royal Banquet Hall, Pocket 1, Matiala Extension, Matiala, Delhi, 110059",
+    hours: "10:00 AM – 8:00 PM IST (Monday–Sunday)",
+    weeklyOff: "Wednesday",
+    phone: "+91 9555213651",
+    phoneHref: "919555213651",
+    email: "companysneakcure@gmail.com",
+  },
+  {
+    name: "Lucknow Company Own Studio",
+    landmark: "Near Submit Building",
+    address: "624V/177 Vishesh Khand, Gomti Nagar, Lucknow, 226010",
+    hours: "10:00 AM – 8:00 PM IST (Monday–Sunday)",
+    weeklyOff: "Wednesday",
+    phone: "+91 9170775506",
+    phoneHref: "919170775506",
+    email: "companysneakcure@gmail.com",
+  },
+  {
+    name: "Kanpur Company Own Studio",
+    landmark: "",
+    address: "128/61, K Block, VIRAT NAGAR, Kidwai Nagar, Kanpur, Uttar Pradesh 208011",
+    hours: "10:00 AM – 8:00 PM IST (Monday–Sunday)",
+    weeklyOff: "Wednesday",
+    phone: "+91 9170775506",
+    phoneHref: "919170775506",
+    email: "companysneakcure@gmail.com",
+  },
+] as const;
+
+export const CONTACT_REFERRAL_SOURCES = [
+  "Google Search",
+  "Instagram",
+  "Family & Friends",
+  "Word of Mouth",
+  "Brand / Store Reference",
+  "Our Store Hoardings",
+  "Others",
+] as const;
+
+export const CONTACT_FAQ_ITEMS = [
+  {
+    q: "How long does a restoration usually take?",
+    a: "Most restoration projects are completed within 7–15 business days, depending on the condition, materials, and level of craftsmanship required.",
+  },
+  {
+    q: "Can you restore luxury brands?",
+    a: "Yes. We specialize in restoring premium articles like sneakers, handbags, and leather goods, sofa & car restoration from leading luxury brands using professional restoration techniques.",
+  },
+  {
+    q: "Do you offer doorstep pickup and delivery?",
+    a: "Yes. We provide secure pickup and delivery services across Delhi, Lucknow & Kanpur, making it easy to restore your favorite pieces from anywhere.",
+  },
+  {
+    q: "Can heavily damaged leather be restored?",
+    a: "Many damaged items can be significantly revived after a detailed assessment. Our team will recommend the most suitable restoration approach before work begins.",
+  },
+  {
+    q: "How do I request a restoration quote?",
+    a: "Simply send us clear photos through our contact form or WhatsApp. We'll review your item and share a personalized recommendation and estimate.",
+  },
+  {
+    q: "Do you provide franchise opportunities?",
+    a: "Yes. Sneakcure offers franchise partnerships and professional training programs for entrepreneurs interested in building a premium restoration business.",
+  },
+  {
+    q: "What types of products do you restore?",
+    a: "We restore sneakers, leather shoes, luxury handbags, wallets, belts, jackets, and other premium leather accessories.",
+  },
+  {
+    q: "Is my item insured during shipping?",
+    a: "We use trusted logistics partners and secure packaging to ensure your item is handled with the highest level of care throughout the restoration journey.",
+  },
+] as const;
 
 export const SERVICE_CITIES = ["Delhi", "Lucknow", "Kanpur"] as const;
 
@@ -26,23 +106,23 @@ export const FRANCHISE_TERRITORIES = [
 export const FRANCHISE_EXCLUSIVE_TERRITORIES = [
   {
     name: "Delhi",
-    status: "Available",
-    statusClass: "bg-green-100 text-green-800",
-    desc: "NCR territory open for a flagship Sneakcure studio. Prime locations in South Delhi, Gurgaon, or Noida preferred.",
+    status: "Headquarters",
+    statusClass: "bg-primary-black text-white",
+    desc: "Home to Sneakcure's central headquarters, large-scale restoration workshop, and operations center. This facility powers franchise training, quality control, product development, and nationwide support.",
     image: "/franchise/delhi.jpg",
   },
   {
     name: "Lucknow",
-    status: "Flagship",
-    statusClass: "bg-primary-black text-white",
-    desc: "Home of Sneakcure HQ in Gomti Nagar. Our reference atelier — training hub and operational blueprint for partners.",
+    status: "Company-Owned Store",
+    statusClass: "bg-primary-black/90 text-white",
+    desc: "Our fully operational Sneakcure store serves customers with premium shoe and leather restoration. Experience our service standards, customer journey, and business model in action.",
     image: "/franchise/lucknow.jpg",
   },
   {
     name: "Kanpur",
-    status: "Reviewing",
-    statusClass: "bg-yellow-100 text-yellow-800",
-    desc: "Applications under review for Kanpur and surrounding UP markets. One studio per city — selection in progress.",
+    status: "Company-Owned Store",
+    statusClass: "bg-primary-black/90 text-white",
+    desc: "An established Sneakcure store built on the same premium systems and craftsmanship. A live demonstration of the operational excellence every franchise partner receives.",
     image: "/franchise/kanpur.jpg",
   },
 ] as const;
@@ -54,7 +134,6 @@ export const MAIN_NAV = [
   { label: "Training & Consultation", href: "/training" },
   { label: "Get Franchise", href: "/franchise" },
   { label: "Founder Story", href: "/founder" },
-  { label: "Products", href: "/products" },
   { label: "Contact Us", href: "/contact" },
 ] as const;
 
@@ -75,11 +154,11 @@ export const TEAM = [
 export const FOUNDER = {
   name: "Ajit Yadav",
   title: "Founder & Atelier Director",
-  location: "Lucknow, India",
+  location: "Delhi, India",
   image: "/founder/ajit-yadav-portrait.jpg",
-  tagline: "From late-night restorations to a national restoration house.",
+  tagline: "Restoring exceptional footwear instead of replacing it.",
   intro:
-    "Ajit Yadav founded Sneakcure in 2018 with one bench, a desk lamp, and a refusal to treat iconic footwear like disposable fashion. What began as restorations for friends in Lucknow grew into a full atelier — and eventually a training academy and franchise network — because clients kept asking for the same standard on leather goods, bags, and pieces no one else would touch.",
+    "Sneakcure was founded in 2020 by Ajit Yadav with a simple vision to restore exceptional footwear instead of replacing it. What started as a small workshop in Lucknow has grown into a trusted luxury leather atelier, professional training academy, and expanding franchise network, driven by craftsmanship, precision, and a commitment to preserving every piece with the care it truly deserves.",
 } as const;
 
 export const FOUNDER_STORY = [
@@ -186,17 +265,19 @@ export const SERVICE_PAGES = [
   {
     slug: "luxury-sneaker-restoration",
     title: "Luxury Sneaker Restoration",
-    tagline: "Museum-grade revival for iconic footwear.",
-    shortDesc: "Deep cleaning, sole whitening, repainting, and full archival restoration for luxury sneakers.",
+    tagline: "Professional restoration for premium sneakers.",
+    shortDesc:
+      "Deep cleaning, sole whitening, color restoration, stitching repair, suede care, and complete restoration to bring your favorite sneakers back to their finest condition.",
+    homeAccent: "Every detail. Every finish. Perfectly restored.",
     image: serviceImage(0),
     overview:
-      "From oxidized soles to distressed suede and custom paint layers, our sneaker atelier restores grails to factory-fresh character while preserving authenticity. Every pair receives a bespoke protocol documented under studio lighting.",
+      "Every restoration begins with a detailed inspection and ends with careful craftsmanship, ensuring your sneakers look their best while preserving their original character.",
     process: [
-      "Inspection & material mapping",
-      "Deep cleanse & deoxidation",
-      "Structural repair & repaint",
-      "Protective finish & QC",
-      "Archival return packaging",
+      "Complete Inspection & Assessment",
+      "Deep Cleaning & Sole Care",
+      "Leather, Suede & Color Restoration",
+      "Stitching, Repair & Protection",
+      "Final Quality Check & Premium Packaging",
     ],
     pricing: [
       { tier: "Essential Clean", price: "₹1,499+", note: "Standard materials" },
@@ -210,13 +291,21 @@ export const SERVICE_PAGES = [
   },
   {
     slug: "bags-wallets-care",
-    title: "Bags & Wallets Care",
-    tagline: "Revive the leather you carry every day.",
-    shortDesc: "Cleaning, conditioning, color restoration, and hardware care for luxury bags and wallets.",
+    title: "Luxury Bags & Wallets Care",
+    tagline: "Professional care for your everyday luxury.",
+    shortDesc:
+      "Cleaning, leather conditioning, color restoration, edge repair, and hardware polishing to restore the beauty and elegance of premium bags and wallets.",
+    homeAccent: "Every detail. Every texture. Beautifully preserved.",
     image: serviceImage(1),
     overview:
-      "We treat handbags and wallets with the same archival standards as footwear — gentle pH-balanced cleansing, leather rehydration, edge recoloring, and hardware polishing without compromising structure.",
-    process: ["Condition audit", "Surface cleanse", "Leather conditioning", "Color & edge work", "Hardware polish"],
+      "Every bag and wallet is restored with expert craftsmanship and premium products, helping preserve its beauty, functionality, and value for years to come.",
+    process: [
+      "Complete Condition Assessment",
+      "Gentle Deep Cleaning",
+      "Leather Conditioning & Nourishment",
+      "Color & Edge Restoration",
+      "Hardware Polishing & Protection",
+    ],
     pricing: [
       { tier: "Wallet Care", price: "₹999+", note: "Clean & condition" },
       { tier: "Handbag Refresh", price: "₹2,499+", note: "Full exterior care" },
@@ -230,12 +319,20 @@ export const SERVICE_PAGES = [
   {
     slug: "leather-jacket-accessories-restoration",
     title: "Leather Jacket & Accessories Restoration",
-    tagline: "Bring heritage leather back to life.",
-    shortDesc: "Restoration for jackets, belts, watch straps, and premium leather accessories.",
+    tagline: "Restore timeless leather with expert care.",
+    shortDesc:
+      "Professional cleaning, color restoration, conditioning, repair, and protection for leather jackets, belts, wallets, watch straps, and premium accessories.",
+    homeAccent: "Every detail. Every finish. Expertly restored.",
     image: serviceImage(2),
     overview:
-      "Cracked panels, faded dye, and dry leather are revived through multi-stage conditioning, pigment matching, and protective finishing — preserving the garment's original patina where it matters.",
-    process: ["Leather analysis", "Cleanse & degrease", "Recolor & repair", "Conditioning", "Final seal"],
+      "Every leather piece is carefully restored using premium techniques and materials, helping preserve its natural character, comfort, and elegance for years to come.",
+    process: [
+      "Material Inspection & Assessment",
+      "Deep Cleaning & Leather Care",
+      "Color Restoration & Repair",
+      "Conditioning & Protection",
+      "Final Quality Inspection",
+    ],
     pricing: [
       { tier: "Accessory Care", price: "₹799+", note: "Belts, straps" },
       { tier: "Jacket Refresh", price: "₹3,499+", note: "Clean & condition" },
@@ -249,12 +346,20 @@ export const SERVICE_PAGES = [
   {
     slug: "premium-sofa-cleaning-restoration",
     title: "Premium Sofa Cleaning & Restoration",
-    tagline: "Luxury upholstery, restored in place or atelier.",
-    shortDesc: "Deep cleaning and leather restoration for premium home and office seating.",
+    tagline: "Expert care for luxury seating.",
+    shortDesc:
+      "Deep cleaning, stain removal, leather conditioning, fabric care, and color restoration for premium sofas, recliners, and upholstered furniture.",
+    homeAccent: "Every fabric. Every finish. Beautifully renewed.",
     image: serviceImage(3),
     overview:
-      "We restore premium leather and fabric upholstery with material-specific protocols — stain lift, conditioning, recoloring, and protective coatings for long-lasting results.",
-    process: ["Site inspection", "Material test patch", "Deep extraction cleanse", "Restoration & recolor", "Protective finish"],
+      "Every sofa is treated with specialized restoration techniques and premium care products to restore comfort, preserve materials, and maintain its elegant appearance for years to come.",
+    process: [
+      "Material Inspection",
+      "Fabric & Leather Testing",
+      "Deep Cleaning & Stain Removal",
+      "Color Restoration & Conditioning",
+      "Final Protection & Quality Check",
+    ],
     pricing: [
       { tier: "Single Seat", price: "₹1,999+", note: "Chair / stool" },
       { tier: "Two-Seater", price: "₹4,999+", note: "Sofa section" },
@@ -268,12 +373,20 @@ export const SERVICE_PAGES = [
   {
     slug: "car-leather-customization",
     title: "Car Leather Customization",
-    tagline: "Bespoke interiors with precision finish.",
-    shortDesc: "Custom leather dye, repair, and interior detailing for luxury vehicles.",
+    tagline: "Luxury interiors, customized to you.",
+    shortDesc:
+      "Custom leather upholstery, seat restoration, color matching, steering wheel wrapping, and interior refinishing for premium automobiles.",
+    homeAccent: "Every detail. Every drive. Expertly crafted.",
     image: serviceImage(4),
     overview:
-      "From steering wheel rewraps to seat panel recoloring, we deliver automotive leather work with factory-level precision — color-matched pigments and UV-stable finishes.",
-    process: ["Interior audit", "Panel prep", "Custom color match", "Application & cure", "UV protection"],
+      "Every interior is handcrafted with premium automotive leather and precision techniques, delivering exceptional comfort, refined aesthetics, and factory-quality craftsmanship built to last.",
+    process: [
+      "Interior Inspection & Planning",
+      "Surface Preparation",
+      "Custom Color Matching",
+      "Leather Installation & Finishing",
+      "UV Protection & Final Inspection",
+    ],
     pricing: [
       { tier: "Steering Wheel", price: "₹2,999+", note: "Restore or recolor" },
       { tier: "Seat Panels", price: "₹6,999+", note: "Per pair" },
@@ -286,13 +399,21 @@ export const SERVICE_PAGES = [
   },
   {
     slug: "patina-work",
-    title: "Patina Work",
-    tagline: "Artisan color stories on premium leather.",
-    shortDesc: "Hand-applied patina, antiquing, and custom color artistry for footwear and leather goods.",
+    title: "Bespoke Patina Art",
+    tagline: "Handcrafted finishes with timeless character.",
+    shortDesc:
+      "Custom hand-painted patina, leather dyeing, antique effects, and bespoke color artistry for luxury shoes, bags, and leather accessories.",
+    homeAccent: "Every detail. Every finish. Uniquely handcrafted.",
     image: productImage(5),
     overview:
-      "Our patina artists build depth and character through layered dyes, antiquing, and burnishing — from subtle vintage tones to bold bespoke color stories on shoes, bags, and jackets.",
-    process: ["Design consultation", "Base prep", "Layer application", "Burnish & seal", "Final artistry QC"],
+      "Each patina is created entirely by hand using premium leather dyes and traditional artisan techniques, transforming every piece into a one-of-a-kind expression of craftsmanship and individuality.",
+    process: [
+      "Design Consultation",
+      "Surface Preparation",
+      "Hand-Dyed Color Layers",
+      "Burnishing & Finishing",
+      "Final Quality Inspection",
+    ],
     pricing: [
       { tier: "Light Patina", price: "₹2,499+", note: "Subtle aging" },
       { tier: "Full Patina", price: "₹4,999+", note: "Custom color story" },

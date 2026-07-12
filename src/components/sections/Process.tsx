@@ -7,7 +7,7 @@ export function Process() {
   return (
     <section className="section-pad gloss-black-panel py-24 text-soft-white grain md:py-36" aria-label="Restoration process">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="The Journey" title="Six acts of restoration" titleAccent="From intake to return" dark gsap />
+        <SectionHeading eyebrow="The journey" title="Six steps to perfection" titleAccent="From collection to completion" dark gsap />
         <div className="mb-12 hidden h-px w-full bg-white/20 md:block" />
         <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PROCESS_STEPS.map((step) => (

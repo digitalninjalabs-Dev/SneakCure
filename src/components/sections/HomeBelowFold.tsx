@@ -6,7 +6,6 @@ import { ScrollRevealServices } from "@/components/sections/ScrollRevealServices
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { BrandsWall } from "@/components/sections/BrandsWall";
 import { Process } from "@/components/sections/Process";
-import { HowItWorks } from "@/components/sections/HowItWorks";
 import { WhyChoose } from "@/components/sections/WhyChoose";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { SocialReels } from "@/components/sections/SocialReels";
@@ -22,7 +21,6 @@ export function HomeBelowFold() {
       <ScrollRevealServices />
       <BrandsWall />
       <Process />
-      <HowItWorks />
       <WhyChoose />
       <FranchiseHomeBanner />
       <BeforeAfter />

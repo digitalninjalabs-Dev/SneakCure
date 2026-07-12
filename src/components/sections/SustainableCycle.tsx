@@ -1,10 +1,10 @@
 const STEPS = [
-  { num: "01", title: "Repair", desc: "Fix damage before it spreads." },
-  { num: "02", title: "Restore", desc: "Return pairs to archive-grade condition." },
-  { num: "03", title: "Rewear", desc: "Keep grails in rotation, not in landfills." },
+  { num: "01", title: "Restore", desc: "Give every pair a fresh beginning." },
+  { num: "02", title: "Preserve", desc: "Protect quality, comfort, and craftsmanship." },
+  { num: "03", title: "Rewear", desc: "Enjoy your favorites for years to come." },
 ] as const;
 
-const MARQUEE = "Wear · Restore · Repeat · ";
+const MARQUEE = "Restore · Preserve · Rewear · Repeat · ";
 
 function SustainableCycleMobile() {
   return (
@@ -40,13 +40,17 @@ function SustainableCycleMobile() {
 
         <div className="mt-8 space-y-4 text-sm leading-relaxed text-primary-black/80">
           <p>
-            Your decision to restore with Sneakcure supports a{" "}
-            <strong className="font-semibold text-primary-black">wear, restore, repeat</strong> culture that
-            keeps grails out of landfills.
+            Every pair restored at Sneakcure is one less pair sent to landfill. From everyday
+            sneakers to luxury leather goods, we help extend their life through expert restoration
+            and thoughtful care.
           </p>
           <p className="text-primary-black/55">
-            By extending the life of every pair, you reduce waste and embrace a circular approach to luxury
-            footwear.
+            Choosing restoration over replacement reduces waste, preserves craftsmanship, and
+            supports a more responsible way to enjoy premium footwear and leather accessories.
+          </p>
+          <p className="text-primary-black/55">
+            Together, we can restore, preserve, and rewear — creating a future where quality lasts
+            longer and every pair has another story to tell.
           </p>
         </div>
       </div>
@@ -103,17 +107,17 @@ function SustainableCycleDesktop() {
 
         <div className="max-w-xl text-primary-black/90 lg:max-w-none">
           <p className="text-base leading-relaxed sm:text-lg">
-            Your decision to restore with Sneakcure — from sole swaps and suede revival to full archival
-            rebuilds — supports a{" "}
-            <strong className="font-semibold text-primary-black">wear, restore, repeat</strong> culture that
-            keeps grails out of landfills.
+            Every pair restored at Sneakcure is one less pair sent to landfill. From everyday
+            sneakers to luxury leather goods, we help extend their life through expert restoration
+            and thoughtful care.
           </p>
           <p className="mt-5 text-base leading-relaxed text-primary-black/55 sm:mt-6 sm:text-lg">
-            By extending the life of every pair, you reduce waste and embrace a circular approach to luxury
-            footwear. Responsible collecting starts with care that lasts.
+            Choosing restoration over replacement reduces waste, preserves craftsmanship, and
+            supports a more responsible way to enjoy premium footwear and leather accessories.
           </p>
           <p className="mt-5 text-base leading-relaxed text-primary-black/55 sm:mt-6 sm:text-lg">
-            Join us in a cradle-to-cradle mindset — repair, restore, refresh, and rewear with Sneakcure.
+            Together, we can restore, preserve, and rewear — creating a future where quality lasts
+            longer and every pair has another story to tell.
           </p>
         </div>
       </div>

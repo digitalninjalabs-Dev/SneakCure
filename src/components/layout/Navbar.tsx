@@ -48,7 +48,6 @@ function navLabel(label: string, href: string) {
     "/training": "Training",
     "/franchise": "Franchise",
     "/founder": "Founder",
-    "/products": "Products",
     "/contact": "Contact",
   };
   return short[href] ?? label;

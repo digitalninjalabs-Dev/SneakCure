@@ -12,8 +12,8 @@ export function FAQ() {
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           eyebrow="Questions"
-          title="Everything you need to know"
-          titleAccent="Answers at a glance"
+          title="Everything you should know"
+          titleAccent="Clear answers, always"
           align="center"
         />
         <div className="space-y-3">

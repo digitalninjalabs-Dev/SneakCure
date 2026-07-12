@@ -12,7 +12,6 @@ const FOOTER_NAV_SHORT: Record<string, string> = {
   "/training": "Training",
   "/franchise": "Franchise",
   "/founder": "Founder",
-  "/products": "Products",
   "/contact": "Contact",
 };
 

@@ -9,53 +9,51 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SafeImage } from "@/components/ui/SafeImage";
 import { SplitTitle } from "@/components/ui/SplitTitle";
 import { REEL_VIDEOS } from "@/lib/constants";
-import { FOUNDER, FOUNDER_MEDIA, FOUNDER_STORY } from "@/lib/site-data";
+import { FOUNDER, FOUNDER_MEDIA } from "@/lib/site-data";
 import { MOTION_EASE, MOTION_VIEWPORT } from "@/lib/motion-viewport";
 
+const BEGINNING_QUOTE =
+  "True restoration isn't about hiding the marks of time; it's about preserving the character, craftsmanship, and story that make every piece worth carrying forward.";
+
+const FIRST_RESTORATION_BODY =
+  "In 2020, Ajit Yadav began with a modest workshop in Gomti Nagar, Lucknow equipped with a single workbench, handcrafted tools, and an unwavering commitment to quality. Every restored pair earned trust through exceptional craftsmanship. As satisfied clients returned with more treasured pieces, Sneakcure evolved from a passion-driven atelier into a respected destination for luxury footwear and leather restoration.";
+
 const PROCESS_STEPS = [
-  { n: "01", label: "OBSERVE", body: "Analysis of material degradation and structural integrity." },
-  { n: "02", label: "RESTORE", body: "Hand-stitched precision and pigment matching." },
-  { n: "03", label: "REFINE", body: "Preservation coating and texture realignment." },
-  { n: "04", label: "DELIVER", body: "Returned in custom archival packaging." },
+  {
+    n: "01",
+    label: "ASSESS",
+    body: "Detailed inspection of leather condition, construction, and restoration requirements.",
+  },
+  {
+    n: "02",
+    label: "RESTORE",
+    body: "Expert craftsmanship using premium materials, precision techniques, and refined finishing.",
+  },
+  {
+    n: "03",
+    label: "PRESERVE",
+    body: "Protective conditioning, color balancing, and texture preservation for lasting performance.",
+  },
+  {
+    n: "04",
+    label: "RETURN",
+    body: "Carefully packaged and delivered with atelier-level quality assurance and presentation.",
+  },
 ] as const;
 
 const FAQ_ITEMS = [
   {
     q: "Why Sneakcure?",
-    a: "Because modern luxury is about preservation. We live in a disposable world; I wanted to build something that lasts.",
+    a: "Luxury deserves preservation, not replacement. Sneakcure was built on the belief that exceptional craftsmanship can extend the life of cherished footwear and leather goods while protecting their character, value, and legacy.",
   },
   {
-    q: "What changed?",
-    a: "The shift from service to studio. We stopped being a repair shop and started being a restorative lab.",
+    q: "What evolved?",
+    a: "We moved beyond conventional repairs to create a dedicated restoration atelier. Every process is guided by precision, premium materials, and techniques designed to preserve not simply improve the original piece.",
   },
   {
-    q: "What drives you?",
-    a: "The look on a client's face when they see a piece of their past returned to its former glory. It's magic.",
+    q: "What inspires you?",
+    a: "The greatest reward is seeing a client reconnect with something they thought was beyond saving. Restoring treasured possessions and the stories they carry is what continues to inspire every project we undertake.",
   },
-] as const;
-
-const JOURNAL = [
-  {
-    type: "note" as const,
-    text: "Tuesday. The humidity today is perfect for leather hydration. Working on a pair of 1994 high-tops.",
-    date: "14.03.2024",
-  },
-  { type: "image" as const, src: FOUNDER_MEDIA.workspace, alt: "Ajit Yadav in the Sneakcure workshop" },
-  {
-    type: "article" as const,
-    title: "On Materiality",
-    body: "Synthetic polymers never age like natural hides. The challenge is making the new blend with the vintage soul.",
-  },
-  { type: "image" as const, src: FOUNDER_MEDIA.process, alt: "Ajit Yadav restoring leather at the bench" },
-  { type: "quote" as const, text: "Detail is not a luxury, it's a necessity." },
-  { type: "image" as const, src: FOUNDER_MEDIA.portrait, alt: "Ajit Yadav, founder of Sneakcure", grayscale: true },
-] as const;
-
-const VALUES = [
-  { word: "CARE", opacity: "opacity-10", offset: "" },
-  { word: "DETAIL", opacity: "opacity-20", offset: "translate-x-0 md:translate-x-12" },
-  { word: "PATIENCE", opacity: "opacity-40", offset: "translate-x-0 md:translate-x-24" },
-  { word: "TRUST", opacity: "", offset: "translate-x-0 md:translate-x-36" },
 ] as const;
 
 function FounderReveal({
@@ -171,10 +169,9 @@ function FounderBeginningMobile() {
           <p className="founder-label text-primary-black/50">The beginning</p>
           <blockquote className="mt-4">
             <p className="founder-beginning-quote-text-mobile">
-              &ldquo;Restoration is not about making something look new; it&apos;s about honoring the
-              life it has lived while giving it a second chance.&rdquo;
+              &ldquo;{BEGINNING_QUOTE}&rdquo;
             </p>
-            <footer className="founder-beginning-quote-by">— {FOUNDER.name}</footer>
+            <footer className="founder-beginning-quote-by">{FOUNDER.name.toUpperCase()}</footer>
           </blockquote>
         </FounderReveal>
 
@@ -197,10 +194,9 @@ function FounderBeginningDesktop() {
             <p className="founder-label text-primary-black/50">The beginning</p>
             <blockquote className="founder-beginning-quote">
               <p className="founder-beginning-quote-text">
-                &ldquo;Restoration is not about making something look new; it&apos;s about honoring the
-                life it has lived while giving it a second chance.&rdquo;
+                &ldquo;{BEGINNING_QUOTE}&rdquo;
               </p>
-              <footer className="founder-beginning-quote-by">— {FOUNDER.name}</footer>
+              <footer className="founder-beginning-quote-by">{FOUNDER.name.toUpperCase()}</footer>
             </blockquote>
           </FounderReveal>
 
@@ -250,9 +246,9 @@ export function FounderShowcase() {
             </div>
             <div className="absolute -bottom-4 right-0 flex h-24 w-24 items-center justify-center rounded-lg border border-black/10 bg-[#f1edec] p-3 shadow-lg sm:h-32 sm:w-32 sm:p-4 md:-bottom-6 md:-right-6">
               <span className="founder-label text-center text-[10px] leading-tight">
-                EST. 2018
+                EST. 2020
                 <br />
-                SNKCURE STUDIO
+                SNEAKCURE
               </span>
             </div>
           </div>
@@ -279,7 +275,7 @@ export function FounderShowcase() {
             </div>
             <div>
               <p className="founder-label mb-1 text-[10px] text-muted">Location</p>
-              <p className="founder-headline">{FOUNDER.location}</p>
+              <p className="founder-headline">Delhi, India</p>
             </div>
           </div>
 
@@ -310,11 +306,13 @@ export function FounderShowcase() {
           </div>
         </FounderReveal>
         <FounderReveal className="w-full space-y-6 md:w-[35%]" delay={0.12}>
-          <SplitTitle title="The first restoration" accent="Where it all began" as="h2" size="md" />
-          <p className="text-base leading-relaxed text-primary-black/65">
-            {FOUNDER_STORY[1]?.body ??
-              "It was a pair of oxidized Air Jordans. Not just leather and foam, but a legacy. The hours spent reviving them changed everything."}
-          </p>
+          <SplitTitle
+            title="The first restoration"
+            accent="Where craftsmanship found its purpose"
+            as="h2"
+            size="md"
+          />
+          <p className="text-base leading-relaxed text-primary-black/65">{FIRST_RESTORATION_BODY}</p>
           <Link
             href="/services"
             className="founder-label inline-block border-b border-primary-black pb-1 transition-opacity hover:opacity-60"
@@ -382,40 +380,7 @@ export function FounderShowcase() {
         </div>
       </section>
 
-      {/* 6. Values */}
-      <section className="bg-soft-white py-20 md:py-24">
-        <div className="founder-pad founder-container flex flex-col gap-12 md:flex-row md:gap-12">
-          <FounderReveal className="w-full space-y-1 md:w-1/2">
-            {VALUES.map((v) => (
-              <h2
-                key={v.word}
-                className={`founder-values-word text-primary-black ${v.opacity} ${v.offset}`}
-              >
-                {v.word}
-              </h2>
-            ))}
-          </FounderReveal>
-          <FounderReveal className="relative flex w-full justify-end md:w-1/2" delay={0.15}>
-            <div className="w-full space-y-8 md:w-3/4">
-              <div className="founder-asymmetric-shadow overflow-hidden rounded-lg">
-                <SafeImage
-                  src={FOUNDER_MEDIA.portrait}
-                  alt="Ajit Yadav, founder of Sneakcure"
-                  width={500}
-                  height={650}
-                  className="h-auto w-full object-cover"
-                  sizes="40vw"
-                />
-              </div>
-              <p className="founder-body-lg italic text-primary-black/65">
-                &ldquo;In the studio, time moves differently. You can&apos;t rush the cure.&rdquo;
-              </p>
-            </div>
-          </FounderReveal>
-        </div>
-      </section>
-
-      {/* 7. The Now */}
+      {/* 6. Vision 2030 */}
       <section className="overflow-hidden py-24 md:py-32">
         <div className="founder-pad founder-container relative">
           <FounderReveal className="flex justify-end">
@@ -433,79 +398,26 @@ export function FounderShowcase() {
             className="founder-paper founder-asymmetric-shadow relative z-20 mt-10 w-full rounded-lg border border-black/10 p-8 md:absolute md:left-0 md:top-24 md:mt-0 md:w-1/2 md:p-12"
             delay={0.12}
           >
-            <FounderLabel>Vision 2024</FounderLabel>
+            <FounderLabel>Vision 2030</FounderLabel>
             <SplitTitle
-              title="Quiet luxury"
-              accent="Curated longevity"
+              title="Crafted to endure"
+              accent="Preserved for generations"
               as="h2"
               size="md"
               className="mb-8 mt-6"
             />
             <p className="founder-body-lg mb-8 text-primary-black/65">
-              We are building more than a service. We are building a permanent archive for the modern
-              collector. Our upcoming physical space will be as much a gallery as it is a studio.
+              Sneakcure is more than a restoration atelier. We are creating a destination where
+              exceptional craftsmanship, timeless preservation, and luxury care come together. Our
+              vision is to redefine leather restoration through innovation, education, and an
+              uncompromising commitment to preserving what truly matters.
             </p>
-            <MagneticButton href="/about">The vision</MagneticButton>
+            <MagneticButton href="/about">Explore our vision</MagneticButton>
           </FounderReveal>
         </div>
       </section>
 
-      {/* 8. Studio Notes */}
-      <section className="founder-pad founder-container py-20 md:py-24">
-        <p className="founder-label mb-12 text-center tracking-[0.3em]">Studio notes</p>
-        <FounderReveal>
-          <div className="columns-1 gap-8 space-y-8 md:columns-3">
-            {JOURNAL.map((item, i) => {
-              if (item.type === "note") {
-                return (
-                  <div
-                    key={i}
-                    className="founder-paper founder-asymmetric-shadow break-inside-avoid rounded-lg border border-black/10 p-8"
-                  >
-                    <p className="mb-4 italic text-primary-black/65">&ldquo;{item.text}&rdquo;</p>
-                    <span className="founder-label text-[10px]">{item.date}</span>
-                  </div>
-                );
-              }
-              if (item.type === "article") {
-                return (
-                  <div
-                    key={i}
-                    className="founder-paper founder-asymmetric-shadow break-inside-avoid rounded-lg border border-black/10 p-8"
-                  >
-                    <h4 className="founder-headline mb-4">{item.title}</h4>
-                    <p className="text-primary-black/65">{item.body}</p>
-                  </div>
-                );
-              }
-              if (item.type === "quote") {
-                return (
-                  <div
-                    key={i}
-                    className="founder-asymmetric-shadow break-inside-avoid rounded-lg bg-gloss-black p-8 text-soft-white"
-                  >
-                    <p className="founder-headline">&ldquo;{item.text}&rdquo;</p>
-                  </div>
-                );
-              }
-              return (
-                <div key={i} className="founder-asymmetric-shadow break-inside-avoid overflow-hidden rounded-lg">
-                  <SafeImage
-                    src={item.src}
-                    alt={item.alt}
-                    width={400}
-                    height={500}
-                    className={`w-full ${"grayscale" in item && item.grayscale ? "grayscale" : ""}`}
-                    sizes="33vw"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </FounderReveal>
-      </section>
-
-      {/* 9. Personal Note */}
+      {/* 7. Personal Note */}
       <section className="founder-pad founder-container flex flex-col gap-10 py-24 md:flex-row md:gap-12 md:py-32">
         <FounderReveal className="w-full md:w-1/2">
           <SafeImage
@@ -521,9 +433,10 @@ export function FounderShowcase() {
           <div className="max-w-md space-y-8">
             <h3 className="founder-headline italic">A personal note,</h3>
             <p className="founder-body-lg leading-relaxed text-primary-black/65">
-              Thank you for taking the time to see into my world. Sneakcure is a labor of love, a testament
-              to the belief that some things are worth saving. I invite you to join us in this journey of
-              preservation.
+              Thank you for taking the time to discover the story behind Sneakcure. What began as a
+              passion for preserving exceptional craftsmanship has become a lifelong commitment to
+              restoring what truly matters. I invite you to be part of a future where luxury is
+              cared for, protected, and passed on with pride.
             </p>
             <div className="pt-4">
               <p className="founder-headline">{FOUNDER.name}</p>
@@ -533,21 +446,21 @@ export function FounderShowcase() {
         </FounderReveal>
       </section>
 
-      {/* 10. Exit */}
+      {/* 8. Exit */}
       <section className="border-t border-black/10 py-24 text-center md:py-32">
         <FounderReveal>
           <SplitTitle
-            title="See you inside"
-            accent="Sneakcure"
+            title="Begin your restoration journey"
+            accent="With Sneakcure"
             as="h2"
             size="campaign"
             align="center"
             className="mb-12"
           />
           <div className="flex flex-wrap justify-center gap-4">
-            <MagneticButton href="/services">Explore the archive</MagneticButton>
+            <MagneticButton href="/services">Explore our services</MagneticButton>
             <MagneticButton href="/contact" variant="ghost">
-              Studio inquiry
+              Start your restoration
             </MagneticButton>
           </div>
         </FounderReveal>

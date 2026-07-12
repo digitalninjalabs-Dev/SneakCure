@@ -7,8 +7,6 @@ import {
   CampaignLabel,
   CampaignMarquee,
   CampaignReveal,
-  CampaignRevealClip,
-  CampaignScale,
   CampaignScrollImage,
   CampaignSlide,
   CampaignSplitTitle,
@@ -16,6 +14,7 @@ import {
   MaterialIcon,
   ParallaxImage,
 } from "@/components/pages/campaign-ui";
+
 const IMG = {
   heroMain:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDJc0ZAO3fIjkRZEYm0RsiMSMltxAzX5IzS2WatuJGIZZZbs8jfWZxlIfhht3GRdf6Pgek3-6pKiM0ujmoT2vo0-eO26qar810tK9b_HdAw8yYX3G36wG9Q0E28mG6l0QPz3DOlZSuxgrW48IjXsx6o_oUtHuqmvRvdpDOjJOfFADENaQ1hSa4lhsLf0kUeASVJOMiBhNyYmB5b5Ruz_lkZqA9fzUwVEcmkdkv4USxmPH-HbEj9hblqmrIR7LBIALxt6xEksB8jWJA",
@@ -40,35 +39,42 @@ const IMG = {
 } as const;
 
 const MODULES = [
-  "Craft & Repair",
-  "Pricing & Value",
-  "Luxury Branding",
-  "Client Relations",
+  {
+    title: "Craft & Repair",
+    body: "Master professional cleaning, deep cleaning, repainting, leather repair, color restoration, sole whitening, stitching, suede restoration, bag restoration, and premium finishing techniques.",
+  },
+  {
+    title: "Pricing & Value",
+    body: "Understand how to price your services, calculate profits, create premium service packages, and build a business that delivers consistent revenue.",
+  },
+  {
+    title: "Luxury Branding",
+    body: "Learn how to build a premium brand that customers trust through social media, Google Business Profile optimization, digital marketing, packaging, and customer experience.",
+  },
+  {
+    title: "Client Relations",
+    body: "Develop long-term customer relationships through professional communication, quality service, after-sales support, and repeat business strategies.",
+  },
 ] as const;
 
-const TESTIMONIALS = [
+const DAY_STEPS = [
   {
-    quote:
-      "SneakCure didn't just teach me how to fix shoes; they taught me how to value my time and my talent. My business tripled in 6 months.",
-    name: "Marco Rossi",
-    role: "Founder, Milan Restoration",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDXyCPfFQAwB2b7S6028iCPvaFdXk7FiqDcnY6ChyPja4bTuA1Ulu1TVm_rRaAkH5AIPp5nFvy7XBDBl_bAwR6wvRMevZWsrqbggUHYO96cYdjm71VIv3st-k_rBoLtkWkJdYQIAZC5FwNk_SvGtnylOBHIl3eKgzKwuPO2tnpBQTzNXbOuIeruL4putzaaiT-Vk1NvwdaNvPQH2VjCjsetkVCjIXMRp3GYypW-rAEoi7__Zx9v4h2oCSrGbo35D2TPhKKOBvyywfw",
+    title: "Theory & Product Knowledge",
+    body: "Begin with the fundamentals of restoration. Learn about leather types, sneaker construction, restoration chemicals, cleaning solutions, paints, adhesives, color matching, and safe handling practices. A strong foundation leads to better craftsmanship.",
+    image: IMG.dayMorning,
+    align: "left" as const,
   },
   {
-    quote:
-      "The level of technical detail is unmatched. I finally feel like an expert in materials I used to be afraid to touch.",
-    name: "Sarah Chen",
-    role: "Sole Artistry Lab",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB0ZcLKHpKRNVEhu0xDVTeB5NeCKP9Fi7Xde7o-SMzo2gBWYUI7EDWa9YbhYUMr464_CAkHCtR5cSWEXOfHhnDSfwBgAZUJnTz6JTy8zvOewffZKXomIG3ZtizKZ2lLn9Y7g2Wxe5BLiKIbwpOnvsgY4vSM3z1cU3whO7a1Kpv0dqJmUGFOTm1vxM_35ycW2gAy4pfB__zfQnqW75Z2C2ilpVtXDSsKn75Q3bXAOFapqiFaQmWUmih5vJZKVgUtUDQfy4ZvOj76Io8",
+    title: "Guided Practice",
+    body: "Apply what you've learned by working on real restoration projects under expert supervision. Practice sneaker cleaning, leather repair, recoloring, sole whitening, bag restoration, and premium finishing using professional tools and equipment.",
+    image: IMG.dayPractice,
+    align: "right" as const,
   },
   {
-    quote: "Coming here was the best investment I ever made. The networking alone was worth twice the tuition.",
-    name: "Julian Pierce",
-    role: "The Kick Curator",
-    avatar:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB2L6PyDM9Xbjf_1Kej7giDMY35xZ21m9lY1H0pHQ61lafdoesM3QkXLR9uHIkl03HmDS6MRwggmy6-9kYkNZ-LICjRwcxt5Aw_1-lTp9_lZ_r6EXNL5Tzh_39slBz2dSRstGSYlqkmQ2rlESPBmlPGGOtw8N6o_UeTgvh9iOXaQjL6Co0VVT9lFVRyp-T3EaA1gqjRqRzexqlm8dVJNPWNjajzlFaWYR6g4U4oPfw2WhiKBUot1Ta3loyOU_run6LN9ekIVpV3c-A",
+    title: "Strategic Review",
+    body: "End the day by reviewing your work with mentors while learning how to build a successful restoration business. Topics include branding, customer acquisition, pricing strategies, workflow optimization, and business growth planning.",
+    image: IMG.dayReview,
+    align: "left" as const,
   },
 ] as const;
 
@@ -85,12 +91,21 @@ function TrainingApplicationForm() {
     >
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="border-b border-black/10 py-2 focus-within:border-primary-black">
-          <CampaignLabel>Name</CampaignLabel>
-          <input required placeholder="Enter your full name" className="w-full border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0" />
+          <CampaignLabel>Full Name</CampaignLabel>
+          <input
+            required
+            placeholder="Enter your full name"
+            className="w-full border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0"
+          />
         </div>
         <div className="border-b border-black/10 py-2 focus-within:border-primary-black">
-          <CampaignLabel>Email</CampaignLabel>
-          <input required type="email" placeholder="your@email.com" className="w-full border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0" />
+          <CampaignLabel>Email Address</CampaignLabel>
+          <input
+            required
+            type="email"
+            placeholder="your@email.com"
+            className="w-full border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0"
+          />
         </div>
       </div>
       <div className="border-b border-black/10 py-2 focus-within:border-primary-black">
@@ -98,14 +113,27 @@ function TrainingApplicationForm() {
         <select className="w-full appearance-none border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0">
           <option>Training Only</option>
           <option>Consultancy Only</option>
-          <option>The Full Academy Experience (Both)</option>
+          <option>Training & Consultancy (Full Program)</option>
         </select>
       </div>
       <div className="border-b border-black/10 py-2 focus-within:border-primary-black">
-        <CampaignLabel>Your Current Experience</CampaignLabel>
-        <textarea placeholder="Tell us about your background in footwear..." className="min-h-[100px] w-full resize-none border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0" />
+        <CampaignLabel>Current Experience</CampaignLabel>
+        <textarea
+          placeholder="Tell us about your background in footwear or leather restoration..."
+          className="min-h-[100px] w-full resize-none border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0"
+        />
       </div>
-      <button type="submit" className="w-full bg-gloss-black py-6 text-xs font-medium uppercase tracking-[0.15em] text-soft-white transition-opacity hover:opacity-90 sm:text-sm">
+      <div className="border-b border-black/10 py-2 focus-within:border-primary-black">
+        <CampaignLabel>Business Goals</CampaignLabel>
+        <textarea
+          placeholder="Share your goals — launch a studio, grow an existing business, or build a premium restoration brand..."
+          className="min-h-[100px] w-full resize-none border-0 bg-transparent p-0 text-lg outline-none ring-0 focus:ring-0"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-gloss-black py-6 text-xs font-medium uppercase tracking-[0.15em] text-soft-white transition-opacity hover:opacity-90 sm:text-sm"
+      >
         {sent ? "Application Sent" : "Submit Application"}
       </button>
     </form>
@@ -118,17 +146,23 @@ export function TrainingShowcase() {
       {/* Hero */}
       <section className="campaign-hero flex flex-col items-center gap-12 overflow-hidden campaign-pad pb-16 pt-4 md:flex-row md:items-start md:pb-20 md:pt-6">
         <CampaignReveal className="flex w-full flex-col items-start md:w-1/2">
-          <CampaignEyebrow>SneakCure Academy</CampaignEyebrow>
-          <CampaignSplitTitle as="h1" title="Learn the craft" accent="Build the future" className="mb-8" />
-          <p className="mb-12 max-w-lg text-lg leading-relaxed text-muted">
-            Hand-on mastery and strategic mentorship for the next generation of footwear artisans. We don&apos;t just teach
-            restoration; we teach legacy.
+          <CampaignEyebrow>Sneakcure Training</CampaignEyebrow>
+          <CampaignSplitTitle
+            as="h1"
+            title="Master the Craft"
+            accent="Build a Profitable Restoration Business"
+            className="mb-8"
+          />
+          <p className="mb-6 max-w-lg text-lg leading-relaxed text-muted">
+            Learn directly from India&apos;s premium leather &amp; sneaker restoration experts. Our hands-on training is
+            designed for entrepreneurs, business owners, and passionate professionals who want to build a successful
+            restoration business with industry-leading techniques and real-world experience.
+          </p>
+          <p className="mb-12 max-w-lg text-base leading-relaxed text-primary-black/70">
+            Not just training. We build skilled professionals and future business leaders.
           </p>
           <div className="flex w-full flex-col gap-6 sm:w-auto sm:flex-row">
-            <CampaignBtn href="#apply">Apply To Academy</CampaignBtn>
-            <CampaignBtn href="#apply" variant="secondary">
-              Book Consultation
-            </CampaignBtn>
+            <CampaignBtn href="#apply">Apply Today</CampaignBtn>
           </div>
         </CampaignReveal>
 
@@ -151,25 +185,28 @@ export function TrainingShowcase() {
         </CampaignReveal>
       </section>
 
-      <CampaignMarquee text="SneakCure Academy • Future of Footwear • Mastery • Mentorship" />
+      <CampaignMarquee text="Sneakcure Training • Craft & Repair • Business Growth • Premium Restoration" />
 
-      {/* The Experience */}
+      {/* The Training & Consultancy */}
       <section className="campaign-section campaign-pad bg-pearl">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2">
           <CampaignReveal className="group flex flex-col">
             <CampaignScrollImage src={IMG.training} alt="The Training" className="mb-8 aspect-[4/5] bg-soft-white" />
-            <CampaignSplitTitle as="h3" size="display" title="The Training" accent="Hands-on mastery" className="mb-4" />
+            <CampaignSplitTitle as="h2" size="display" title="The Training" accent="Hands-on mastery" className="mb-4" />
             <p className="max-w-md text-base leading-relaxed text-muted">
-              Master the alchemy of restoration. From chemical cleaning to leather reconstruction, we provide the
-              foundational skills required for world-class artisans.
+              Build the skills that premium clients expect. At Sneakcure, you&apos;ll learn professional sneaker, shoe,
+              leather, bag, and sofa restoration through practical training—not just theory. Every session is designed
+              to help you confidently handle real customer projects using industry-standard techniques and tools.
             </p>
           </CampaignReveal>
           <CampaignReveal className="group mt-0 flex flex-col md:mt-24" delay={0.2}>
             <CampaignScrollImage src={IMG.consultancy} alt="The Consultancy" className="mb-8 aspect-[4/5] bg-soft-white" />
-            <CampaignSplitTitle as="h3" size="display" title="The Consultancy" accent="Business architecture" className="mb-4" />
+            <CampaignSplitTitle as="h2" size="display" title="The Consultancy" accent="Business architecture" className="mb-4" />
             <p className="max-w-md text-base leading-relaxed text-muted">
-              Architecture for your business. We help you scale from a hobbyist to a global luxury service provider with
-              proven operational blueprints.
+              Knowing the craft is only the beginning. We help you turn your skills into a profitable business with
+              proven systems for pricing, branding, operations, customer experience, and marketing. Whether you&apos;re
+              launching your first restoration studio or expanding an existing business, our consultancy provides a
+              clear roadmap for sustainable growth.
             </p>
           </CampaignReveal>
         </div>
@@ -178,20 +215,31 @@ export function TrainingShowcase() {
       {/* The Modules */}
       <section className="flex flex-col bg-white md:flex-row">
         <div className="aspect-square h-[500px] w-full md:sticky md:top-0 md:aspect-auto md:h-screen md:w-1/2">
-          <CampaignScrollImage src={IMG.modules} alt="Modules" className="h-full w-full" />
+          <CampaignScrollImage src={IMG.modules} alt="Training modules" className="h-full w-full" />
         </div>
         <div className="flex w-full flex-col justify-center bg-gloss-black p-[max(1.25rem,4vw)] text-white md:w-1/2">
-          <CampaignSplitTitle title="The Modules" accent="Four core pillars" dark className="mb-12" />
+          <CampaignSplitTitle title="The Modules" accent="Four pillars of success" dark className="mb-12" />
           <ul className="divide-y divide-white/10">
             {MODULES.map((item, i) => (
-              <CampaignSlide key={item} delay={i * 0.12} from="right" className="group flex cursor-default items-end justify-between pt-8">
-                <div className="flex flex-col">
-                  <span className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] opacity-50">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="editorial-title text-[clamp(1.75rem,3vw,3rem)]">{item}</span>
+              <CampaignSlide
+                key={item.title}
+                delay={i * 0.12}
+                from="right"
+                className="group cursor-default pt-8 first:pt-0"
+              >
+                <div className="flex items-start justify-between gap-6">
+                  <div className="min-w-0 flex-1">
+                    <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] opacity-50">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="editorial-title block text-[clamp(1.5rem,3vw,2.25rem)]">{item.title}</span>
+                    <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/55">{item.body}</p>
+                  </div>
+                  <MaterialIcon
+                    name="arrow_forward"
+                    className="shrink-0 text-3xl opacity-40 transition-transform group-hover:translate-x-2 group-hover:opacity-100"
+                  />
                 </div>
-                <MaterialIcon name="arrow_forward" className="text-4xl transition-transform group-hover:translate-x-2" />
               </CampaignSlide>
             ))}
           </ul>
@@ -203,22 +251,26 @@ export function TrainingShowcase() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 md:grid-cols-12">
           <CampaignReveal className="flex flex-col items-start md:col-span-5">
             <CampaignSplitTitle title="Personal Mentorship" accent="Direct access" dark className="mb-8" />
-            <p className="mb-12 text-lg leading-relaxed opacity-80">
-              Direct access to industry pioneers. Your journey is uniquely yours, and our mentorship calls ensure your
-              path is straight and your standard is impeccable.
+            <p className="mb-6 text-lg leading-relaxed opacity-80">
+              Receive one-on-one guidance from experienced restoration professionals throughout your learning journey.
+              Get personalized technical feedback, solve business challenges, and gain practical insights from experts
+              who restore premium footwear and luxury leather products every day.
+            </p>
+            <p className="mb-12 text-base leading-relaxed text-white/55">
+              Every question matters. Every student gets individual attention.
             </p>
             <div className="group flex cursor-pointer items-center gap-4">
               <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 transition-all group-hover:bg-white group-hover:text-primary-black">
                 <MaterialIcon name="play_arrow" />
               </div>
-              <span className="text-[12px] font-medium uppercase tracking-[0.15em]">Watch the process</span>
+              <span className="text-[12px] font-medium uppercase tracking-[0.15em]">Watch the Process</span>
             </div>
           </CampaignReveal>
           <CampaignReveal className="md:col-span-7" delay={0.3}>
             <div className="relative aspect-video w-full bg-soft-white md:aspect-[3/4]">
               <CampaignScrollImage
                 src={IMG.mentorship}
-                alt="Mentorship"
+                alt="Personal mentorship"
                 className="h-full w-full"
                 imgClassName="opacity-80 contrast-125 grayscale"
               />
@@ -230,35 +282,16 @@ export function TrainingShowcase() {
 
       {/* A Day Inside */}
       <section className="campaign-section campaign-pad">
-        <CampaignReveal className="mb-24 text-center">
-          <CampaignSplitTitle title="A Day Inside" accent="The academy workflow" align="center" className="mb-4" />
-          <p className="text-[12px] font-medium uppercase tracking-[0.15em] text-muted">The Academy Workflow</p>
+        <CampaignReveal className="mb-16 text-center md:mb-24">
+          <CampaignSplitTitle title="A Day Inside" accent="The Sneakcure experience" align="center" className="mb-6" />
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted">
+            Every training day is carefully structured to combine theory, practical learning, and business development,
+            ensuring you leave with both technical expertise and entrepreneurial confidence.
+          </p>
         </CampaignReveal>
         <div className="relative mx-auto max-w-7xl space-y-32">
           <CampaignTimelineLine className="absolute bottom-0 left-1/2 top-0 hidden -translate-x-1/2 md:block" />
-          {[
-            {
-              time: "08:00 — 10:00",
-              title: "Theory & Rituals",
-              body: "Coffee and curriculum. Understanding material science and the chemistry of restoration before a single brush is touched.",
-              image: IMG.dayMorning,
-              align: "left" as const,
-            },
-            {
-              time: "10:00 — 14:00",
-              title: "Guided Practice",
-              body: "Live restoration. Under the watchful eye of a master, you execute complex reconstructions on archived pieces.",
-              image: IMG.dayPractice,
-              align: "right" as const,
-            },
-            {
-              time: "16:00 — 18:00",
-              title: "Strategic Review",
-              body: "Business development sessions. Reviewing your specific market positioning and client growth strategies for the next quarter.",
-              image: IMG.dayReview,
-              align: "left" as const,
-            },
-          ].map((step, i) => (
+          {DAY_STEPS.map((step, i) => (
             <CampaignReveal
               key={step.title}
               delay={i * 0.1}
@@ -269,9 +302,10 @@ export function TrainingShowcase() {
                 delay={i * 0.08}
                 className={`w-full md:w-1/2 ${step.align === "left" ? "md:pr-24 md:text-right" : "md:pl-24 md:text-left"}`}
               >
-                <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">{step.time}</span>
                 <h4 className="editorial-title mb-4 text-[clamp(1.75rem,3vw,3rem)]">{step.title}</h4>
-                <p className={`max-w-sm text-base leading-relaxed text-muted ${step.align === "left" ? "md:ml-auto" : ""}`}>{step.body}</p>
+                <p className={`max-w-sm text-base leading-relaxed text-muted ${step.align === "left" ? "md:ml-auto" : ""}`}>
+                  {step.body}
+                </p>
               </CampaignSlide>
               <div className={`w-full md:w-1/2 ${step.align === "right" ? "md:pr-24 md:flex md:justify-end" : "md:pl-24"}`}>
                 <CampaignScrollImage src={step.image} alt={step.title} className="aspect-square max-w-md bg-soft-white" />
@@ -281,76 +315,54 @@ export function TrainingShowcase() {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="campaign-section campaign-pad bg-soft-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <CampaignScale key={t.name} delay={i * 0.15} className="flex h-full flex-col bg-pearl p-12">
-              <MaterialIcon name="format_quote" filled className="mb-8 text-primary-black" />
-              <p className="editorial-title mb-12 flex-1 text-[clamp(1.5rem,2.5vw,2rem)] italic leading-snug">&ldquo;{t.quote}&rdquo;</p>
-              <div className="mt-auto flex items-center gap-4">
-                <div className="h-12 w-12 overflow-hidden rounded-full bg-soft-white">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                    suppressHydrationWarning
-                  />
-                </div>
-                <div>
-                  <span className="block text-[12px] font-medium uppercase tracking-wider">{t.name}</span>
-                  <span className="text-xs text-muted">{t.role}</span>
-                </div>
-              </div>
-            </CampaignScale>
-          ))}
-        </div>
-      </section>
-
-      {/* Limited Intake */}
-      <CampaignReveal className="campaign-section px-[max(1.25rem,4vw)] text-center">
-        <CampaignSplitTitle title="Small batches" accent="Maximum attention" align="center" className="mb-6" />
-        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted">
-          We strictly limit our academy to 8 students per quarter to ensure every artisan receives the technical feedback
-          and strategic guidance they deserve.
-        </p>
-        <div className="mt-16 flex items-center justify-center gap-12">
-          <div className="text-left">
-            <span className="editorial-title block text-[clamp(2rem,4vw,3rem)]">Q3</span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">Current Intake</span>
-          </div>
-          <div className="h-12 w-px bg-black/10" />
-          <div className="text-left">
-            <span className="editorial-title block text-[clamp(2rem,4vw,3rem)]">2/8</span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">Spots Left</span>
-          </div>
-        </div>
-      </CampaignReveal>
-
       {/* Application Form */}
       <section id="apply" className="campaign-section campaign-pad bg-white">
-        <CampaignReveal className="mx-auto max-w-4xl bg-pearl p-12 shadow-sm md:p-24">
-          <CampaignSplitTitle as="h3" size="display" title="Begin your transformation" accent="Apply today" className="mb-12" />
+        <CampaignReveal className="mx-auto max-w-4xl bg-pearl p-8 shadow-sm sm:p-12 md:p-24">
+          <CampaignSplitTitle as="h2" size="display" title="Begin Your Transformation" accent="Apply today" className="mb-6" />
+          <p className="mb-12 max-w-2xl text-base leading-relaxed text-muted">
+            Ready to build a successful restoration business? Complete the application form and tell us about your
+            background, goals, and interests. Whether you&apos;re a beginner, entrepreneur, or existing business owner,
+            Sneakcure will help you develop the technical skills and business knowledge needed to succeed in the
+            premium restoration industry.
+          </p>
           <TrainingApplicationForm />
         </CampaignReveal>
       </section>
 
       {/* Final Close */}
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-[max(1.25rem,4vw)] text-center">
-        <CampaignSplitTitle title="Start building work" accent="People remember" align="center" className="relative z-10 mb-12" />
+      <section className="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-[max(1.25rem,4vw)] py-24 text-center md:min-h-screen md:py-32">
         <div className="absolute inset-0 z-0 opacity-5">
           <ParallaxImage src={IMG.finalBg} alt="" className="h-full w-full" speed={0.12} />
         </div>
+        <CampaignReveal className="relative z-10 mx-auto max-w-3xl">
+          <CampaignSplitTitle title="Start Building Work" accent="People remember" align="center" className="mb-10" />
+          <div className="space-y-6 text-base leading-relaxed text-muted sm:text-lg">
+            <p>Anyone can clean a shoe.</p>
+            <p>
+              Professionals restore craftsmanship, preserve luxury, and create experiences that customers never forget.
+            </p>
+            <p>
+              At Sneakcure, you&apos;ll gain the technical expertise, business knowledge, and confidence to build a
+              restoration brand that stands out in the market. Learn the craft, master the business, and create work
+              that people proudly recommend.
+            </p>
+            <p className="font-medium text-primary-black">
+              Build skills. Build trust. Build a business with Sneakcure — luxury craftsmanship.
+            </p>
+          </div>
+        </CampaignReveal>
       </section>
 
       {/* Sticky CTA */}
       <div className="pointer-events-none fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 sm:bottom-12 sm:right-12">
-        <CampaignBtn href="#apply" className="pointer-events-auto !h-20 !w-20 !rounded-full !p-0 shadow-2xl md:!h-auto md:!w-auto md:!rounded-none md:!px-10 md:!py-5">
+        <CampaignBtn
+          href="#apply"
+          className="pointer-events-auto !h-20 !w-20 !rounded-full !p-0 shadow-2xl md:!h-auto md:!w-auto md:!rounded-none md:!px-10 md:!py-5"
+        >
           <span className="md:hidden">
             <MaterialIcon name="school" className="text-3xl" />
           </span>
-          <span className="hidden md:inline">Inquire Now</span>
+          <span className="hidden md:inline">Apply Today</span>
         </CampaignBtn>
       </div>
     </div>

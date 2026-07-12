@@ -9,8 +9,11 @@ const TrainingShowcase = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Training & Consultation",
-  description: "Professional sneaker and leather restoration training programs and consultation services by Sneakcure.",
+  title: {
+    absolute: "Sneakcure Training | Learn Shoe & Leather Restoration Skills",
+  },
+  description:
+    "Master premium shoe and leather restoration with Sneakcure. Get hands-on training, expert guidance, and business skills to launch or grow your restoration career.",
 };
 
 export default function TrainingPage() {
