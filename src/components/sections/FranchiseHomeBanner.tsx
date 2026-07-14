@@ -38,8 +38,10 @@ function FilmStrip({
   );
 }
 
+type TerritoryCity = (typeof FRANCHISE_TERRITORIES)[number]["city"];
+
 export function FranchiseHomeBanner() {
-  const [activeCity, setActiveCity] = useState(FRANCHISE_TERRITORIES[0]!.city);
+  const [activeCity, setActiveCity] = useState<TerritoryCity>(FRANCHISE_TERRITORIES[0]!.city);
   const active = FRANCHISE_TERRITORIES.find((t) => t.city === activeCity) ?? FRANCHISE_TERRITORIES[0]!;
 
   const cityStrip = Array.from({ length: 3 }, (_, copy) =>
