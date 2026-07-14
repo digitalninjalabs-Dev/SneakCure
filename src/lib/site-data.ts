@@ -7,6 +7,8 @@ export const SITE = {
   whatsapp: "919555213651",
   address:
     "Kh No: 31/25, Plot No 86, Near MG Royal Banquet Hall, Pocket 1, Matiala Extension, Matiala, Delhi, 110059",
+  hours: "10:00 AM – 8:00 PM IST (Mon–Tue, Thu–Sun)",
+  weeklyOff: "Wednesday",
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.9462!3d26.8467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDUwJzQ4LjEiTiA4MMKwNTYnNDYuMyJF!5e0!3m2!1sen!2sin!4v1",
   instagram: "https://instagram.com/Sneakcure",
@@ -26,7 +28,7 @@ export const CONTACT_STORES = [
   },
   {
     name: "Lucknow Company Own Studio",
-    landmark: "Near Submit Building",
+    landmark: "Near Summit Building",
     address: "624V/177 Vishesh Khand, Gomti Nagar, Lucknow, 226010",
     hours: "10:00 AM – 8:00 PM IST (Monday–Sunday)",
     weeklyOff: "Wednesday",
@@ -97,9 +99,24 @@ export const FRANCHISE_HOME_IMAGE =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuC63WQcWdPWICp7H-PBnleVHosYEqVDRiVwe5O2Q0Nm4S3Yww-39oJQmVhjD3KWfdiB96Ei8EEnu-hFxc7QFvkUP1aIR9OECJaXLftPfRQ23QYoWZcA-iepTysFZkJSZkHxx12Ad9r-iiYdVebgbhAPbH9fq2XgGpgztSBUCuhhRw3D9ldgSA8yKHZqpivYWfkEsjp7ZeAlDqou9zEdK5tfbl1KrKYWsCwhFZjm7O4XzClkU9al8Bh1sPJ0KPLx-eky48T0JcqMbfo";
 
 export const FRANCHISE_TERRITORIES = [
-  { city: "Lucknow", detail: "Gomti Nagar · Flagship" },
-  { city: "Delhi", detail: "NCR · Open" },
-  { city: "Kanpur", detail: "UP · Open" },
+  {
+    city: "Delhi",
+    detail: "NCR · Headquarters",
+    phone: "+91 9555213651",
+    phoneHref: "919555213651",
+  },
+  {
+    city: "Lucknow",
+    detail: "Gomti Nagar · Flagship",
+    phone: "+91 9170775506",
+    phoneHref: "919170775506",
+  },
+  {
+    city: "Kanpur",
+    detail: "UP · Open",
+    phone: "+91 9170775506",
+    phoneHref: "919170775506",
+  },
 ] as const;
 
 /** Franchise page — exclusive territory cards */
@@ -313,7 +330,7 @@ export const SERVICE_PAGES = [
     ],
     faqs: [
       { q: "Can you fix corner wear?", a: "Yes — we recolor and rebuild worn edges with matched pigments." },
-      { q: "Is pickup available?", a: "White-glove pickup available in Lucknow, Delhi, and Kanpur." },
+      { q: "Is pickup available?", a: "White-glove pickup available in Delhi, Lucknow, and Kanpur." },
     ],
   },
   {
@@ -428,10 +445,14 @@ export const SERVICE_PAGES = [
 
 export type ServicePage = (typeof SERVICE_PAGES)[number];
 
-export const SERVICE_NAV = SERVICE_PAGES.map((service) => ({
-  label: service.title,
-  href: `/services/${service.slug}`,
-}));
+export const SERVICE_NAV = [
+  { label: "SNEAKER RESTORATION", href: "/services/luxury-sneaker-restoration" },
+  { label: "BAGS & WALLETS CARE", href: "/services/bags-wallets-care" },
+  { label: "JACKET & ACCESSORIES RESTORATION", href: "/services/leather-jacket-accessories-restoration" },
+  { label: "SOFA CLEANING & RESTORATION", href: "/services/premium-sofa-cleaning-restoration" },
+  { label: "CAR LEATHER CUSTOMIZATION", href: "/services/car-leather-customization" },
+  { label: "PATINA ARTWORK", href: "/services/patina-work" },
+] as const;
 
 export function getServiceBySlug(slug: string): ServicePage | undefined {
   return SERVICE_PAGES.find((s) => s.slug === slug);

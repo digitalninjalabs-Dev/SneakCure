@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ClosedWednesdayBar } from "@/components/layout/ClosedWednesdayBar";
 import { FooterServeBar } from "@/components/layout/FooterServeBar";
 import { MAIN_NAV, SITE } from "@/lib/site-data";
 
@@ -39,6 +40,10 @@ export function Footer() {
                 collectors, stylists, and luxury houses.
               </p>
               <p className="mt-4 text-sm text-muted">{SITE.address}</p>
+              <p className="mt-3 text-sm text-muted">{SITE.hours}</p>
+              <p className="mt-1 text-sm font-medium text-soft-white/90">
+                Closed every {SITE.weeklyOff}
+              </p>
             </div>
             <div>
               <p className="mb-4 text-xs uppercase tracking-[0.2em] text-muted">Navigate</p>
@@ -105,7 +110,8 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Cities ticker — between main footer & copyright (reference layout) */}
+      {/* Weekly off + cities — between main footer & copyright */}
+      <ClosedWednesdayBar />
       <FooterServeBar />
 
       {/* Copyright strip */}

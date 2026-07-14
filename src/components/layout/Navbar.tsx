@@ -111,7 +111,7 @@ function ServicesDropdown({
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute left-1/2 top-full z-50 w-[min(100vw-2rem,18.5rem)] -translate-x-1/2 pt-3"
+            className="absolute left-1/2 top-full z-50 w-[min(100vw-2rem,22rem)] -translate-x-1/2 pt-3"
             initial={{ opacity: 0, y: 8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
@@ -129,8 +129,8 @@ function ServicesDropdown({
                         prefetch={false}
                         onMouseEnter={() => prefetchRoute(item.href)}
                         onFocus={() => prefetchRoute(item.href)}
-                        className={`block px-6 py-3.5 text-center font-body text-sm font-medium leading-snug text-primary-black transition-colors hover:bg-black/[0.05] hover:font-semibold ${
-                          active ? "bg-black/[0.05] font-semibold" : ""
+                        className={`block px-5 py-3.5 text-center text-[11px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-black transition-colors hover:bg-black/[0.05] lg:text-xs ${
+                          active ? "bg-black/[0.05]" : ""
                         }`}
                       >
                         {item.label}
@@ -533,8 +533,8 @@ export function Navbar() {
                                     href={item.href}
                                     scroll={false}
                                     prefetch={false}
-                                    className={`flex min-h-11 items-center rounded-xl px-5 py-2.5 text-sm font-medium text-primary-black hover:bg-black/5 hover:font-semibold ${
-                                      pathname === item.href ? "font-semibold" : ""
+                                    className={`flex min-h-11 items-center rounded-xl px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-black hover:bg-black/5 ${
+                                      pathname === item.href ? "bg-black/5" : ""
                                     }`}
                                     onClick={closeMenu}
                                   >

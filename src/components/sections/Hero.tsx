@@ -1,50 +1,57 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { prefersReducedMotion } from "@/lib/motion";
+import { SERVICE_CITIES } from "@/lib/site-data";
 
-const HERO_VIDEO = "/video/herovideo.mp4";
-
-const HERO_WORDS = ["CLEAN", "REPAIR", "RECOLOR", "RESTORE"] as const;
-const HERO_LOCATIONS = ["Lucknow", "Delhi", "Kanpur"] as const;
-
-const WORD_MS = 4200;
+const HERO_VIDEO = "/video/sneakhero.mp4";
 const LOCATION_MS = 3800;
 
-const SMOOTH_EASE = [0.33, 1, 0.68, 1] as const;
+function HeroLocationCycle() {
+  const [index, setIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const label = SERVICE_CITIES[index]!;
 
-function createCycleMotion(scale: "hero" | "location") {
-  const yIn = scale === "hero" ? 14 : 8;
-  const yOut = scale === "hero" ? -10 : -6;
+  useEffect(() => {
+    setReduceMotion(prefersReducedMotion());
+  }, []);
 
-  return {
-    initial: {
-      opacity: 0,
-      y: yIn,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        opacity: { duration: 1.1, ease: SMOOTH_EASE },
-        y: { duration: 1.2, ease: SMOOTH_EASE },
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: yOut,
-      transition: {
-        opacity: { duration: 0.9, ease: SMOOTH_EASE },
-        y: { duration: 1, ease: SMOOTH_EASE },
-      },
-    },
-  };
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % SERVICE_CITIES.length);
+    }, LOCATION_MS);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
+  return (
+    <div className="text-right">
+      <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">
+        Now serving
+      </p>
+      <span className="relative block h-[1.35em] overflow-hidden">
+        <span className="invisible font-display text-base font-medium uppercase tracking-[0.14em] md:text-lg">
+          Lucknow
+        </span>
+        <AnimatePresence initial={false}>
+          <motion.span
+            key={label}
+            className="absolute right-0 top-0 font-display text-base font-medium uppercase tracking-[0.14em] text-white/85 md:text-lg"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
+          >
+            {label}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+    </div>
+  );
 }
-
-const wordMotion = createCycleMotion("hero");
-const locationMotion = createCycleMotion("location");
 
 function HeroVideoBackground({ paused }: { paused: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -85,105 +92,6 @@ function HeroVideoBackground({ paused }: { paused: boolean }) {
   );
 }
 
-function useCycleIndex(length: number, intervalMs: number, startOffset = 0) {
-  const [index, setIndex] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [active, setActive] = useState(startOffset === 0);
-
-  useEffect(() => {
-    setReduceMotion(prefersReducedMotion());
-  }, []);
-
-  useEffect(() => {
-    if (startOffset === 0) return;
-    const timeout = window.setTimeout(() => setActive(true), startOffset);
-    return () => window.clearTimeout(timeout);
-  }, [startOffset]);
-
-  useEffect(() => {
-    if (reduceMotion || !active) return;
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % length);
-    }, intervalMs);
-    return () => window.clearInterval(id);
-  }, [reduceMotion, active, length, intervalMs]);
-
-  return index;
-}
-
-function CyclingText({
-  items,
-  motionVariants,
-  className,
-  widthPlaceholder,
-  intervalMs,
-  startOffset = 0,
-  ariaLive = "polite",
-}: {
-  items: readonly string[];
-  motionVariants: typeof wordMotion;
-  className: string;
-  widthPlaceholder: string;
-  intervalMs: number;
-  startOffset?: number;
-  ariaLive?: "off" | "polite";
-}) {
-  const index = useCycleIndex(items.length, intervalMs, startOffset);
-  const label = items[index];
-
-  return (
-    <span className={`relative block overflow-hidden bg-transparent ${className}`} aria-live={ariaLive}>
-      <span className="invisible block" aria-hidden>
-        {widthPlaceholder}
-      </span>
-      <AnimatePresence initial={false}>
-        <motion.span
-          key={label}
-          className="absolute left-0 top-0 block w-full bg-transparent will-change-[opacity,transform]"
-          variants={motionVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          {label}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
-function HeroWordCycle() {
-  return (
-    <h1 className="bg-transparent [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
-      <CyclingText
-        items={HERO_WORDS}
-        motionVariants={wordMotion}
-        widthPlaceholder="RESTORE"
-        intervalMs={WORD_MS}
-        className="font-display text-[clamp(2rem,11vw,7.5rem)] font-semibold uppercase leading-[0.92] text-white"
-      />
-    </h1>
-  );
-}
-
-function HeroLocationCycle() {
-  return (
-    <div className="text-right">
-      <p className="mb-1.5 bg-transparent text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">
-        Now serving
-      </p>
-      <CyclingText
-        items={HERO_LOCATIONS}
-        motionVariants={locationMotion}
-        widthPlaceholder="Lucknow"
-        intervalMs={LOCATION_MS}
-        startOffset={900}
-        className="font-display text-base font-medium uppercase tracking-[0.14em] text-white/80 md:text-lg"
-      />
-    </div>
-  );
-}
-
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [heroInView, setHeroInView] = useState(true);
@@ -205,123 +113,97 @@ export function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative min-h-svh w-full overflow-hidden bg-black pb-[max(5rem,env(safe-area-inset-bottom))]"
+      className="relative min-h-svh w-full overflow-hidden bg-black"
       aria-label="Hero"
     >
       <div className="absolute inset-0">
         <HeroVideoBackground paused={!heroInView} />
-        <div className="absolute inset-0 bg-black/18" aria-hidden />
+        {/* Center stays almost clear so in-video CLEAN / REPAIR / RESTORE dominates */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/45"
+          className="absolute inset-x-0 top-0 h-[28%] bg-gradient-to-b from-black/40 to-transparent"
           aria-hidden
         />
-        <div className="absolute inset-0 grain opacity-15" aria-hidden />
+        <div
+          className="absolute inset-x-0 bottom-0 h-[34%] bg-gradient-to-t from-black/85 via-black/45 to-transparent"
+          aria-hidden
+        />
       </div>
 
-      <div className="relative z-10 flex min-h-svh flex-col justify-end pb-20 pt-[calc(var(--site-header-offset)+1rem)] sm:pb-16 md:justify-center md:pb-24 md:pt-32">
+      {/* Top-right locations */}
+      <div className="pointer-events-none absolute inset-x-0 top-[calc(var(--site-header-offset)+0.5rem)] z-10">
         <div className="site-shell">
-          <div className="hero-copy">
-            <p
-              className="bg-transparent text-xs font-medium uppercase tracking-[0.28em] text-white/75"
-              data-fade-up
-            >
-              Premium Sneaker Restoration
-            </p>
-
-            <div className="mt-5 bg-transparent">
-              <HeroWordCycle />
-            </div>
-
-            <p
-              className="mt-6 max-w-xl bg-transparent text-sm leading-relaxed text-white/85 sm:text-base md:mt-8 md:text-lg"
-              data-fade-up
-            >
-              Crafted for iconic footwear. Museum-grade restoration for grails, runway
-              samples, and everyday legends.
-            </p>
-
-            <div
-              className="mt-8 flex w-full flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2.5 md:mt-11"
-              data-fade-up
-            >
-              <MagneticButton
-                href="/contact"
-                className="!min-h-11 !w-full !px-5 !py-3 !text-xs sm:!w-auto sm:!px-5 sm:!py-3 sm:!text-xs"
-              >
-                Book Restoration
-              </MagneticButton>
-              <MagneticButton
-                href="/services"
-                variant="ghost"
-                className="!min-h-11 !w-full !px-5 !py-3 !text-xs border-white/40 bg-transparent text-white hover:bg-white/10 sm:!w-auto sm:!px-5 sm:!py-3 sm:!text-xs"
-              >
-                Explore Services
-              </MagneticButton>
-            </div>
-
-            <div className="mt-8 md:hidden" data-fade-up>
-              <HeroLocationCycle />
-            </div>
-
-            <div
-              className="hero-copy mt-8 grid grid-cols-3 gap-3 border-t border-white/15 bg-transparent pt-6 text-white/55 md:hidden"
-              data-fade-up
-            >
-              <div className="bg-transparent text-center sm:text-left">
-                <p className="font-display text-lg text-white sm:text-2xl">12k+</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.14em] sm:text-xs">Pairs Restored</p>
-              </div>
-              <div className="bg-transparent text-center sm:text-left">
-                <p className="font-display text-lg text-white sm:text-2xl">48</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.14em] sm:text-xs">Luxury Brands</p>
-              </div>
-              <div className="bg-transparent text-center sm:text-left">
-                <p className="font-display text-lg text-white sm:text-2xl">99%</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.14em] sm:text-xs">Satisfaction</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="site-shell mt-14 md:mt-20">
-          <div
-            className="hero-copy hidden items-center gap-10 border-t border-white/15 bg-transparent pt-8 text-white/55 md:flex"
-            data-fade-up
-          >
-            <div className="bg-transparent">
-              <p className="font-display text-2xl text-white">12k+</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em]">Pairs Restored</p>
-            </div>
-            <div className="h-10 w-px bg-white/20" aria-hidden />
-            <div className="bg-transparent">
-              <p className="font-display text-2xl text-white">48</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em]">Luxury Brands</p>
-            </div>
-            <div className="h-10 w-px bg-white/20" aria-hidden />
-            <div className="bg-transparent">
-              <p className="font-display text-2xl text-white">99%</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em]">Satisfaction</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-16 z-10 hidden md:block md:bottom-24">
-        <div className="site-shell justify-end">
-          <div className="flex w-full max-w-[72rem] justify-end bg-transparent px-4 sm:px-5 md:px-8">
+          <div className="hero-copy flex justify-end">
             <HeroLocationCycle />
           </div>
         </div>
       </div>
 
-      <div
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
-        aria-hidden
-      >
-        <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
-          Scroll
-        </span>
-        <span className="block h-10 w-px bg-gradient-to-b from-white/50 to-transparent" />
+      {/* Slim bottom bar — only brand + actions + stats */}
+      <div className="absolute inset-x-0 bottom-0 z-10 pb-[max(1rem,env(safe-area-inset-bottom))] pt-16">
+        <div className="site-shell">
+          <div className="hero-copy">
+            <div
+              className="flex flex-col gap-4 border-t border-white/15 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 md:pt-6"
+              data-fade-up
+            >
+              <div className="min-w-0 flex-1">
+                <h1 className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-white sm:text-base">
+                  Sneakcure
+                </h1>
+                <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/65 sm:text-sm">
+                  Premium sneaker &amp; leather restoration
+                </p>
+              </div>
+
+              <div className="flex shrink-0 flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3">
+                <MagneticButton
+                  href="/contact"
+                  className="!min-h-10 !w-full !px-5 !py-2.5 !text-[11px] sm:!w-auto"
+                >
+                  Book Restoration
+                </MagneticButton>
+                <Link
+                  href="/services"
+                  className="inline-flex min-h-10 items-center justify-center px-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/70 transition-colors hover:text-white sm:justify-start"
+                >
+                  Explore Services →
+                </Link>
+              </div>
+
+              <div className="hidden items-center gap-6 text-white/50 lg:flex">
+                <div>
+                  <p className="font-display text-lg text-white">12k+</p>
+                  <p className="text-[10px] uppercase tracking-[0.16em]">Restored</p>
+                </div>
+                <div className="h-8 w-px bg-white/15" aria-hidden />
+                <div>
+                  <p className="font-display text-lg text-white">48</p>
+                  <p className="text-[10px] uppercase tracking-[0.16em]">Brands</p>
+                </div>
+                <div className="h-8 w-px bg-white/15" aria-hidden />
+                <div>
+                  <p className="font-display text-lg text-white">99%</p>
+                  <p className="text-[10px] uppercase tracking-[0.16em]">Satisfaction</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-center text-white/50 lg:hidden">
+              <div>
+                <p className="font-display text-base text-white">12k+</p>
+                <p className="text-[9px] uppercase tracking-[0.14em]">Restored</p>
+              </div>
+              <div>
+                <p className="font-display text-base text-white">48</p>
+                <p className="text-[9px] uppercase tracking-[0.14em]">Brands</p>
+              </div>
+              <div>
+                <p className="font-display text-base text-white">99%</p>
+                <p className="text-[9px] uppercase tracking-[0.14em]">Satisfaction</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

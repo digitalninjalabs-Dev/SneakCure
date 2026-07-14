@@ -395,7 +395,7 @@ export function FounderShowcase() {
             </div>
           </FounderReveal>
           <FounderReveal
-            className="founder-paper founder-asymmetric-shadow relative z-20 mt-10 w-full rounded-lg border border-black/10 p-8 md:absolute md:left-0 md:top-24 md:mt-0 md:w-1/2 md:p-12"
+            className="founder-asymmetric-shadow relative z-20 mt-10 w-full rounded-lg border border-black/10 bg-white p-8 md:absolute md:left-0 md:top-24 md:mt-0 md:w-1/2 md:p-12"
             delay={0.12}
           >
             <FounderLabel>Vision 2030</FounderLabel>

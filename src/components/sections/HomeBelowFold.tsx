@@ -18,6 +18,7 @@ export function HomeBelowFold() {
       <About />
       <Statistics />
       <SustainableCycle />
+      <SocialReels />
       <ScrollRevealServices />
       <BrandsWall />
       <Process />
@@ -25,7 +26,6 @@ export function HomeBelowFold() {
       <FranchiseHomeBanner />
       <BeforeAfter />
       <Testimonials />
-      <SocialReels />
       <FAQ />
       <BookingCTA />
     </>

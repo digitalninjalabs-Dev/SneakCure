@@ -1253,6 +1253,34 @@
   animation: footer-serve-marquee 28s linear infinite;
 }
 
+.closed-wed-track {
+  animation: closed-wed-marquee 32s linear infinite;
+}
+
+@keyframes closed-wed-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closed-wed-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .closed-wed-track > div[aria-hidden] {
+    display: none;
+  }
+}
+
 @keyframes footer-serve-marquee {
   from {
     transform: translateX(0);

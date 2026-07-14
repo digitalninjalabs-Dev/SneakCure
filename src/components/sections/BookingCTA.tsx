@@ -22,6 +22,9 @@ export function BookingCTA() {
         <p className="mt-6 text-lg text-muted md:text-xl" data-fade-up>
           Restore them with craftsmanship. Doorstep pickup available across India.
         </p>
+        <p className="mt-3 text-sm font-medium uppercase tracking-[0.16em] text-primary-black/55" data-fade-up>
+          Closed every Wednesday · Open Mon–Tue &amp; Thu–Sun
+        </p>
 
         <form
           className="mx-auto mt-14 max-w-lg space-y-4 text-left"

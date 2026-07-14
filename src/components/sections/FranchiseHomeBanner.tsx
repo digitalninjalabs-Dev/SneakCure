@@ -1,13 +1,17 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { SafeImage } from "@/components/ui/SafeImage";
 import { MaterialIcon } from "@/components/pages/campaign-ui";
-import { FRANCHISE_HOME_IMAGE, FRANCHISE_TERRITORIES, SITE } from "@/lib/site-data";
-
-const PHONE_HREF = `tel:${SITE.phone.replace(/\s/g, "")}`;
+import { FRANCHISE_HOME_IMAGE, FRANCHISE_TERRITORIES } from "@/lib/site-data";
 
 const PERKS =
   "Full Training · Brand SOPs · Supply Chain · Launch Kit · Territory Support · Marketing Playbooks · ";
+
+const PHONE_EASE = [0.33, 1, 0.68, 1] as const;
 
 function FilmStrip({
   reverse,
@@ -35,6 +39,9 @@ function FilmStrip({
 }
 
 export function FranchiseHomeBanner() {
+  const [activeCity, setActiveCity] = useState(FRANCHISE_TERRITORIES[0]!.city);
+  const active = FRANCHISE_TERRITORIES.find((t) => t.city === activeCity) ?? FRANCHISE_TERRITORIES[0]!;
+
   const cityStrip = Array.from({ length: 3 }, (_, copy) =>
     FRANCHISE_TERRITORIES.map((branch) => (
       <span key={`${copy}-${branch.city}`} className="franchise-ad-film-chip">
@@ -110,33 +117,74 @@ export function FranchiseHomeBanner() {
                 <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">
                   Territories
                 </p>
-                <ul className="mt-3 space-y-2.5">
-                  {FRANCHISE_TERRITORIES.map((branch) => (
-                    <li
-                      key={branch.city}
-                      className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3"
-                    >
-                      <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em]">
-                        <MaterialIcon name="location_on" filled className="shrink-0 text-base text-white/55" />
-                        {branch.city}
-                      </span>
-                      <span className="pl-6 text-[11px] text-white/40 sm:pl-0 sm:text-right">{branch.detail}</span>
-                    </li>
-                  ))}
+                <p className="mt-1 text-[10px] text-white/35">Tap a city to see its number</p>
+                <ul className="mt-3 space-y-1">
+                  {FRANCHISE_TERRITORIES.map((branch) => {
+                    const selected = branch.city === activeCity;
+                    return (
+                      <li key={branch.city}>
+                        <button
+                          type="button"
+                          onClick={() => setActiveCity(branch.city)}
+                          aria-pressed={selected}
+                          className={`flex w-full flex-col gap-0.5 rounded-xl px-2.5 py-2 text-left transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-3 ${
+                            selected
+                              ? "bg-white/12 text-soft-white"
+                              : "text-white/70 hover:bg-white/6 hover:text-soft-white"
+                          }`}
+                        >
+                          <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.1em]">
+                            <MaterialIcon
+                              name="location_on"
+                              filled
+                              className={`shrink-0 text-base ${selected ? "text-white" : "text-white/45"}`}
+                            />
+                            {branch.city}
+                          </span>
+                          <span
+                            className={`pl-6 text-[11px] sm:pl-0 sm:text-right ${
+                              selected ? "text-white/55" : "text-white/35"
+                            }`}
+                          >
+                            {branch.detail}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
 
-                <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+                <div className="mt-6 flex flex-col gap-2">
                   <a
-                    href={PHONE_HREF}
-                    className="franchise-ad-cta-primary inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full bg-soft-white px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-black transition-colors hover:bg-white sm:text-[11px]"
+                    href={`tel:${active.phoneHref}`}
+                    className="franchise-ad-cta-primary relative z-0 inline-flex min-h-11 w-full items-center justify-center gap-2.5 rounded-full bg-soft-white px-4 py-3 text-primary-black transition-colors hover:bg-white"
+                    aria-label={`Call ${active.city} at ${active.phone}`}
                   >
-                    <MaterialIcon name="call" className="shrink-0 text-sm" />
-                    <span className="sm:hidden">Call Us</span>
-                    <span className="hidden truncate sm:inline">{SITE.phone}</span>
+                    <MaterialIcon name="call" className="relative z-[1] shrink-0 text-[15px]" />
+                    <span className="relative z-[1] inline-grid max-w-full overflow-hidden">
+                      <AnimatePresence mode="wait" initial={false}>
+                        <motion.span
+                          key={`${active.city}-${active.phone}`}
+                          className="col-start-1 row-start-1 whitespace-nowrap font-display text-sm font-semibold tabular-nums leading-none tracking-normal"
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          transition={{ duration: 0.3, ease: PHONE_EASE }}
+                        >
+                          {active.phone}
+                        </motion.span>
+                      </AnimatePresence>
+                      <span
+                        className="invisible col-start-1 row-start-1 whitespace-nowrap font-display text-sm font-semibold tabular-nums leading-none"
+                        aria-hidden
+                      >
+                        +91 9555213651
+                      </span>
+                    </span>
                   </a>
                   <Link
                     href="/franchise"
-                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-full border border-white/25 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-soft-white transition-colors hover:border-white/45 hover:bg-white/5 sm:text-[11px]"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full border border-white/25 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-soft-white transition-colors hover:border-white/45 hover:bg-white/5 sm:text-[11px]"
                   >
                     Apply Now
                     <MaterialIcon name="arrow_forward" className="text-sm" />
