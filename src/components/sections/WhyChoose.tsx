@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function WhyChoose() {
   return (
-    <section className="section-pad bg-pearl py-24 md:py-36 grain" aria-label="Why choose Sneakcure">
+    <section className="section-pad bg-white py-24 md:py-36" aria-label="Why choose Sneakcure">
       <SectionHeading
         eyebrow="The Sneakcure Standard"
         title="Why people trust Sneakcure"
@@ -46,4 +46,4 @@ export function WhyChoose() {
     </section>
   );
 }
-
+

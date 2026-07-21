@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
+import { FooterGetStartedMarquee } from "@/components/layout/FooterGetStartedMarquee";
 import { Navbar } from "@/components/layout/Navbar";
 import { ClientBootstraps } from "@/components/providers/ClientBootstraps";
 import { productImage } from "@/lib/constants";
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F6F4F1",
+  themeColor: "#FFFFFF",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -88,6 +89,7 @@ export default function RootLayout({
           href="/logo/sneakcuresqblack.png"
           as="image"
         />
+        <link rel="preload" href="/video/sneakhero-poster.jpg" as="image" />
         <link
           href="https://api.fontshare.com/v2/css?f=clash-display@400,500,600,700&f=satoshi@400,500,700&display=swap"
           rel="stylesheet"
@@ -130,6 +132,7 @@ export default function RootLayout({
           <ClientBootstraps>
             <Navbar />
             {children}
+            <FooterGetStartedMarquee />
             <Footer />
           </ClientBootstraps>
         </div>

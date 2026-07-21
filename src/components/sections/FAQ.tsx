@@ -8,7 +8,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="section-pad bg-soft-white py-24 md:py-36" aria-label="FAQ">
+    <section className="section-pad bg-white py-24 md:py-36" aria-label="FAQ">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           eyebrow="Questions"

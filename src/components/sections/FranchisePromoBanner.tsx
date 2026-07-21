@@ -14,7 +14,7 @@ function TickerHalf({ hidden }: { hidden?: boolean }) {
 
 export function FranchisePromoBanner() {
   return (
-    <section className="franchise-promo-strip overflow-hidden bg-soft-white" aria-label="Franchise opportunity">
+    <section className="franchise-promo-strip overflow-hidden bg-white" aria-label="Franchise opportunity">
       <div className="section-pad flex items-center gap-4 border-y border-primary-black/10 py-3 sm:gap-6 sm:py-3.5">
         <div className="min-w-0 flex-1 overflow-hidden">
           <div className="franchise-promo-strip-track flex h-[1.125rem] w-max items-center sm:h-5">

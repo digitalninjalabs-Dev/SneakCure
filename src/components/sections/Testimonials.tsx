@@ -8,7 +8,7 @@ export function Testimonials() {
   return (
     <section
       id="reviews"
-      className="section-pad gloss-black-panel py-24 text-soft-white md:py-36 grain"
+      className="section-pad bg-black py-24 text-soft-white md:py-36"
       aria-label="Testimonials"
     >
       <SectionHeading

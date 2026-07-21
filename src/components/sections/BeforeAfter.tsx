@@ -3,7 +3,7 @@ import { BEFORE_AFTER_SHOWCASE } from "@/lib/constants";
 
 export function BeforeAfter() {
   return (
-    <section className="section-pad bg-pearl py-20 sm:py-24 md:py-32 grain" aria-label="Before and after showcase">
+    <section className="section-pad bg-white py-20 sm:py-24 md:py-32" aria-label="Before and after showcase">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14 md:mb-16">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-primary-black/45">

@@ -90,7 +90,7 @@ function ServicesDropdown({
         prefetch={false}
         className={`flex items-center gap-1.5 whitespace-nowrap rounded-full py-2.5 text-[12px] font-semibold uppercase transition-colors duration-300 lg:text-[13px] xl:text-sm ${
           isHovered || isActive
-            ? "bg-pearl px-4 text-primary-black shadow-sm lg:px-5"
+            ? "bg-white px-4 text-primary-black shadow-sm lg:px-5"
             : anyHover
               ? "px-3 text-primary-black/35"
               : "px-3 text-primary-black/55"
@@ -182,11 +182,17 @@ function DesktopNav({
   prefetchRoute: (href: string) => void;
 }) {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
   const anyHover = hovered !== null;
+
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => setReady(true));
+    return () => window.cancelAnimationFrame(id);
+  }, []);
 
   return (
     <ul
-      className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
+      className="nav-desktop-list hidden min-w-0 flex-1 items-center justify-center lg:flex"
       onMouseLeave={() => setHovered(null)}
     >
       {MAIN_NAV.map((link) => {
@@ -212,7 +218,7 @@ function DesktopNav({
         const display = navLabel(link.label, link.href);
 
         return (
-          <li key={link.href}>
+          <li key={link.href} className="nav-desktop-item">
             <Link
               href={link.href}
               scroll={false}
@@ -222,17 +228,39 @@ function DesktopNav({
                 prefetchRoute(link.href);
               }}
               onFocus={() => prefetchRoute(link.href)}
-              className="block whitespace-nowrap py-2.5 text-[12px] font-medium uppercase lg:text-[13px] xl:text-sm"
+              className="nav-desktop-link-base block whitespace-nowrap py-2.5 text-[12px] font-medium uppercase lg:text-[13px] xl:text-sm"
             >
               <motion.span
                 className="block"
-                animate={{
-                  paddingLeft: isHovered ? "1.35rem" : anyHover ? "0.55rem" : "0.75rem",
-                  paddingRight: isHovered ? "1.35rem" : anyHover ? "0.55rem" : "0.75rem",
-                  letterSpacing: isHovered ? "0.28em" : anyHover ? "0.1em" : isActive ? "0.18em" : "0.14em",
-                  color: isHovered || isActive ? "var(--color-primary-black)" : anyHover ? "rgba(17,17,17,0.35)" : "rgba(17,17,17,0.55)",
-                  scale: isHovered ? 1.04 : 1,
-                }}
+                initial={false}
+                animate={
+                  ready
+                    ? {
+                        paddingLeft: isHovered ? "1.35rem" : anyHover ? "0.55rem" : "0.75rem",
+                        paddingRight: isHovered ? "1.35rem" : anyHover ? "0.55rem" : "0.75rem",
+                        letterSpacing: isHovered
+                          ? "0.28em"
+                          : anyHover
+                            ? "0.1em"
+                            : isActive
+                              ? "0.18em"
+                              : "0.14em",
+                        color:
+                          isHovered || isActive
+                            ? "var(--color-primary-black)"
+                            : anyHover
+                              ? "rgba(17,17,17,0.35)"
+                              : "rgba(17,17,17,0.55)",
+                        scale: isHovered ? 1.04 : 1,
+                      }
+                    : {
+                        paddingLeft: "0.75rem",
+                        paddingRight: "0.75rem",
+                        letterSpacing: "0.14em",
+                        color: "rgba(17,17,17,0.55)",
+                        scale: 1,
+                      }
+                }
                 transition={{
                   type: "spring",
                   stiffness: 380,

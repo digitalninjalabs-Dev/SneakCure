@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Process() {
   return (
-    <section className="section-pad gloss-black-panel py-24 text-soft-white grain md:py-36" aria-label="Restoration process">
+    <section className="section-pad bg-black py-24 text-soft-white md:py-36" aria-label="Restoration process">
       <div className="mx-auto max-w-6xl">
         <SectionHeading eyebrow="The journey" title="Six steps to perfection" titleAccent="From collection to completion" dark gsap />
         <div className="mb-12 hidden h-px w-full bg-white/20 md:block" />
@@ -13,12 +13,12 @@ export function Process() {
           {PROCESS_STEPS.map((step) => (
             <li
               key={step.step}
-              className="rounded-2xl border border-white/10 bg-premium-gray/40 p-6 sm:p-8"
+              className="rounded-2xl border border-black/5 bg-white p-6 text-primary-black sm:p-8"
               data-scroll-reveal
             >
-              <span className="text-xs tracking-[0.2em] text-muted">{step.step}</span>
-              <h3 className="mt-2 font-display text-xl sm:mt-3 sm:text-2xl">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{step.desc}</p>
+              <span className="text-xs tracking-[0.2em] text-primary-black/40">{step.step}</span>
+              <h3 className="mt-2 font-display text-xl text-primary-black sm:mt-3 sm:text-2xl">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-primary-black/55">{step.desc}</p>
             </li>
           ))}
         </ol>

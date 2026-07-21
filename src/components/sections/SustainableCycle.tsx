@@ -9,7 +9,7 @@ const MARQUEE = "Restore · Preserve · Rewear · Repeat · ";
 function SustainableCycleMobile() {
   return (
     <section
-      className="sustainable-cycle-section overflow-x-hidden section-pad bg-pearl py-14 grain sm:py-16 md:hidden"
+      className="sustainable-cycle-section overflow-x-hidden section-pad bg-white py-14 sm:py-16 md:hidden"
       aria-label="Sustainable sneaker care"
     >
       <div className="mx-auto w-full max-w-lg">
@@ -21,7 +21,7 @@ function SustainableCycleMobile() {
         <ol className="mt-8 space-y-3">
           {STEPS.map((step) => (
             <li key={step.num}>
-              <div className="rounded-2xl border border-primary-black/10 bg-white/80 px-5 py-5 backdrop-blur-sm">
+              <div className="rounded-2xl border border-primary-black/10 bg-white px-5 py-5">
                 <span className="text-[11px] font-medium tracking-[0.28em] text-muted">{step.num}</span>
                 <p className="editorial-title mt-2 text-2xl uppercase leading-none text-primary-black">
                   {step.title}
@@ -61,7 +61,7 @@ function SustainableCycleMobile() {
 function SustainableCycleDesktop() {
   return (
     <section
-      className="sustainable-cycle-section section-pad bg-pearl py-20 grain max-md:hidden sm:py-24 md:py-32 lg:py-36"
+      className="sustainable-cycle-section section-pad bg-white py-20 max-md:hidden sm:py-24 md:py-32 lg:py-36"
       aria-label="Sustainable sneaker care"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10 xl:gap-14">
@@ -82,7 +82,7 @@ function SustainableCycleDesktop() {
             {STEPS.map((step, index) => (
               <li key={step.num}>
                 <div
-                  className="sustainable-cycle-step rounded-2xl border border-primary-black/10 bg-white/70 px-6 py-5 backdrop-blur-sm sm:px-7 sm:py-6"
+                  className="sustainable-cycle-step rounded-2xl border border-primary-black/10 bg-white px-6 py-5 sm:px-7 sm:py-6"
                   data-scroll-reveal
                 >
                   <span className="text-[11px] font-medium tracking-[0.28em] text-muted">{step.num}</span>

@@ -8,6 +8,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 import { SERVICE_CITIES } from "@/lib/site-data";
 
 const HERO_VIDEO = "/video/sneakhero.mp4";
+const HERO_POSTER = "/video/sneakhero-poster.jpg";
 const LOCATION_MS = 3800;
 
 function HeroLocationCycle() {
@@ -29,20 +30,20 @@ function HeroLocationCycle() {
 
   return (
     <div className="text-right">
-      <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.22em] text-white/45">
+      <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white sm:text-xs">
         Now serving
       </p>
-      <span className="relative block h-[1.35em] overflow-hidden">
-        <span className="invisible font-display text-base font-medium uppercase tracking-[0.14em] md:text-lg">
+      <span className="relative block min-w-[7.5rem] overflow-hidden leading-none sm:min-w-[9rem]">
+        <span className="invisible block font-display text-xl font-bold uppercase leading-none tracking-[0.12em] text-white sm:text-2xl md:text-[1.75rem]">
           Lucknow
         </span>
         <AnimatePresence initial={false}>
           <motion.span
             key={label}
-            className="absolute right-0 top-0 font-display text-base font-medium uppercase tracking-[0.14em] text-white/85 md:text-lg"
-            initial={{ opacity: 0, y: 8 }}
+            className="absolute right-0 top-0 font-display text-xl font-bold uppercase leading-none tracking-[0.12em] text-white sm:text-2xl md:text-[1.75rem]"
+            initial={{ opacity: 0, y: "110%" }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={{ opacity: 0, y: "-110%" }}
             transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
           >
             {label}
@@ -56,6 +57,7 @@ function HeroLocationCycle() {
 function HeroVideoBackground({ paused }: { paused: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -63,32 +65,46 @@ function HeroVideoBackground({ paused }: { paused: boolean }) {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !mounted) return;
     if (paused) {
       video.pause();
       return;
     }
     video.play().catch(() => {});
-  }, [mounted, paused]);
-
-  if (!mounted) {
-    return <div className="absolute inset-0 bg-black" aria-hidden />;
-  }
+  }, [mounted, paused, ready]);
 
   return (
-    <video
-      ref={videoRef}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="none"
-      className="absolute inset-0 h-full w-full object-cover"
-      suppressHydrationWarning
-      aria-hidden
-    >
-      <source src={HERO_VIDEO} type="video/mp4" />
-    </video>
+    <div className="absolute inset-0">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={HERO_POSTER}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        fetchPriority="high"
+        decoding="async"
+        aria-hidden
+      />
+      {mounted && (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={HERO_POSTER}
+          onLoadedData={() => setReady(true)}
+          onCanPlay={() => setReady(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            ready ? "opacity-100" : "opacity-0"
+          }`}
+          suppressHydrationWarning
+          aria-hidden
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+      )}
+    </div>
   );
 }
 
@@ -118,9 +134,8 @@ export function Hero() {
     >
       <div className="absolute inset-0">
         <HeroVideoBackground paused={!heroInView} />
-        {/* Center stays almost clear so in-video CLEAN / REPAIR / RESTORE dominates */}
         <div
-          className="absolute inset-x-0 top-0 h-[28%] bg-gradient-to-b from-black/40 to-transparent"
+          className="absolute inset-x-0 top-0 h-[32%] bg-gradient-to-b from-black/55 via-black/25 to-transparent"
           aria-hidden
         />
         <div
@@ -129,16 +144,15 @@ export function Hero() {
         />
       </div>
 
-      {/* Top-right locations */}
-      <div className="pointer-events-none absolute inset-x-0 top-[calc(var(--site-header-offset)+0.5rem)] z-10">
+      {/* Top-right — below menu */}
+      <div className="pointer-events-none absolute inset-x-0 top-[calc(var(--site-header-offset)+0.75rem)] z-10">
         <div className="site-shell">
-          <div className="hero-copy flex justify-end">
+          <div className="hero-copy flex w-full justify-end">
             <HeroLocationCycle />
           </div>
         </div>
       </div>
 
-      {/* Slim bottom bar — only brand + actions + stats */}
       <div className="absolute inset-x-0 bottom-0 z-10 pb-[max(1rem,env(safe-area-inset-bottom))] pt-16">
         <div className="site-shell">
           <div className="hero-copy">

@@ -47,7 +47,7 @@ export function SocialReels() {
   return (
     <section
       id="reels"
-      className="section-pad bg-pearl py-20 sm:py-24 md:py-32 grain"
+      className="section-pad bg-white py-20 text-primary-black sm:py-24 md:py-32"
       aria-label="Sneakcure social media reels"
     >
       <SectionHeading
@@ -63,14 +63,14 @@ export function SocialReels() {
         {REEL_VIDEOS.map((src, i) => (
           <article
             key={src}
-            className="group relative aspect-[9/16] overflow-hidden rounded-xl bg-gloss-black shadow-[0_12px_40px_rgba(0,0,0,0.1)] sm:rounded-2xl sm:shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
+            className="group relative aspect-[9/16] overflow-hidden rounded-xl bg-black shadow-[0_12px_40px_rgba(0,0,0,0.08)] sm:rounded-2xl sm:shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
           >
             <ReelVideo src={src} index={i} />
           </article>
         ))}
       </FadeIn>
 
-      <p className="mt-10 text-center text-sm tracking-wide text-muted md:mt-12">
+      <p className="mt-10 text-center text-sm tracking-wide text-primary-black/45 md:mt-12">
         <a
           href={SITE.instagram}
           target="_blank"

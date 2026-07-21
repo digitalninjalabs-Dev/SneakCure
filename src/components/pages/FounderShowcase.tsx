@@ -244,7 +244,7 @@ export function FounderShowcase() {
                 sizes="(max-width:768px) 85vw, 40vw"
               />
             </div>
-            <div className="absolute -bottom-4 right-0 flex h-24 w-24 items-center justify-center rounded-lg border border-black/10 bg-[#f1edec] p-3 shadow-lg sm:h-32 sm:w-32 sm:p-4 md:-bottom-6 md:-right-6">
+            <div className="absolute -bottom-4 right-0 flex h-24 w-24 items-center justify-center rounded-lg border border-black/10 bg-white p-3 shadow-lg sm:h-32 sm:w-32 sm:p-4 md:-bottom-6 md:-right-6">
               <span className="founder-label text-center text-[10px] leading-tight">
                 EST. 2020
                 <br />

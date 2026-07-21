@@ -31,13 +31,13 @@ export function AnimatedCounter({ value, suffix = "", label }: AnimatedCounterPr
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-card shine-sweep rounded-2xl p-6 sm:p-8 md:p-10"
+      className="rounded-2xl border border-black/5 bg-white p-6 sm:p-8 md:p-10"
     >
       <p className="editorial-title text-4xl text-primary-black sm:text-5xl md:text-6xl">
         {display.toLocaleString()}
         {suffix}
       </p>
-      <p className="mt-3 text-sm uppercase tracking-[0.15em] text-muted">{label}</p>
+      <p className="mt-3 text-sm uppercase tracking-[0.15em] text-primary-black/45">{label}</p>
     </motion.div>
   );
 }

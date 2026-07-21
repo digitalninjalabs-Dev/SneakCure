@@ -44,7 +44,7 @@ function RevealWord({
   return (
     <motion.li
       style={{ opacity, y }}
-      className="font-display text-[clamp(2.75rem,10vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
+            className="font-display text-[clamp(2.75rem,10vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
     >
       {word}
     </motion.li>
@@ -190,7 +190,7 @@ function MobileWordShowcase({
   const service = SERVICE_PAGES[index]!;
 
   return (
-    <div className="relative overflow-hidden bg-[#0a0a0a] px-4 py-8">
+    <div className="relative overflow-hidden bg-black px-4 py-8">
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
         style={{
@@ -295,7 +295,7 @@ function ServicesMobileShowcase() {
 
   return (
     <section className="services-premium-section overflow-x-hidden bg-black" aria-label="Services">
-      <div className="bg-[#F6F4F1] px-4 py-10">
+      <div className="bg-white px-4 py-10">
         <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
         <h2 className="editorial-title mt-4 text-[clamp(1.65rem,7vw,2.25rem)] font-semibold leading-[1.05] text-primary-black">
           Every detail.
@@ -324,7 +324,7 @@ function ServicesMobileShowcase() {
         lines={display.lines}
       />
 
-      <div className="bg-[#F6F4F1] px-4 pb-10 pt-2">
+      <div className="bg-white px-4 pb-10 pt-2">
         <MagneticButton href={`/services/${active.slug}`} className="!min-h-11 !w-full !text-xs">
           Explore service
         </MagneticButton>
@@ -418,7 +418,7 @@ function ServicesDesktopScroll() {
         >
           <ServiceIndexRail activeIndex={activeIndex} onSelect={scrollToService} />
 
-          <div className="relative flex flex-col justify-between bg-[#F6F4F1] px-6 py-10 sm:px-8 md:px-10 md:py-12 lg:px-14 lg:py-14">
+          <div className="relative flex flex-col justify-between bg-white px-6 py-10 sm:px-8 md:px-10 md:py-12 lg:px-14 lg:py-14">
             <div>
               <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
               <h2 className="editorial-title mt-4 max-w-md text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.05] text-primary-black">
@@ -447,7 +447,7 @@ function ServicesDesktopScroll() {
             </div>
           </div>
 
-          <div className="relative hidden min-h-0 bg-[#0a0a0a] md:block">
+          <div className="relative hidden min-h-0 bg-black md:block">
             <div className="absolute inset-y-0 left-0 w-px bg-white/10" aria-hidden />
             <WordShowcase
               key={display.lines.join("-")}

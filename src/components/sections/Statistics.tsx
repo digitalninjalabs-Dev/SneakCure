@@ -4,12 +4,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Statistics() {
   return (
-    <section className="section-pad bg-soft-white py-20 sm:py-24 md:py-28 grain" aria-label="Premium statistics">
+    <section className="section-pad bg-black py-20 text-soft-white sm:py-24 md:py-28" aria-label="Premium statistics">
       <SectionHeading
         eyebrow="By the numbers"
         title="Excellence in every restoration"
         titleAccent="Trusted across India"
         align="center"
+        dark
         gsap
       />
       <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
