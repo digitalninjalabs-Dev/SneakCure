@@ -1,12 +1,12 @@
 import { About } from "@/components/sections/About";
 import { FranchiseHomeBanner } from "@/components/sections/FranchiseHomeBanner";
 import { Statistics } from "@/components/sections/Statistics";
-import { SustainableCycle } from "@/components/sections/SustainableCycle";
+// import { SustainableCycle } from "@/components/sections/SustainableCycle";
 import { ScrollRevealServices } from "@/components/sections/ScrollRevealServices";
 import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { BrandsWall } from "@/components/sections/BrandsWall";
 import { Process } from "@/components/sections/Process";
-import { WhyChoose } from "@/components/sections/WhyChoose";
+// import { WhyChoose } from "@/components/sections/WhyChoose";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { SocialReels } from "@/components/sections/SocialReels";
 import { FAQ } from "@/components/sections/FAQ";
@@ -17,12 +17,14 @@ export function HomeBelowFold() {
     <>
       <About />
       <Statistics />
-      <SustainableCycle />
+      {/* Hidden for now — SustainableCycle */}
+      {/* <SustainableCycle /> */}
       <SocialReels />
       <ScrollRevealServices />
       <BrandsWall />
       <Process />
-      <WhyChoose />
+      {/* Hidden for now — WhyChoose */}
+      {/* <WhyChoose /> */}
       <FranchiseHomeBanner />
       <BeforeAfter />
       <Testimonials />

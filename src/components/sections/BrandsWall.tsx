@@ -60,11 +60,11 @@ export function BrandsWall() {
   return (
     <section
       id="brands"
-      className="section-pad bg-white py-12 sm:py-16 md:py-24"
+      className="section-pad bg-white py-8 sm:py-10 md:py-12"
       aria-label="Luxury brands wall"
     >
       <div className="mx-auto max-w-6xl text-center">
-        <p className="mb-8 text-xs font-normal tracking-wide text-neutral-500 sm:mb-10 sm:text-sm md:mb-14 md:text-base">
+        <p className="mb-5 text-xs font-normal tracking-wide text-neutral-500 sm:mb-6 sm:text-sm md:mb-8 md:text-base">
           Brands We Have Restored..
         </p>
 
@@ -105,7 +105,7 @@ export function BrandsWall() {
           </motion.ul>
         </LayoutGroup>
 
-        <p className="mt-10 text-sm font-normal tracking-wide text-neutral-500 md:mt-14 md:text-base">
+        <p className="mt-6 text-sm font-normal tracking-wide text-neutral-500 md:mt-8 md:text-base">
           ..... and many more
         </p>
       </div>

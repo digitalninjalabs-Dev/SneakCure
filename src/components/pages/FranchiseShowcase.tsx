@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   CampaignBtn,
   CampaignEyebrow,
   CampaignGrayscaleImage,
-  CampaignHeroParallax,
   CampaignLabel,
   CampaignReveal,
   CampaignScale,
@@ -14,9 +14,11 @@ import {
   CampaignSplitTitle,
   CampaignTimelineLine,
   MaterialIcon,
-  ParallaxImage,
 } from "@/components/pages/campaign-ui";
-import { FRANCHISE_EXCLUSIVE_TERRITORIES } from "@/lib/site-data";
+import { FRANCHISE_EXCLUSIVE_TERRITORIES, SITE } from "@/lib/site-data";
+import { LoopVideo } from "@/components/services/LoopVideo";
+import { SERVICES_HERO_VIDEO } from "@/components/services/service-media";
+import { FranchiseWordsMarquee } from "@/components/pages/FranchiseWordsMarquee";
 
 const IMG = {
   hero: "https://lh3.googleusercontent.com/aida-public/AB6AXuC9bjaskSLC0EPreQVMT7hNpwyQvW3ndEjKZEZyUaK6FFhfVaYFD5-d8YMWKu_GBWxob2NeubM1bXfwIDxPgR4rYZN2a4Y5gk91vlcaieDCrLj4Fy_nYHXDQPcSWFs_gLMV6KfFBMOwQ39MFx7c26pcTox2ViC9mXe50ird35808AHzUOsB4c5Ms4tZ2QCjyk5vercZLO-Nj_gzLMa-XiIyrRc2B5g-0H7pjkBgXtXbeSDBrE1WzbU6RXroKc2FD4_Tcjt7H6yvSFk",
@@ -251,86 +253,123 @@ function FranchiseApplicationForm() {
   );
 }
 
-export function FranchiseShowcase() {
+function FranchiseHero() {
   return (
-    <div className="campaign-page overflow-x-hidden bg-pearl text-primary-black">
-      {/* Hero */}
-      <section className="campaign-hero flex flex-col items-stretch md:flex-row">
-        <div className="flex w-full flex-col justify-start campaign-pad pb-12 md:w-1/2 md:pb-16">
+    <section
+      className="relative min-h-[100svh] overflow-x-clip bg-primary-black text-white"
+      aria-label="Sneakcure Franchise"
+    >
+      <div className="absolute inset-0 overflow-hidden" aria-hidden>
+        <LoopVideo
+          src={SERVICES_HERO_VIDEO}
+          poster={IMG.hero}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/45" />
+      </div>
+
+      <div className="relative z-10 flex min-h-[100svh] flex-col justify-between gap-10 section-pad pb-8 pt-28 sm:gap-12 sm:pb-10 sm:pt-32 md:pb-12 md:pt-36">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:items-start md:gap-10">
           <CampaignReveal>
-            <CampaignEyebrow>Sneakcure Franchise</CampaignEyebrow>
-            <CampaignSplitTitle
-              as="h1"
-              title="Build India's Next Premium Restoration Studio"
-              accent="Own Your City"
-              className="mb-4"
-            />
-            <p className="mb-6 text-lg font-medium leading-relaxed text-primary-black/80">
-              Lead the Luxury Care Revolution.
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/50">
+              Sneakcure Franchise
             </p>
-            <p className="mb-12 max-w-lg text-lg leading-relaxed text-muted">
-              Launch your own premium shoe and leather restoration business with Sneakcure. We provide expert
-              mentorship, operational framework, and ongoing dedicated success manager support.
+            <h1 className="editorial-title mt-4 text-[clamp(2.25rem,7vw,5.25rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
+              Build India&apos;s Next Premium Restoration Studio
+              <span className="mt-[0.08em] block italic font-medium tracking-[-0.03em] text-white/45">
+                Own Your City.
+              </span>
+            </h1>
+            <p className="mt-5 max-w-md text-sm font-medium leading-relaxed text-white/70 sm:text-[15px] md:text-base">
+              Lead the luxury care revolution with expert mentorship, operational frameworks, and dedicated success
+              support.
             </p>
-            <div className="mb-16">
-              <CampaignBtn href="#application">Apply for Franchise</CampaignBtn>
+          </CampaignReveal>
+
+          <CampaignReveal delay={0.1} className="md:justify-self-end md:pt-3 md:text-right">
+            <p className="max-w-sm text-sm font-medium leading-relaxed text-white/55 md:ml-auto sm:text-[15px]">
+              Launch your own premium shoe and leather restoration business with Sneakcure. We provide the systems,
+              training, and brand to open and grow with confidence.
+            </p>
+            <Link
+              href="#application"
+              className="mt-6 inline-flex min-h-11 items-center rounded-full bg-white px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-black transition-transform hover:scale-[1.03] md:mt-8"
+            >
+              Apply for Franchise
+            </Link>
+          </CampaignReveal>
+        </div>
+
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+          <CampaignReveal delay={0.15} className="flex items-center gap-4">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">Follow us</span>
+            <span className="hidden h-px w-10 bg-white/30 sm:block" aria-hidden />
+            <div className="flex items-center gap-2">
+              <a
+                href={SITE.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 text-white ring-1 ring-white/20 transition-colors hover:bg-white hover:text-primary-black"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+                  <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zM12 9a3 3 0 110 6 3 3 0 010-6z" />
+                </svg>
+              </a>
+              <a
+                href={SITE.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-md bg-white/10 text-white ring-1 ring-white/20 transition-colors hover:bg-white hover:text-primary-black"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+                  <path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.2l.8-3H14V9z" />
+                </svg>
+              </a>
             </div>
-            <div className="grid grid-cols-2 gap-8 border-t border-black/5 pt-10 md:grid-cols-4">
-              {[
-                ["Launch Support", "Dedicated Team"],
-                ["Training", "Professional"],
-                ["Brand", "Premium"],
-                ["Operations", "Business"],
-              ].map(([label, value], i) => (
-                <CampaignSlide key={label} delay={0.15 + i * 0.08} from="left">
-                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#77777b]">{label}</p>
-                  <p className="text-base font-semibold">{value}</p>
-                </CampaignSlide>
-              ))}
+          </CampaignReveal>
+
+          <CampaignReveal delay={0.2} className="sm:text-right">
+            <div className="flex items-end gap-4 sm:justify-end">
+              <div className="mb-1 hidden grid-cols-3 gap-0.5 sm:grid" aria-hidden>
+                {Array.from({ length: 9 }).map((_, i) => (
+                  <span key={i} className="h-1.5 w-1.5 bg-white/70" />
+                ))}
+              </div>
+              <div>
+                <p className="editorial-title text-[clamp(2.5rem,6vw,4rem)] font-semibold leading-none tracking-[-0.04em]">
+                  3+
+                </p>
+                <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55">
+                  Cities live · limited territories
+                </p>
+              </div>
             </div>
           </CampaignReveal>
         </div>
-        <CampaignHeroParallax className="relative w-full overflow-hidden bg-deep-black md:w-1/2">
-          <ParallaxImage
-            src={IMG.hero}
-            alt="Sneakcure franchise studio"
-            className="h-full min-h-[420px] w-full opacity-80 md:min-h-full"
-            speed={0.1}
-          />
-          <div className="pointer-events-none absolute inset-0 flex items-end justify-center p-4 md:items-center md:p-12">
-            <div className="relative flex w-full max-w-lg flex-col gap-3 md:block md:h-full">
-              <CampaignScale
-                delay={0.3}
-                className="border border-white/20 bg-white/90 p-4 shadow-2xl backdrop-blur-md md:absolute md:left-0 md:top-10 md:p-6"
-              >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-primary-black">Support</p>
-                <h3 className="editorial-title text-xl md:text-2xl">Launch Ready</h3>
-              </CampaignScale>
-              <CampaignScale
-                delay={0.45}
-                className="border border-white/10 bg-gloss-black/95 p-4 text-white shadow-2xl md:absolute md:bottom-40 md:right-0 md:p-8"
-              >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest opacity-60">Territories</p>
-                <h3 className="editorial-title text-2xl md:text-3xl">Limited Cities</h3>
-              </CampaignScale>
-              <CampaignScale
-                delay={0.6}
-                className="border border-white/10 bg-white/10 p-4 text-white shadow-2xl backdrop-blur-xl md:absolute md:bottom-10 md:left-20 md:p-6"
-              >
-                <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest opacity-70">Standard</p>
-                <h3 className="editorial-title text-xl md:text-2xl">Premium Care</h3>
-              </CampaignScale>
-            </div>
-          </div>
-        </CampaignHeroParallax>
-      </section>
+      </div>
+    </section>
+  );
+}
+
+export function FranchiseShowcase() {
+  return (
+    <div className="campaign-page overflow-x-clip bg-pearl text-primary-black">
+      <FranchiseHero />
 
       {/* The Opportunity */}
       <section className="campaign-section campaign-pad mx-auto max-w-[1440px]">
         <div className="flex flex-col items-center gap-20 md:flex-row">
           <CampaignReveal className="w-full md:w-5/12">
             <CampaignEyebrow>The Opportunity</CampaignEyebrow>
-            <CampaignSplitTitle size="display" title="A business built on premium care" accent="Not just shoe cleaning" className="mb-6" />
+            <h2 className="editorial-title mb-6 text-[clamp(2.25rem,5.2vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-primary-black">
+              A business built on premium care
+              <span className="mt-[0.14em] block font-semibold tracking-[-0.035em] text-primary-black/40">
+                Not just shoe cleaning.
+              </span>
+            </h2>
             <p className="mb-8 text-base leading-relaxed text-muted">
               India&apos;s premium footwear and luxury leather market is growing rapidly. Sneakcure helps you build a
               high-value restoration business backed by expert training, standardized processes, and a trusted premium
@@ -380,6 +419,8 @@ export function FranchiseShowcase() {
           </div>
         </div>
       </section>
+
+      <FranchiseWordsMarquee />
 
       {/* The Sneakcure Advantage */}
       <section className="campaign-section bg-gloss-black px-[max(1.25rem,4vw)] text-white">

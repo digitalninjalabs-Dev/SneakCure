@@ -3,9 +3,9 @@ import { BEFORE_AFTER_SHOWCASE } from "@/lib/constants";
 
 export function BeforeAfter() {
   return (
-    <section className="section-pad bg-white py-20 sm:py-24 md:py-32" aria-label="Before and after showcase">
+    <section className="section-pad bg-white py-12 sm:py-14 md:py-16" aria-label="Before and after showcase">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14 md:mb-16">
+        <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10 md:mb-12">
           <p className="text-xs font-medium uppercase tracking-[0.22em] text-primary-black/45">
             Transformations
           </p>

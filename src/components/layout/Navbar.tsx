@@ -88,17 +88,17 @@ function ServicesDropdown({
         href="/services"
         scroll={false}
         prefetch={false}
-        className={`flex items-center gap-1.5 whitespace-nowrap rounded-full py-2.5 text-[12px] font-semibold uppercase transition-colors duration-300 lg:text-[13px] xl:text-sm ${
+        className={`flex items-center gap-1.5 whitespace-nowrap rounded-full py-2.5 text-[12px] font-semibold uppercase transition-colors duration-300 [font-family:var(--font-body)] lg:text-[13px] xl:text-sm ${
           isHovered || isActive
             ? "bg-white px-4 text-primary-black shadow-sm lg:px-5"
             : anyHover
-              ? "px-3 text-primary-black/35"
-              : "px-3 text-primary-black/55"
+              ? "px-3 text-primary-black/45"
+              : "px-3 text-primary-black/70"
         }`}
         aria-haspopup="true"
         aria-expanded={open}
       >
-        <span className="tracking-[0.14em] lg:tracking-[0.16em]">Services</span>
+        <span className="tracking-[0.12em] lg:tracking-[0.14em]">Services</span>
         <svg
           viewBox="0 0 12 12"
           className={`h-2.5 w-2.5 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
@@ -129,7 +129,7 @@ function ServicesDropdown({
                         prefetch={false}
                         onMouseEnter={() => prefetchRoute(item.href)}
                         onFocus={() => prefetchRoute(item.href)}
-                        className={`block px-5 py-3.5 text-center text-[11px] font-semibold uppercase leading-snug tracking-[0.12em] text-primary-black transition-colors hover:bg-black/[0.05] lg:text-xs ${
+                        className={`block px-5 py-3.5 text-center text-[12px] font-semibold leading-snug tracking-[0.02em] text-primary-black transition-colors hover:bg-black/[0.05] lg:text-[13px] xl:text-sm [font-family:var(--font-body)] ${
                           active ? "bg-black/[0.05]" : ""
                         }`}
                       >
@@ -228,7 +228,7 @@ function DesktopNav({
                 prefetchRoute(link.href);
               }}
               onFocus={() => prefetchRoute(link.href)}
-              className="nav-desktop-link-base block whitespace-nowrap py-2.5 text-[12px] font-medium uppercase lg:text-[13px] xl:text-sm"
+              className="nav-desktop-link-base block whitespace-nowrap py-2.5 text-[12px] font-semibold uppercase [font-family:var(--font-body)] lg:text-[13px] xl:text-sm"
             >
               <motion.span
                 className="block"
@@ -243,21 +243,21 @@ function DesktopNav({
                           : anyHover
                             ? "0.1em"
                             : isActive
-                              ? "0.18em"
-                              : "0.14em",
+                              ? "0.16em"
+                              : "0.12em",
                         color:
                           isHovered || isActive
                             ? "var(--color-primary-black)"
                             : anyHover
-                              ? "rgba(17,17,17,0.35)"
-                              : "rgba(17,17,17,0.55)",
+                              ? "rgba(17,17,17,0.45)"
+                              : "rgba(17,17,17,0.72)",
                         scale: isHovered ? 1.04 : 1,
                       }
                     : {
                         paddingLeft: "0.75rem",
                         paddingRight: "0.75rem",
-                        letterSpacing: "0.14em",
-                        color: "rgba(17,17,17,0.55)",
+                        letterSpacing: "0.12em",
+                        color: "rgba(17,17,17,0.72)",
                         scale: 1,
                       }
                 }
@@ -520,7 +520,7 @@ export function Navbar() {
                       >
                         <button
                           type="button"
-                          className={`flex min-h-11 w-full items-center justify-between rounded-2xl px-5 py-3 text-base font-medium uppercase tracking-[0.12em] transition-colors ${
+                          className={`flex min-h-11 w-full items-center justify-between rounded-2xl px-5 py-3 text-base font-semibold uppercase tracking-[0.1em] transition-colors ${
                             servicesActive ? "bg-black/5 text-primary-black" : "text-primary-black/80"
                           }`}
                           onClick={() => setMobileServicesOpen((open) => !open)}
@@ -561,7 +561,7 @@ export function Navbar() {
                                     href={item.href}
                                     scroll={false}
                                     prefetch={false}
-                                    className={`flex min-h-11 items-center rounded-xl px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-black hover:bg-black/5 ${
+                                    className={`flex min-h-11 items-center rounded-xl px-5 py-2.5 text-[13px] font-semibold tracking-[0.02em] text-primary-black hover:bg-black/5 [font-family:var(--font-body)] ${
                                       pathname === item.href ? "bg-black/5" : ""
                                     }`}
                                     onClick={closeMenu}
@@ -597,7 +597,7 @@ export function Navbar() {
                         prefetch={false}
                         onMouseEnter={() => prefetchRoute(link.href)}
                         onFocus={() => prefetchRoute(link.href)}
-                        className={`group flex min-h-11 items-center rounded-2xl px-5 py-3 text-base font-medium uppercase tracking-[0.12em] transition-colors duration-300 hover:bg-black/5 ${
+                        className={`group flex min-h-11 items-center rounded-2xl px-5 py-3 text-base font-semibold uppercase tracking-[0.1em] transition-colors duration-300 hover:bg-black/5 ${
                           active ? "bg-black/5 text-primary-black" : "text-primary-black/80"
                         }`}
                         onClick={closeMenu}

@@ -119,8 +119,8 @@ export function CampaignScale({
 export function CampaignMarquee({ text }: { text: string }) {
   const doubled = `${text}  •  ${text}  •  `;
   return (
-    <div className="campaign-marquee overflow-hidden border-y border-black/8 bg-pearl py-8">
-      <div className="campaign-marquee-track editorial-title whitespace-nowrap text-[clamp(1.5rem,4vw,3rem)] uppercase tracking-[0.2em] text-primary-black/5">
+    <div className="campaign-marquee overflow-hidden border-y border-black/8 bg-white py-8">
+      <div className="campaign-marquee-track editorial-title whitespace-nowrap text-[clamp(1.5rem,4vw,3rem)] uppercase tracking-[0.2em] text-primary-black">
         {doubled.repeat(4)}
       </div>
     </div>

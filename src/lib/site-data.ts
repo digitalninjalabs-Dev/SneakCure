@@ -12,6 +12,8 @@ export const SITE = {
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.5!2d80.9462!3d26.8467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDUwJzQ4LjEiTiA4MMKwNTYnNDYuMyJF!5e0!3m2!1sen!2sin!4v1",
   instagram: "https://instagram.com/Sneakcure",
+  facebook: "https://www.facebook.com/sneakcure",
+  youtube: "https://www.youtube.com/@sneakcure",
 } as const;
 
 export const CONTACT_STORES = [
@@ -95,8 +97,7 @@ export const CONTACT_FAQ_ITEMS = [
 
 export const SERVICE_CITIES = ["Delhi", "Lucknow", "Kanpur"] as const;
 
-export const FRANCHISE_HOME_IMAGE =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuC63WQcWdPWICp7H-PBnleVHosYEqVDRiVwe5O2Q0Nm4S3Yww-39oJQmVhjD3KWfdiB96Ei8EEnu-hFxc7QFvkUP1aIR9OECJaXLftPfRQ23QYoWZcA-iepTysFZkJSZkHxx12Ad9r-iiYdVebgbhAPbH9fq2XgGpgztSBUCuhhRw3D9ldgSA8yKHZqpivYWfkEsjp7ZeAlDqou9zEdK5tfbl1KrKYWsCwhFZjm7O4XzClkU9al8Bh1sPJ0KPLx-eky48T0JcqMbfo";
+export const FRANCHISE_HOME_IMAGE = "/franchise/atelier-neon-bg.png";
 
 export const FRANCHISE_TERRITORIES = [
   {
@@ -281,7 +282,7 @@ export const FOUNDER_TIMELINE = [
 export const SERVICE_PAGES = [
   {
     slug: "luxury-sneaker-restoration",
-    title: "Luxury Sneaker Restoration",
+    title: "Sneaker",
     tagline: "Professional restoration for premium sneakers.",
     shortDesc:
       "Deep cleaning, sole whitening, color restoration, stitching repair, suede care, and complete restoration to bring your favorite sneakers back to their finest condition.",
@@ -308,7 +309,7 @@ export const SERVICE_PAGES = [
   },
   {
     slug: "bags-wallets-care",
-    title: "Luxury Bags & Wallets Care",
+    title: "Bags & Wallets Care",
     tagline: "Professional care for your everyday luxury.",
     shortDesc:
       "Cleaning, leather conditioning, color restoration, edge repair, and hardware polishing to restore the beauty and elegance of premium bags and wallets.",
@@ -335,7 +336,7 @@ export const SERVICE_PAGES = [
   },
   {
     slug: "leather-jacket-accessories-restoration",
-    title: "Leather Jacket & Accessories Restoration",
+    title: "Jacket & Accessories",
     tagline: "Restore timeless leather with expert care.",
     shortDesc:
       "Professional cleaning, color restoration, conditioning, repair, and protection for leather jackets, belts, wallets, watch straps, and premium accessories.",
@@ -362,7 +363,7 @@ export const SERVICE_PAGES = [
   },
   {
     slug: "premium-sofa-cleaning-restoration",
-    title: "Premium Sofa Cleaning & Restoration",
+    title: "Sofa Cleaning",
     tagline: "Expert care for luxury seating.",
     shortDesc:
       "Deep cleaning, stain removal, leather conditioning, fabric care, and color restoration for premium sofas, recliners, and upholstered furniture.",
@@ -388,35 +389,8 @@ export const SERVICE_PAGES = [
     ],
   },
   {
-    slug: "car-leather-customization",
-    title: "Car Leather Customization",
-    tagline: "Luxury interiors, customized to you.",
-    shortDesc:
-      "Custom leather upholstery, seat restoration, color matching, steering wheel wrapping, and interior refinishing for premium automobiles.",
-    homeAccent: "Every detail. Every drive. Expertly crafted.",
-    image: serviceImage(4),
-    overview:
-      "Every interior is handcrafted with premium automotive leather and precision techniques, delivering exceptional comfort, refined aesthetics, and factory-quality craftsmanship built to last.",
-    process: [
-      "Interior Inspection & Planning",
-      "Surface Preparation",
-      "Custom Color Matching",
-      "Leather Installation & Finishing",
-      "UV Protection & Final Inspection",
-    ],
-    pricing: [
-      { tier: "Steering Wheel", price: "₹2,999+", note: "Restore or recolor" },
-      { tier: "Seat Panels", price: "₹6,999+", note: "Per pair" },
-      { tier: "Full Interior", price: "Custom", note: "Consultation required" },
-    ],
-    faqs: [
-      { q: "Will the color fade?", a: "We use automotive-grade UV-stable finishes designed for longevity." },
-      { q: "How long does customization take?", a: "3–10 business days depending on scope." },
-    ],
-  },
-  {
     slug: "patina-work",
-    title: "Bespoke Patina Art",
+    title: "Customization/Patina Artwork",
     tagline: "Handcrafted finishes with timeless character.",
     shortDesc:
       "Custom hand-painted patina, leather dyeing, antique effects, and bespoke color artistry for luxury shoes, bags, and leather accessories.",
@@ -441,17 +415,44 @@ export const SERVICE_PAGES = [
       { q: "Is patina permanent?", a: "Properly sealed patina is durable; we include care instructions with every piece." },
     ],
   },
+  {
+    slug: "car-leather-customization",
+    title: "Leather Care",
+    tagline: "Premium leather care for interiors and goods.",
+    shortDesc:
+      "Leather conditioning, color matching, seat restoration, steering wrap, and refinishing for automotive interiors and luxury leather goods.",
+    homeAccent: "Every detail. Every finish. Expertly cared for.",
+    image: serviceImage(4),
+    overview:
+      "Every leather surface is treated with precision techniques and premium materials — restoring comfort, color, and longevity across car interiors and atelier leather care.",
+    process: [
+      "Inspection & Planning",
+      "Surface Preparation",
+      "Color Matching & Conditioning",
+      "Repair & Finishing",
+      "Protection & Final Inspection",
+    ],
+    pricing: [
+      { tier: "Conditioning", price: "₹1,999+", note: "Clean & nourish" },
+      { tier: "Panel Restore", price: "₹4,999+", note: "Recolor & repair" },
+      { tier: "Full Care", price: "Custom", note: "Consultation required" },
+    ],
+    faqs: [
+      { q: "Do you work on car interiors?", a: "Yes — seats, steering wheels, panels, and full interior leather care." },
+      { q: "Will the color fade?", a: "We use UV-stable finishes designed for lasting color and protection." },
+    ],
+  },
 ] as const;
 
 export type ServicePage = (typeof SERVICE_PAGES)[number];
 
 export const SERVICE_NAV = [
-  { label: "SNEAKER RESTORATION", href: "/services/luxury-sneaker-restoration" },
-  { label: "BAGS & WALLETS CARE", href: "/services/bags-wallets-care" },
-  { label: "JACKET & ACCESSORIES RESTORATION", href: "/services/leather-jacket-accessories-restoration" },
-  { label: "SOFA CLEANING & RESTORATION", href: "/services/premium-sofa-cleaning-restoration" },
-  { label: "CAR LEATHER CUSTOMIZATION", href: "/services/car-leather-customization" },
-  { label: "PATINA ARTWORK", href: "/services/patina-work" },
+  { label: "Sneaker", href: "/services/luxury-sneaker-restoration" },
+  { label: "Bags & Wallets Care", href: "/services/bags-wallets-care" },
+  { label: "Jacket & Accessories", href: "/services/leather-jacket-accessories-restoration" },
+  { label: "Sofa Cleaning", href: "/services/premium-sofa-cleaning-restoration" },
+  { label: "Customization/Patina Artwork", href: "/services/patina-work" },
+  { label: "Leather Care", href: "/services/car-leather-customization" },
 ] as const;
 
 export function getServiceBySlug(slug: string): ServicePage | undefined {

@@ -6,3 +6,10 @@ dist
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# Local design scratch and source media (served copies live in /public)
+/Franchise
+/Traning
+/founderimage
+/*.mp4
+temp-training.txt

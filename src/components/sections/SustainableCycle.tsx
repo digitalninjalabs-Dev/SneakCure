@@ -15,40 +15,40 @@ function SustainableCycleMobile() {
       <div className="mx-auto w-full max-w-lg">
         <h2 className="editorial-title text-[clamp(1.75rem,8vw,2.5rem)] uppercase leading-[1.05] tracking-tight text-primary-black">
           Sustainable
-          <span className="mt-2 block text-primary-black/75">With Sneakcure</span>
+          <span className="mt-2 block text-primary-black">With Sneakcure</span>
         </h2>
 
         <ol className="mt-8 space-y-3">
           {STEPS.map((step) => (
             <li key={step.num}>
               <div className="rounded-2xl border border-primary-black/10 bg-white px-5 py-5">
-                <span className="text-[11px] font-medium tracking-[0.28em] text-muted">{step.num}</span>
+                <span className="text-[11px] font-semibold tracking-[0.28em] text-primary-black/70">{step.num}</span>
                 <p className="editorial-title mt-2 text-2xl uppercase leading-none text-primary-black">
                   {step.title}
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-primary-black/55">{step.desc}</p>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-primary-black">{step.desc}</p>
               </div>
             </li>
           ))}
         </ol>
 
         <div className="mt-8 overflow-hidden border-y border-primary-black/10 py-3">
-          <div className="sustainable-cycle-marquee-track editorial-title whitespace-nowrap text-lg uppercase tracking-[0.18em] text-primary-black/10">
+          <div className="sustainable-cycle-marquee-track editorial-title whitespace-nowrap text-lg uppercase tracking-[0.18em] text-primary-black/15">
             {MARQUEE.repeat(6)}
           </div>
         </div>
 
-        <div className="mt-8 space-y-4 text-sm leading-relaxed text-primary-black/80">
+        <div className="mt-8 space-y-4 text-sm font-medium leading-relaxed text-primary-black">
           <p>
             Every pair restored at Sneakcure is one less pair sent to landfill. From everyday
             sneakers to luxury leather goods, we help extend their life through expert restoration
             and thoughtful care.
           </p>
-          <p className="text-primary-black/55">
+          <p>
             Choosing restoration over replacement reduces waste, preserves craftsmanship, and
             supports a more responsible way to enjoy premium footwear and leather accessories.
           </p>
-          <p className="text-primary-black/55">
+          <p>
             Together, we can restore, preserve, and rewear — creating a future where quality lasts
             longer and every pair has another story to tell.
           </p>
@@ -71,7 +71,7 @@ function SustainableCycleDesktop() {
               Sustainable
             </span>
             <span className="sustainable-cycle-title-rule" aria-hidden />
-            <span className="editorial-title text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-none tracking-tight text-primary-black/80">
+            <span className="editorial-title text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-none tracking-tight text-primary-black">
               With Sneakcure
             </span>
           </div>
@@ -85,11 +85,11 @@ function SustainableCycleDesktop() {
                   className="sustainable-cycle-step rounded-2xl border border-primary-black/10 bg-white px-6 py-5 sm:px-7 sm:py-6"
                   data-scroll-reveal
                 >
-                  <span className="text-[11px] font-medium tracking-[0.28em] text-muted">{step.num}</span>
+                  <span className="text-[11px] font-semibold tracking-[0.28em] text-primary-black/70">{step.num}</span>
                   <p className="editorial-title mt-2 text-3xl uppercase leading-none text-primary-black sm:text-4xl">
                     {step.title}
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-primary-black/55">{step.desc}</p>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-primary-black">{step.desc}</p>
                 </div>
                 {index < STEPS.length - 1 ? (
                   <div className="sustainable-cycle-connector" aria-hidden />
@@ -99,23 +99,23 @@ function SustainableCycleDesktop() {
           </ol>
 
           <div className="sustainable-cycle-marquee mt-8 overflow-hidden border-y border-primary-black/10 py-4">
-            <div className="sustainable-cycle-marquee-track editorial-title whitespace-nowrap text-[clamp(1.25rem,3vw,2rem)] uppercase tracking-[0.22em] text-primary-black/10">
+            <div className="sustainable-cycle-marquee-track editorial-title whitespace-nowrap text-[clamp(1.25rem,3vw,2rem)] uppercase tracking-[0.22em] text-primary-black/15">
               {MARQUEE.repeat(8)}
             </div>
           </div>
         </div>
 
-        <div className="max-w-xl text-primary-black/90 lg:max-w-none">
-          <p className="text-base leading-relaxed sm:text-lg">
+        <div className="max-w-xl text-primary-black lg:max-w-none">
+          <p className="text-base font-medium leading-relaxed sm:text-lg">
             Every pair restored at Sneakcure is one less pair sent to landfill. From everyday
             sneakers to luxury leather goods, we help extend their life through expert restoration
             and thoughtful care.
           </p>
-          <p className="mt-5 text-base leading-relaxed text-primary-black/55 sm:mt-6 sm:text-lg">
+          <p className="mt-5 text-base font-medium leading-relaxed sm:mt-6 sm:text-lg">
             Choosing restoration over replacement reduces waste, preserves craftsmanship, and
             supports a more responsible way to enjoy premium footwear and leather accessories.
           </p>
-          <p className="mt-5 text-base leading-relaxed text-primary-black/55 sm:mt-6 sm:text-lg">
+          <p className="mt-5 text-base font-medium leading-relaxed sm:mt-6 sm:text-lg">
             Together, we can restore, preserve, and rewear — creating a future where quality lasts
             longer and every pair has another story to tell.
           </p>

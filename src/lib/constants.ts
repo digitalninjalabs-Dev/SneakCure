@@ -104,40 +104,106 @@ export const TESTIMONIALS = [
   },
 ] as const;
 
-export const FAQ_ITEMS = [
+export const FAQ_GROUPS = [
   {
-    q: "How long does a restoration take?",
-    a: "Most restorations are completed within 7–15 business days, depending on the item's condition and the level of craftsmanship required.",
+    id: "restoration",
+    label: "Restoration",
+    items: [
+      {
+        q: "How long does a restoration take?",
+        a: "Most restorations are completed within 7–15 business days, depending on the item's condition and the level of craftsmanship required.",
+      },
+      {
+        q: "Can you restore luxury brands?",
+        a: "Yes. We professionally restore sneakers, shoes, bags, jackets, and leather accessories from leading luxury and premium brands.",
+      },
+      {
+        q: "Can damaged leather be restored?",
+        a: "In many cases, yes. Our specialists assess every item individually and recommend the most suitable restoration solution.",
+      },
+      {
+        q: "Will the original look be preserved?",
+        a: "Absolutely. Our focus is to preserve the original character, texture, and craftsmanship while restoring the item's appearance.",
+      },
+    ],
   },
   {
-    q: "Can you restore luxury brands?",
-    a: "Yes. We professionally restore sneakers, shoes, bags, jackets, and leather accessories from leading luxury and premium brands.",
+    id: "services",
+    label: "Services",
+    items: [
+      {
+        q: "What items do you restore?",
+        a: "We restore sneakers, leather shoes, handbags, wallets, jackets, sofas, car interiors, and other premium leather goods.",
+      },
+      {
+        q: "Do you offer custom patina or recolor work?",
+        a: "Yes. From subtle tone refresh to bespoke patina art, our artisans can match references or create a custom finish.",
+      },
+      {
+        q: "Can sofas and car interiors be restored?",
+        a: "Yes. We offer on-site and atelier care for premium sofas and automotive leather interiors.",
+      },
+    ],
   },
   {
-    q: "Do you offer pickup across India?",
-    a: "Yes. We provide secure doorstep pickup and delivery services across India for a smooth, hassle-free restoration experience.",
+    id: "pickup",
+    label: "Pickup & delivery",
+    items: [
+      {
+        q: "Do you offer pickup across India?",
+        a: "Yes. We provide secure doorstep pickup and delivery services across India for a smooth, hassle-free restoration experience.",
+      },
+      {
+        q: "How does the process work?",
+        a: "Share photos for a quote, schedule a pickup, we restore in our atelier, then return your piece with care instructions.",
+      },
+      {
+        q: "Is packaging handled securely?",
+        a: "Every item is packed with protective materials so it travels safely from your door to our atelier and back.",
+      },
+    ],
   },
   {
-    q: "Can damaged leather be restored?",
-    a: "In many cases, yes. Our specialists assess every item individually and recommend the most suitable restoration solution.",
+    id: "pricing",
+    label: "Pricing & quotes",
+    items: [
+      {
+        q: "How can I get a quote?",
+        a: "Simply share clear photos of your item through WhatsApp or our enquiry form. Our team will review them and provide a personalized estimate.",
+      },
+      {
+        q: "What affects the price?",
+        a: "Condition, materials, and the depth of work required — from clean and refresh to full structural restoration.",
+      },
+      {
+        q: "Is the estimate free?",
+        a: "Yes. Photo-based assessments and estimates are complimentary with no obligation.",
+      },
+    ],
   },
   {
-    q: "Will the original look be preserved?",
-    a: "Absolutely. Our focus is to preserve the original character, texture, and craftsmanship while restoring the item's appearance.",
-  },
-  {
-    q: "How can I get a quote?",
-    a: "Simply share clear photos of your item through WhatsApp or our enquiry form. Our team will review them and provide a personalized estimate.",
-  },
-  {
-    q: "Do you provide franchise opportunities?",
-    a: "Yes. Sneakcure offers franchise partnerships and professional training programs for entrepreneurs across India.",
-  },
-  {
-    q: "What items do you restore?",
-    a: "We restore sneakers, leather shoes, handbags, wallets, jackets, sofas, car interiors, and other premium leather goods.",
+    id: "franchise",
+    label: "Franchise",
+    items: [
+      {
+        q: "Do you provide franchise opportunities?",
+        a: "Yes. Sneakcure offers franchise partnerships and professional training programs for entrepreneurs across India.",
+      },
+      {
+        q: "Is training included?",
+        a: "Yes. Franchise partners receive hands-on training covering techniques, operations, and brand standards.",
+      },
+      {
+        q: "Where can I apply?",
+        a: "Reach out through our franchise page or contact form and our team will guide you through next steps.",
+      },
+    ],
   },
 ] as const;
+
+export const FAQ_ITEMS: readonly { q: string; a: string }[] = FAQ_GROUPS.flatMap(
+  (group) => [...group.items]
+);
 
 export const PRODUCT_IMAGES = [
   "/product/product-01.jpg",

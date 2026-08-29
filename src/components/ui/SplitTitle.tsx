@@ -2,22 +2,26 @@
 
 import { TitleReveal } from "@/components/ui/TitleReveal";
 
+/** Homepage section title scale — keep About / pages in sync */
+const HOME_SECTION =
+  "text-[clamp(1.85rem,4.5vw,3.25rem)] font-semibold leading-[1.1] tracking-[-0.03em]";
+
 export const SPLIT_TITLE_SIZES = {
-  hero: "text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.12]",
-  page: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]",
-  section: "text-3xl sm:text-4xl md:text-6xl lg:text-7xl leading-[1.1]",
-  display: "text-[clamp(2rem,4vw,3rem)] leading-[1.12]",
-  campaign: "text-[clamp(1.75rem,6.5vw,5rem)] leading-[1.1]",
-  md: "text-3xl md:text-4xl lg:text-5xl leading-[1.12]",
-  sm: "text-3xl leading-[1.12]",
-  cta: "text-3xl sm:text-4xl md:text-5xl leading-[1.1]",
+  hero: "text-[clamp(2.5rem,6vw,4.5rem)] font-semibold leading-[1.12] tracking-[-0.03em]",
+  page: "text-[clamp(2rem,5.5vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.03em]",
+  section: HOME_SECTION,
+  display: "text-[clamp(2rem,4vw,3rem)] font-semibold leading-[1.12] tracking-[-0.03em]",
+  campaign: "text-[clamp(1.75rem,6.5vw,5rem)] font-semibold leading-[1.1] tracking-[-0.03em]",
+  md: HOME_SECTION,
+  sm: "text-[clamp(1.65rem,3.5vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.03em]",
+  cta: HOME_SECTION,
 } as const;
 
 export type SplitTitleSize = keyof typeof SPLIT_TITLE_SIZES;
 
 export function parseSplitTitle(title: string, accent?: string) {
   if (accent) {
-    const line1 = title.endsWith(".") ? title : `${title}.`;
+    const line1 = title;
     const line2 = accent.endsWith(".") ? accent : `${accent}.`;
     return { line1, line2 };
   }
@@ -60,15 +64,15 @@ export function SplitTitle({
   const sizeClass = SPLIT_TITLE_SIZES[size];
   const alignClass = align === "center" ? "text-center" : "text-left";
   const primaryColor = dark ? "text-soft-white" : "text-primary-black";
-  const accentColor = dark ? "text-white/35" : "text-primary-black/35";
+  const accentColor = dark ? "text-white/45" : "text-primary-black/45";
 
   return (
     <div className={`${alignClass} ${className}`}>
       <TitleReveal delay={delay}>
-        <Tag className={`editorial-title text-balance break-words ${sizeClass} ${primaryColor}`}>{line1}</Tag>
-      </TitleReveal>
-      <TitleReveal delay={delay + 0.08}>
-        <Tag className={`editorial-title text-balance break-words ${sizeClass} italic ${accentColor}`}>{line2}</Tag>
+        <Tag className={`editorial-title text-balance break-words ${sizeClass} ${primaryColor}`}>
+          {line1}
+          <span className={`mt-1 block italic ${accentColor}`}>{line2}</span>
+        </Tag>
       </TitleReveal>
     </div>
   );

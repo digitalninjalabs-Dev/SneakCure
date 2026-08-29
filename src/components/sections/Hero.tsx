@@ -7,9 +7,12 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { prefersReducedMotion } from "@/lib/motion";
 import { SERVICE_CITIES } from "@/lib/site-data";
 
-const HERO_VIDEO = "/video/sneakhero.mp4";
+const HERO_VIDEO = "/video/SK.mp4";
 const HERO_POSTER = "/video/sneakhero-poster.jpg";
+const HERO_WORDS = ["CLEAN", "REPAIR", "RECOLOR", "RESTORE"] as const;
+const WORD_MS = 4200;
 const LOCATION_MS = 3800;
+const SMOOTH_EASE = [0.33, 1, 0.68, 1] as const;
 
 function HeroLocationCycle() {
   const [index, setIndex] = useState(0);
@@ -54,6 +57,64 @@ function HeroLocationCycle() {
   );
 }
 
+function HeroWordCycle() {
+  const [index, setIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const label = HERO_WORDS[index]!;
+
+  useEffect(() => {
+    setReduceMotion(prefersReducedMotion());
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % HERO_WORDS.length);
+    }, WORD_MS);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
+  const wordClass =
+    "font-display text-[clamp(2.75rem,11vw,7.5rem)] font-semibold uppercase leading-[0.92] tracking-tight text-white";
+
+  return (
+    <h1>
+      <span className="relative mx-auto block w-max max-w-full overflow-x-clip overflow-y-visible px-1">
+        {/* Widest word reserves width so RECOLOR never clips */}
+        <span className={`invisible block ${wordClass}`} aria-hidden>
+          RECOLOR
+        </span>
+        <AnimatePresence initial={false}>
+          <motion.span
+            key={label}
+            className={`absolute inset-x-0 top-0 block text-center will-change-[opacity,transform] ${wordClass}`}
+            aria-live="polite"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: {
+                opacity: { duration: 1.35, ease: SMOOTH_EASE },
+                y: { duration: 1.5, ease: SMOOTH_EASE },
+              },
+            }}
+            exit={{
+              opacity: 0,
+              y: -10,
+              transition: {
+                opacity: { duration: 1.15, ease: SMOOTH_EASE },
+                y: { duration: 1.2, ease: SMOOTH_EASE },
+              },
+            }}
+          >
+            {label}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+    </h1>
+  );
+}
+
 function HeroVideoBackground({ paused }: { paused: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -74,7 +135,7 @@ function HeroVideoBackground({ paused }: { paused: boolean }) {
   }, [mounted, paused, ready]);
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 bg-black">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={HERO_POSTER}
@@ -135,7 +196,7 @@ export function Hero() {
       <div className="absolute inset-0">
         <HeroVideoBackground paused={!heroInView} />
         <div
-          className="absolute inset-x-0 top-0 h-[32%] bg-gradient-to-b from-black/55 via-black/25 to-transparent"
+          className="absolute inset-x-0 top-0 h-[28%] bg-gradient-to-b from-black/50 via-black/20 to-transparent"
           aria-hidden
         />
         <div
@@ -144,12 +205,17 @@ export function Hero() {
         />
       </div>
 
-      {/* Top-right — below menu */}
       <div className="pointer-events-none absolute inset-x-0 top-[calc(var(--site-header-offset)+0.75rem)] z-10">
         <div className="site-shell">
           <div className="hero-copy flex w-full justify-end">
             <HeroLocationCycle />
           </div>
+        </div>
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+        <div className="site-shell w-full text-center" data-fade-up>
+          <HeroWordCycle />
         </div>
       </div>
 
@@ -161,9 +227,9 @@ export function Hero() {
               data-fade-up
             >
               <div className="min-w-0 flex-1">
-                <h1 className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-white sm:text-base">
+                <p className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-white sm:text-base">
                   Sneakcure
-                </h1>
+                </p>
                 <p className="mt-1 max-w-xs text-xs leading-relaxed text-white/65 sm:text-sm">
                   Premium sneaker &amp; leather restoration
                 </p>

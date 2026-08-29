@@ -1,475 +1,121 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SERVICE_PAGES } from "@/lib/site-data";
+import { SafeImage } from "@/components/ui/SafeImage";
 
-const COUNT = SERVICE_PAGES.length;
-
-const PANEL_START = 0.1;
-const PANEL_END = 0.2;
-const SERVICES_START = 0.24;
-const SERVICES_END = 0.96;
-
-const SERVICE_DISPLAY = [
-  { lines: ["SNEAKER", "RESTORATION"], accent: "#E8C9A8" },
-  { lines: ["BAGS", "CARE"], accent: "#D4C4B0" },
-  { lines: ["LEATHER", "RESTORATION"], accent: "#C9A27A" },
-  { lines: ["SOFA", "RESTORATION"], accent: "#B8A898" },
-  { lines: ["CAR", "INTERIORS"], accent: "#A89078" },
-  { lines: ["PATINA", "ART"], accent: "#D8BC94" },
+const SHORT_TITLES = [
+  "Sneaker",
+  "Bags & Wallets",
+  "Jacket & Accessories",
+  "Sofa Cleaning",
+  "Customization/Patina",
+  "Leather Care",
 ] as const;
 
-const INTRO_WORDS = ["CLEAN", "REPAIR", "RECOLOR", "RESTORE"] as const;
+/** Monochrome card grounds — black/white theme, not pastels */
+const CARD_TONES = [
+  { bg: "#f4f4f4", text: "#111111", muted: "rgba(17,17,17,0.62)", link: "#111111" },
+  { bg: "#ebebeb", text: "#111111", muted: "rgba(17,17,17,0.62)", link: "#111111" },
+  { bg: "#111111", text: "#ffffff", muted: "rgba(255,255,255,0.65)", link: "#ffffff" },
+  { bg: "#f0f0f0", text: "#111111", muted: "rgba(17,17,17,0.62)", link: "#111111" },
+  { bg: "#e6e6e6", text: "#111111", muted: "rgba(17,17,17,0.62)", link: "#111111" },
+  { bg: "#0a0a0a", text: "#ffffff", muted: "rgba(255,255,255,0.65)", link: "#ffffff" },
+] as const;
 
-function RevealWord({
-  word,
-  index,
-  total,
-  scrollYProgress,
-}: {
-  word: string;
-  index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}) {
-  const slice = PANEL_START / total;
-  const start = index * slice;
-  const peak = start + slice * 0.72;
-  const opacity = useTransform(scrollYProgress, [start, peak], [0.12, 1]);
-  const y = useTransform(scrollYProgress, [start, peak], [24, 0]);
-
-  return (
-    <motion.li
-      style={{ opacity, y }}
-            className="font-display text-[clamp(2.75rem,10vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
-    >
-      {word}
-    </motion.li>
-  );
-}
-
-function ServiceIndexRail({
-  activeIndex,
-  onSelect,
-}: {
-  activeIndex: number;
-  onSelect: (index: number) => void;
-}) {
-  return (
-    <nav
-      className="services-index-rail hidden flex-col justify-center border-r border-black/8 md:flex"
-      aria-label="Service index"
-    >
-      {SERVICE_PAGES.map((service, i) => {
-        const active = i === activeIndex;
-        return (
-          <button
-            key={service.slug}
-            type="button"
-            onClick={() => onSelect(i)}
-            className={`group relative flex h-11 w-full items-center justify-center transition-colors ${
-              active ? "text-primary-black" : "text-primary-black/25 hover:text-primary-black/50"
-            }`}
-            aria-current={active ? "true" : undefined}
-            aria-label={service.title}
-          >
-            <span
-              className={`font-display text-[10px] tabular-nums tracking-[0.18em] transition-transform duration-300 ${
-                active ? "scale-110" : "group-hover:scale-105"
-              }`}
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            {active && <span className="absolute inset-y-3 -right-px w-px bg-primary-black" />}
-          </button>
-        );
-      })}
-    </nav>
-  );
-}
-
-function MobileServiceTabs({
-  activeIndex,
-  onSelect,
-}: {
-  activeIndex: number;
-  onSelect: (index: number) => void;
-}) {
-  return (
-    <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      {SERVICE_PAGES.map((service, i) => (
-        <button
-          key={service.slug}
-          type="button"
-          onClick={() => onSelect(i)}
-          className={`flex min-h-11 shrink-0 items-center justify-center rounded-full border px-4 text-[10px] uppercase tracking-[0.14em] transition-colors ${
-            i === activeIndex
-              ? "border-primary-black/25 bg-primary-black/5 text-primary-black"
-              : "border-primary-black/10 text-primary-black/35"
-          }`}
-          aria-current={i === activeIndex ? "true" : undefined}
-          aria-label={service.title}
-        >
-          {String(i + 1).padStart(2, "0")}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function ServiceDetailPanel({
-  activeIndex,
-  variant = "desktop",
-}: {
-  activeIndex: number;
-  variant?: "desktop" | "mobile";
-}) {
-  const active = SERVICE_PAGES[activeIndex]!;
-  const indexLabel = String(activeIndex + 1).padStart(2, "0");
-  const isMobile = variant === "mobile";
-
-  return (
-    <>
-      <div className="relative min-h-[8rem]">
-        {!isMobile && (
-          <span
-            className="pointer-events-none absolute -left-1 top-0 font-display text-[clamp(4rem,12vw,7rem)] font-bold leading-none tracking-tight text-primary-black/[0.05]"
-            aria-hidden
-          >
-            {indexLabel}
-          </span>
-        )}
-
-        <div key={active.slug} className="relative animate-[service-fade-in_0.35s_ease-out]">
-          <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-primary-black/40">
-            {indexLabel} — Signature service
-          </p>
-          {"homeAccent" in active && active.homeAccent ? (
-            <p className="mt-2 text-xs uppercase tracking-[0.16em] text-primary-black/45">
-              {active.homeAccent}
-            </p>
-          ) : null}
-          <h3 className="editorial-title mt-3 max-w-md text-xl font-semibold leading-tight text-primary-black sm:text-2xl md:text-[1.85rem]">
-            {active.title}
-          </h3>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-primary-black/60">{active.tagline}</p>
-          <p className="mt-2 text-sm leading-relaxed text-primary-black/40">{active.shortDesc}</p>
-        </div>
-      </div>
-
-      {!isMobile && (
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-          <MagneticButton href={`/services/${active.slug}`} className="!min-h-11 !w-full !text-xs sm:!w-auto">
-            Explore service
-          </MagneticButton>
-          <Link
-            href="/services"
-            className="inline-flex min-h-11 items-center text-[10px] font-medium uppercase tracking-[0.2em] text-primary-black/40 transition-colors hover:text-primary-black"
-          >
-            All services →
-          </Link>
-        </div>
-      )}
-    </>
-  );
-}
-
-function MobileWordShowcase({
-  index,
-  accent,
-  lines,
-}: {
-  index: number;
-  accent: string;
-  lines: readonly [string, string];
-}) {
-  const indexLabel = String(index + 1).padStart(2, "0");
-  const service = SERVICE_PAGES[index]!;
-
-  return (
-    <div className="relative overflow-hidden bg-black px-4 py-8">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        style={{
-          background: `radial-gradient(ellipse 80% 60% at 70% 30%, ${accent}55 0%, transparent 65%)`,
-        }}
-        aria-hidden
-      />
-
-      <p className="relative text-[10px] font-medium uppercase tracking-[0.34em] text-white/35">
-        {indexLabel} / {String(COUNT).padStart(2, "0")}
-      </p>
-
-      <div className="relative mt-6">
-        {lines.map((line, i) => (
-          <h3
-            key={line}
-            className="font-display text-[clamp(1.5rem,9vw,2.25rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
-            style={{ opacity: i === 0 ? 1 : 0.72 }}
-          >
-            {line}
-          </h3>
-        ))}
-      </div>
-
-      <ul className="relative mt-6 space-y-2.5 border-t border-white/10 pt-5">
-        {service.process.map((step, i) => (
-          <li key={step} className="flex items-start gap-3">
-            <span className="font-display shrink-0 pt-0.5 text-[10px] tabular-nums tracking-[0.2em] text-white/25">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="min-w-0 text-[11px] uppercase leading-snug tracking-[0.14em] text-white/55">
-              {step}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <p className="relative mt-5 text-sm leading-relaxed text-white/40">{service.overview}</p>
-    </div>
-  );
-}
-
-function WordShowcase({
-  index,
-  accent,
-  lines,
-}: {
-  index: number;
-  accent: string;
-  lines: readonly [string, string];
-}) {
-  const indexLabel = String(index + 1).padStart(2, "0");
-  const service = SERVICE_PAGES[index]!;
-
-  return (
-    <div className="relative flex min-h-[20rem] flex-col justify-between overflow-hidden px-4 py-8 sm:px-6 sm:py-10 md:h-full md:min-h-0 md:px-12 md:py-12 lg:px-16 lg:py-14">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          background: `radial-gradient(ellipse 80% 60% at 70% 30%, ${accent}55 0%, transparent 65%)`,
-        }}
-        aria-hidden
-      />
-
-      <p className="relative text-[10px] font-medium uppercase tracking-[0.34em] text-white/35">
-        {indexLabel} / {String(COUNT).padStart(2, "0")}
-      </p>
-
-      <div className="relative flex flex-1 flex-col justify-center py-6">
-        {lines.map((line, i) => (
-          <h3
-            key={line}
-            className="font-display break-words text-[clamp(1.75rem,11vw,7.5rem)] font-bold uppercase leading-[0.88] tracking-tight text-white"
-            style={{ marginLeft: i === 1 ? "0.12em" : 0, opacity: i === 0 ? 1 : 0.72 }}
-          >
-            {line}
-          </h3>
-        ))}
-
-        <ul className="relative mt-8 space-y-3 border-t border-white/10 pt-6 md:mt-10 md:pt-8">
-          {service.process.map((step, i) => (
-            <li key={step} className="flex items-baseline gap-3 sm:gap-4">
-              <span className="font-display shrink-0 text-[10px] tabular-nums tracking-[0.2em] text-white/25">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-[11px] uppercase tracking-[0.16em] text-white/55 sm:text-xs">{step}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <p className="relative max-w-sm text-sm leading-relaxed text-white/40">{service.overview}</p>
-    </div>
-  );
-}
-
-function ServicesMobileShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const display = SERVICE_DISPLAY[activeIndex]!;
-  const active = SERVICE_PAGES[activeIndex]!;
-  const indexLabel = String(activeIndex + 1).padStart(2, "0");
-
-  return (
-    <section className="services-premium-section overflow-x-hidden bg-black" aria-label="Services">
-      <div className="bg-white px-4 py-10">
-        <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
-        <h2 className="editorial-title mt-4 text-[clamp(1.65rem,7vw,2.25rem)] font-semibold leading-[1.05] text-primary-black">
-          Every detail.
-          <br />
-          Every finish.
-          <br />
-          <span className="text-primary-black/45">Perfectly restored.</span>
-        </h2>
-
-        <div className="mt-8 -mx-1 px-1">
-          <MobileServiceTabs activeIndex={activeIndex} onSelect={setActiveIndex} />
-          <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-primary-black/35">
-            Tap to explore · {indexLabel}/{String(COUNT).padStart(2, "0")}
-          </p>
-        </div>
-
-        <div className="mt-8">
-          <ServiceDetailPanel activeIndex={activeIndex} variant="mobile" />
-        </div>
-      </div>
-
-      <MobileWordShowcase
-        key={display.lines.join("-")}
-        index={activeIndex}
-        accent={display.accent}
-        lines={display.lines}
-      />
-
-      <div className="bg-white px-4 pb-10 pt-2">
-        <MagneticButton href={`/services/${active.slug}`} className="!min-h-11 !w-full !text-xs">
-          Explore service
-        </MagneticButton>
-        <Link
-          href="/services"
-          className="mt-3 inline-flex min-h-11 w-full items-center justify-center text-[10px] font-medium uppercase tracking-[0.2em] text-primary-black/40 transition-colors hover:text-primary-black"
-        >
-          All services →
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function ServicesDesktopScroll() {
-  const containerRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const lastIndexRef = useRef(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    let nextIndex = 0;
-    if (v >= SERVICES_START) {
-      const t = Math.min(1, (v - SERVICES_START) / (SERVICES_END - SERVICES_START));
-      nextIndex = Math.min(COUNT - 1, Math.floor(t * COUNT));
-    }
-
-    if (nextIndex !== lastIndexRef.current) {
-      lastIndexRef.current = nextIndex;
-      setActiveIndex(nextIndex);
-    }
-  });
-
-  const scrollToService = useCallback((index: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const scrollTop = window.scrollY + el.getBoundingClientRect().top;
-    const scrollable = el.offsetHeight - window.innerHeight;
-    const span = (SERVICES_END - SERVICES_START) / COUNT;
-    const targetProgress = SERVICES_START + index * span + span * 0.15;
-
-    window.scrollTo({
-      top: scrollTop + targetProgress * scrollable,
-      behavior: "smooth",
-    });
-  }, []);
-
-  const wordsOpacity = useTransform(scrollYProgress, [PANEL_START, PANEL_START + 0.06], [1, 0]);
-  const panelY = useTransform(scrollYProgress, [PANEL_START, PANEL_END], ["100%", "0%"]);
-  const progressScale = useTransform(scrollYProgress, (v) => {
-    if (v < SERVICES_START) return 0;
-    const t = Math.min(1, (v - SERVICES_START) / (SERVICES_END - SERVICES_START));
-    return t;
-  });
-
-  const display = SERVICE_DISPLAY[activeIndex]!;
-  const indexLabel = String(activeIndex + 1).padStart(2, "0");
-
-  return (
-    <section
-      ref={containerRef}
-      className="services-premium-section relative h-[280vh] bg-black md:h-[320vh]"
-      aria-label="Services"
-    >
-      <div className="sticky top-0 h-svh overflow-hidden bg-black [contain:layout_paint]">
-        <motion.div
-          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-black px-4"
-          style={{ opacity: wordsOpacity }}
-        >
-          <ul className="flex flex-col items-center gap-1 text-center">
-            {INTRO_WORDS.map((word, i) => (
-              <RevealWord
-                key={word}
-                word={word}
-                index={i}
-                total={INTRO_WORDS.length}
-                scrollYProgress={scrollYProgress}
-              />
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.div
-          className="absolute inset-0 z-20 grid min-h-0 md:grid-cols-[3.75rem_1fr_1fr]"
-          style={{ y: panelY }}
-        >
-          <ServiceIndexRail activeIndex={activeIndex} onSelect={scrollToService} />
-
-          <div className="relative flex flex-col justify-between bg-white px-6 py-10 sm:px-8 md:px-10 md:py-12 lg:px-14 lg:py-14">
-            <div>
-              <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-primary-black/45">Services</p>
-              <h2 className="editorial-title mt-4 max-w-md text-[clamp(1.85rem,4vw,2.75rem)] font-semibold leading-[1.05] text-primary-black">
-                Every detail.
-                <br />
-                Every finish.
-                <br />
-                <span className="text-primary-black/45">Perfectly restored.</span>
-              </h2>
-            </div>
-
-            <div className="mt-8 md:mt-0">
-              <ServiceDetailPanel activeIndex={activeIndex} />
-
-              <div className="mt-8 hidden items-center gap-4 md:flex">
-                <div className="relative h-px flex-1 overflow-hidden bg-primary-black/10">
-                  <motion.div
-                    className="absolute inset-y-0 left-0 w-full origin-left bg-primary-black"
-                    style={{ scaleX: progressScale }}
-                  />
-                </div>
-                <span className="font-display text-[10px] tabular-nums tracking-[0.22em] text-primary-black/45">
-                  {indexLabel} / {String(COUNT).padStart(2, "0")}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative hidden min-h-0 bg-black md:block">
-            <div className="absolute inset-y-0 left-0 w-px bg-white/10" aria-hidden />
-            <WordShowcase
-              key={display.lines.join("-")}
-              index={activeIndex}
-              accent={display.accent}
-              lines={display.lines}
-            />
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+function trimDesc(text: string, max = 120) {
+  const clean = text.trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max).replace(/\s+\S*$/, "");
+  return `${cut}…`;
 }
 
 export function ScrollRevealServices() {
+  const count = SERVICE_PAGES.length;
+
   return (
-    <div id="services">
-      <div className="md:hidden">
-        <ServicesMobileShowcase />
+    <div id="services" className="bg-white">
+      <div className="section-pad pb-4 pt-10 sm:pb-5 sm:pt-12 md:pt-14">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary-black/45">
+          Services
+        </p>
+        <h2 className="editorial-title mt-3 max-w-2xl text-[clamp(1.85rem,4.5vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-primary-black">
+          Every detail. Every finish.
+          <span className="text-primary-black/45"> Perfectly restored.</span>
+        </h2>
       </div>
-      <div className="hidden md:block">
-        <ServicesDesktopScroll />
+
+      <div className="section-pad relative pb-[12vh]">
+        {SERVICE_PAGES.map((service, i) => {
+          const tone = CARD_TONES[i % CARD_TONES.length]!;
+          const shortTitle = SHORT_TITLES[i] ?? service.title;
+          const indexLabel = String(i + 1).padStart(2, "0");
+          const stickyTop = `calc(var(--site-header-offset) + ${i * 0.65}rem)`;
+
+          return (
+            <article
+              key={service.slug}
+              className="sticky mb-4 sm:mb-5 md:mb-6"
+              style={{ top: stickyTop, zIndex: i + 1 }}
+            >
+              <div
+                className="grid overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] md:min-h-[min(72vh,36rem)] md:grid-cols-2 md:rounded-[2.25rem]"
+                style={{ backgroundColor: tone.bg, color: tone.text }}
+              >
+                <div className="flex flex-col justify-between gap-8 p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14">
+                  <div>
+                    <h3 className="editorial-title text-[clamp(1.85rem,4vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
+                      <span className="tabular-nums opacity-50">{indexLabel}</span>{" "}
+                      {shortTitle}
+                    </h3>
+                    <p
+                      className="mt-5 max-w-md text-sm font-medium leading-relaxed sm:mt-6 sm:text-base"
+                      style={{ color: tone.muted }}
+                    >
+                      {trimDesc(service.tagline + " " + service.shortDesc, 140)}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="inline-flex min-h-11 w-fit items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition-opacity hover:opacity-70"
+                    style={{ color: tone.link }}
+                  >
+                    Learn more
+                    <span aria-hidden>→</span>
+                  </Link>
+                </div>
+
+                <div className="relative min-h-[14rem] p-4 sm:min-h-[18rem] sm:p-5 md:min-h-0 md:p-6 lg:p-7">
+                  <div className="relative h-full min-h-[14rem] overflow-hidden rounded-[1.25rem] sm:min-h-[18rem] sm:rounded-[1.5rem] md:min-h-full">
+                    <SafeImage
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={i === 0}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Extra scroll room so the last cards can stick cleanly */}
+              {i === count - 1 ? null : (
+                <div className="pointer-events-none h-2 sm:h-3" aria-hidden />
+              )}
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="section-pad pb-8 pt-2 text-center sm:pb-10">
+        <Link
+          href="/services"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-primary-black/15 px-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-black transition-colors hover:border-primary-black/35"
+        >
+          View all services →
+        </Link>
       </div>
     </div>
   );

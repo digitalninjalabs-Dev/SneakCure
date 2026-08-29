@@ -1,19 +1,31 @@
 import { SafeImage } from "@/components/ui/SafeImage";
 import { ImageReveal } from "@/components/ui/scroll-reveal";
-import { SplitTitle } from "@/components/ui/SplitTitle";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function GalleryGrid({
   images,
+  eyebrow,
   title = "Gallery",
   titleAccent,
+  dense = false,
 }: {
   images: readonly string[];
+  eyebrow?: string;
   title?: string;
   titleAccent?: string;
+  dense?: boolean;
 }) {
   return (
-    <section className="section-pad py-20 md:py-28">
-      <SplitTitle title={title} accent={titleAccent} as="h2" size="md" align="center" className="mb-10" />
+    <section className={`section-pad ${dense ? "py-10 sm:py-12 md:py-14" : "py-20 md:py-28"}`}>
+      <SectionHeading
+        eyebrow={eyebrow}
+        title={title}
+        titleAccent={titleAccent}
+        align="center"
+        size="section"
+        dense
+        className="!mb-8"
+      />
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
         {images.map((src, i) => (
           <ImageReveal

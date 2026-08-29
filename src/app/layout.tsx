@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
-import { FooterGetStartedMarquee } from "@/components/layout/FooterGetStartedMarquee";
 import { Navbar } from "@/components/layout/Navbar";
 import { ClientBootstraps } from "@/components/providers/ClientBootstraps";
 import { productImage } from "@/lib/constants";
@@ -95,7 +94,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Anton&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&family=Yellowtail&display=swap"
           rel="stylesheet"
         />
         <script
@@ -132,7 +131,6 @@ export default function RootLayout({
           <ClientBootstraps>
             <Navbar />
             {children}
-            <FooterGetStartedMarquee />
             <Footer />
           </ClientBootstraps>
         </div>

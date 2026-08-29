@@ -36,7 +36,7 @@ function ServeHalf({ hidden }: { hidden?: boolean }) {
 export function FooterServeBar() {
   return (
     <div className="footer-serve-bar w-full bg-black" aria-label="Service cities across India">
-      <div className="overflow-hidden border-y border-white/10">
+      <div className="overflow-hidden">
         <div className="footer-serve-track flex w-max items-center py-3.5 sm:py-4">
           <ServeHalf />
           <ServeHalf hidden />
